@@ -1,0 +1,217 @@
+/* ===============================
+   GLOBAL RESET & BASE
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    color: #333;
+    background-color: #fff;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+/* Brand */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.navbar-brand img {
+    width: 40px;
+    height: auto;
+}
+
+/* Menu */
+.navbar-menu ul {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar-menu a {
+    font-weight: 500;
+    color: #444;
+    position: relative;
+    padding: 5px 0;
+}
+
+.navbar-menu li.active a,
+.navbar-menu a:hover {
+    color: #c1121f;
+}
+
+/* Underline effect */
+.navbar-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: #c1121f;
+    transition: width 0.3s ease;
+}
+
+.navbar-menu li.active a::after,
+.navbar-menu a:hover::after {
+    width: 100%;
+}
+
+/* Toggle */
+.navbar-toggle {
+    display: none;
+    font-size: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+    background: #111;
+    color: #ddd;
+    padding: 60px 0 20px;
+}
+
+.footer-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+/* Footer Brand */
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.footer-brand img {
+    width: 45px;
+}
+
+.footer h4 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.footer h5 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* Footer Links */
+.footer ul li {
+    margin-bottom: 10px;
+}
+
+.footer ul li a {
+    color: #bbb;
+    font-size: 14px;
+}
+
+.footer ul li a:hover {
+    color: #fff;
+}
+
+/* Contact */
+.footer-contact li {
+    font-size: 14px;
+    color: #bbb;
+}
+
+/* Bottom */
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #333;
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 13px;
+    color: #999;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .navbar-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        display: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .navbar-menu.show {
+        display: block;
+    }
+
+    .navbar-menu ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .navbar-menu li {
+        border-top: 1px solid #eee;
+    }
+
+    .navbar-menu a {
+        display: block;
+        padding: 15px 20px;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+}
