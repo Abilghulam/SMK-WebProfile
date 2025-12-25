@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolProfile;
+use App\Models\SchoolStatistic;
+use App\Models\Principal;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('layouts.user-pages.home', [
-            'schoolProfile' => SchoolProfile::first()
-        ]);
+        $schoolProfile = SchoolProfile::first();
+        $statistic     = SchoolStatistic::first();
+        $principal     = Principal::first();
+
+        return view('layouts.user-pages.home', compact('schoolProfile', 'statistic', 'principal'));
     }
+
 }

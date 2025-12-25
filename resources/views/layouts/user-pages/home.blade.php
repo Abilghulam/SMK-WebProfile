@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- ===== PAGE META ===== --}}
-@section('title', 'Home | SMK Negeri')
+@section('title', 'Home | SMK Negeri 9 Muaro Jambi')
 @section('meta_description', 'Website resmi SMK Negeri sebagai pusat informasi dan publikasi sekolah')
 
 @section('content')
@@ -16,6 +16,6 @@
     @include('components.user-pages.home.statistics')
 
     {{-- SAMBUTAN KEPALA SEKOLAH --}}
-    @include('components.user-pages.home.headmaster')
+    @include('components.user-pages.home.principal-welcome')
 
 @endsection

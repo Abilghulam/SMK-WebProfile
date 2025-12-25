@@ -29,6 +29,6 @@ class SchoolProfile extends Model
         'curriculum',
         'logo',
         'address',
-        'youtube_url'
+        'youtube_url',
     ];
 }
