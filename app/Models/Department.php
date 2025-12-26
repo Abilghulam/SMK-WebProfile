@@ -14,6 +14,11 @@ class Department extends Model
         'description',
         'competencies',
         'career_opportunities',
+        'duration_years',
+        'learning_model',
+        'has_internship',
+        'learning_activities',
+        'graduate_profile',
         'image',
         'is_active',
     ];
@@ -21,6 +26,8 @@ class Department extends Model
     protected $casts = [
     'competencies' => 'array',
     'career_opportunities' => 'array',
+    'learning_activities' => 'array',
+    'has_internship' => 'boolean',
     'is_active' => 'boolean',
     ];
 

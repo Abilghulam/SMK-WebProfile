@@ -2,16 +2,17 @@
 
 {{-- ===== PAGE META ===== --}}
 @section('title', ($department->name ?? 'Program Keahlian') . ' | SMK Negeri')
-@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($department->short_description ?? $department->description ?? ''), 155))
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($department->short_description ??
+    ($department->description ?? '')), 155))
 
 @section('content')
 
     {{-- HERO --}}
     @include('components.user-pages.shared.hero', [
-        'kicker'   => 'Akademik',
-        'title'    => $department->name ?? 'Program Keahlian',
+        'kicker' => 'Program Keahlian',
+        'title' => $department->name ?? 'Program Keahlian',
         'subtitle' => $department->short_description ?? 'Informasi lengkap program keahlian.',
-        'bgImage'  => $department->image ? asset($department->image) : asset('assets/images/hero-bg.jpg')
+        'bgImage' => $department->image ? asset($department->image) : asset('assets/images/hero-bg.jpg'),
     ])
 
     <section class="page-section department-detail">
@@ -31,7 +32,7 @@
                 {{-- Main Content --}}
                 <article class="detail-main">
 
-                    @if($department->image)
+                    @if ($department->image)
                         <div class="detail-cover">
                             <img src="{{ asset($department->image) }}" alt="{{ $department->name }}" loading="lazy">
                         </div>
@@ -40,7 +41,7 @@
                     <div class="detail-card">
                         <h2 class="detail-title">Profil Program Keahlian</h2>
 
-                        @if(!empty($department->description))
+                        @if (!empty($department->description))
                             <div class="detail-body">
                                 {!! nl2br(e($department->description)) !!}
                             </div>
@@ -49,44 +50,44 @@
                         @endif
                     </div>
 
-                        <div class="detail-card detail-card--split">
+                    <div class="detail-card detail-card--split">
                         <div class="detail-split">
 
-                                {{-- Kompetensi --}}
-                                <section class="info-box">
-                                    <h3 class="info-title">Kompetensi Keahlian</h3>
+                            {{-- Kompetensi --}}
+                            <section class="info-box">
+                                <h3 class="info-title">Kompetensi Keahlian</h3>
 
-                                    @if(!empty($department->competencies) && is_array($department->competencies))
-                                        <ul class="info-list">
-                                            @foreach($department->competencies as $item)
-                                                <li>{{ $item }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p class="detail-muted">Informasi kompetensi belum tersedia.</p>
-                                    @endif
-                                </section>
+                                @if (!empty($department->competencies) && is_array($department->competencies))
+                                    <ul class="info-list">
+                                        @foreach ($department->competencies as $item)
+                                            <li>{{ $item }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p class="detail-muted">Informasi kompetensi belum tersedia.</p>
+                                @endif
+                            </section>
 
-                                {{-- Peluang Karir --}}
-                                <section class="info-box">
-                                    <h3 class="info-title">Peluang Karir</h3>
+                            {{-- Peluang Karir --}}
+                            <section class="info-box">
+                                <h3 class="info-title">Peluang Karir</h3>
 
-                                    @if(!empty($department->career_opportunities) && is_array($department->career_opportunities))
-                                        <ul class="info-list">
-                                            @foreach($department->career_opportunities as $item)
-                                                <li>{{ $item }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p class="detail-muted">Informasi peluang karir belum tersedia.</p>
-                                    @endif
-                                </section>
-                            </div>
+                                @if (!empty($department->career_opportunities) && is_array($department->career_opportunities))
+                                    <ul class="info-list">
+                                        @foreach ($department->career_opportunities as $item)
+                                            <li>{{ $item }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p class="detail-muted">Informasi peluang karir belum tersedia.</p>
+                                @endif
+                            </section>
                         </div>
+                    </div>
 
                     <div class="detail-actions">
                         <a href="{{ route('departments.index') }}" class="btn-back">
-                            Kembali ke daftar program
+                            Kembali Ke Daftar Program
                         </a>
                     </div>
 
@@ -95,6 +96,7 @@
                 {{-- Side Panel --}}
                 <aside class="detail-side">
 
+                    {{-- Card: Informasi --}}
                     <div class="side-card">
                         <div class="side-head">
                             <h3>Informasi</h3>
@@ -125,17 +127,78 @@
                         </div>
                     </div>
 
-                    @if(!empty($department->short_description))
-                        <div class="side-card side-card--note">
-                            <h3>Ringkasan</h3>
-                            <p>{{ $department->short_description }}</p>
+                    {{-- Card: Ringkasan Akademik --}}
+                    @if (!empty($department->short_description) || !empty($department->graduate_profile))
+                        <div class="side-card side-card--summary">
+                            <h3>Ringkasan Akademik</h3>
+                            <div class="side-row">
+                                <p class="side-lead">
+                                    @if (!empty($department->short_description))
+                                        {{ $department->short_description }}
+                                    @endif
+
+                                    @if (!empty($department->graduate_profile))
+                                        {{ !empty($department->short_description) ? ' ' : '' }}
+                                        {{ $department->graduate_profile }}
+                                    @endif
+                                </p>
+                            </div>
+
+                            <div class="side-row">
+                                <div class="side-label">Durasi</div>
+                                <div class="side-value">
+                                    {{ $department->duration_years ?? 3 }} Tahun
+                                </div>
+                            </div>
+
+                            <div class="side-row">
+                                <div class="side-label">Model Pembelajaran</div>
+                                <div class="side-value">
+                                    {{ $department->learning_model ?? 'Teori & Praktik' }}
+                                </div>
+                            </div>
+
+                            <div class="side-row">
+                                <div class="side-label">Praktik Kerja Lapangan</div>
+                                <div class="side-value">
+                                    {{ $department->has_internship ?? true ? 'Tersedia' : 'Tidak tersedia' }}
+                                </div>
+                            </div>
+
+                            <div class="side-row">
+                                <div class="side-label">Kegiatan</div>
+                                <div class="side-value">
+                                    @if (!empty($department->learning_activities) && is_array($department->learning_activities))
+                                        <ul class="side-mini-list">
+                                            @foreach ($department->learning_activities as $act)
+                                                <li>{{ $act }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <span class="side-fallback">Proyek & Portofolio</span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     @endif
 
+                    {{-- Card: Aksi Cepat --}}
+                    <div class="side-card side-card--actions">
+                        <h3>Aksi Cepat</h3>
+
+                        <a class="side-action" href="{{ route('departments.index') }}">
+                            Lihat Daftar Program Lainnya
+                            <span aria-hidden="true">→</span>
+                        </a>
+
+                        <a class="side-action" href="{{ route('facilities.index') }}">
+                            Lihat Fasilitas Sekolah
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+
                 </aside>
-
             </div>
-
         </div>
     </section>
 @endsection

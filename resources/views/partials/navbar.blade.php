@@ -34,17 +34,10 @@
                 </li>
 
                 {{-- Blog dropdown --}}
-                <li class="nav-item nav-dropdown {{ request()->is('blog*') ? 'active' : '' }}">
-                    <button class="nav-link nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item {{ request()->is('blog*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('blog.index') }}">
                         Blog
-                        <span class="chev" aria-hidden="true">▾</span>
-                    </button>
-
-                    <div class="dropdown">
-                        <a class="dropdown-link" href="{{ url('/blog/berita') }}">Berita Sekolah</a>
-                        <a class="dropdown-link" href="{{ url('/blog/agenda') }}">Agenda Sekolah</a>
-                        <a class="dropdown-link" href="{{ url('/blog/prestasi') }}">Prestasi Siswa &amp; Sekolah</a>
-                    </div>
+                    </a>
                 </li>
 
                 <li class="nav-item {{ request()->is('dokumentasi*') ? 'active' : '' }}">
