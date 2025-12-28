@@ -6,6 +6,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\LegalDocumentController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -44,3 +45,18 @@ Route::prefix('dokumentasi')->group(function () {
         ->name('documentation.show');
 
 });
+
+Route::get('/layanan', function () {
+    return view('layouts.user-pages.services.index');
+})->name('services.index');
+
+Route::get('/layanan/legalitas', [LegalDocumentController::class, 'index'])
+    ->name('legal.index');
+
+Route::get('/layanan/legalitas/{slug}', [LegalDocumentController::class, 'show'])
+    ->name('legal.show');
+
+Route::get('/layanan/legalitas/{slug}/download', [\App\Http\Controllers\LegalDocumentController::class, 'download'])
+    ->name('legal.download');
+
+

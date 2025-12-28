@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             GallerySeeder::class,
             GalleryItemSeeder::class,
+            LegalDocumentSeeder::class,
         ]);
     }
 

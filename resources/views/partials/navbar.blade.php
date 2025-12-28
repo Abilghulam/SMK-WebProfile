@@ -35,28 +35,21 @@
                     </div>
                 </li>
 
-                {{-- Blog dropdown --}}
+                {{-- Blog --}}
                 <li class="nav-item {{ request()->is('blog*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('blog.index') }}">
                         Blog
                     </a>
                 </li>
 
+                {{-- Dokumentasi --}}
                 <li class="nav-item {{ request()->is('dokumentasi*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ url('/dokumentasi') }}">Dokumentasi</a>
                 </li>
 
-                {{-- Layanan dropdown --}}
-                <li class="nav-item nav-dropdown {{ request()->is('layanan*') ? 'active' : '' }}">
-                    <button class="nav-link nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">
-                        Layanan
-                        <span class="chev" aria-hidden="true">▾</span>
-                    </button>
-
-                    <div class="dropdown">
-                        <a class="dropdown-link" href="{{ url('/layanan/kontak-lokasi') }}">Kontak &amp; Lokasi</a>
-                        <a class="dropdown-link" href="{{ url('/layanan/legalitas') }}">Legalitas Sekolah</a>
-                    </div>
+                {{-- Layanan --}}
+                <li class="nav-item {{ request()->is('layanan*') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ url('/layanan') }}">Layanan</a>
                 </li>
 
             </ul>

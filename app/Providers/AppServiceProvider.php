@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        View::share('settings', Setting::query()->first());
+
         View::composer(['partials.navbar', 'partials.footer'], function ($view) {
             $view->with('schoolProfile', SchoolProfile::first());
         });
