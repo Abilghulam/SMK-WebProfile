@@ -15,6 +15,9 @@
     {{-- STATISTIK SEKOLAH --}}
     @include('components.user-pages.home.statistics')
 
+    {{-- DOKUMENTASI TERBARU --}}
+    @include('components.user-pages.home.documentation')
+
     {{-- SAMBUTAN KEPALA SEKOLAH --}}
     @include('components.user-pages.home.principal-welcome')
 

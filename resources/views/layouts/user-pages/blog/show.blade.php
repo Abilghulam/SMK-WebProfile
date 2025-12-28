@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ($post->title ?? 'Detail Blog') . ' | SMK Negeri')
+@section('title', ($post->title ?? 'Detail Blog') . ' | SMK Negeri 9 Muaro Jambi')
 @section('meta_description', $post->excerpt ?? 'Informasi terbaru dari sekolah')
 
 @section('content')
@@ -17,24 +17,24 @@
         <div class="container">
 
             {{-- Breadcrumb --}}
-            <nav class="blog-breadcrumb">
+            <nav class="breadcrumb">
                 <a href="{{ url('/') }}">Home</a>
-                <span class="blog-crumb-sep">/</span>
+                <span class="crumb-sep">/</span>
                 <a href="{{ route('blog.index') }}">Blog</a>
 
                 @if ($post->type === 'news')
-                    <span class="blog-crumb-sep">/</span>
+                    <span class="crumb-sep">/</span>
                     <a href="{{ route('blog.news') }}">Berita</a>
                 @elseif($post->type === 'agenda')
-                    <span class="blog-crumb-sep">/</span>
+                    <span class="crumb-sep">/</span>
                     <a href="{{ route('blog.agenda') }}">Agenda</a>
                 @elseif($post->type === 'achievement')
-                    <span class="blog-crumb-sep">/</span>
+                    <span class="crumb-sep">/</span>
                     <a href="{{ route('blog.achievements') }}">Prestasi</a>
                 @endif
 
-                <span class="blog-crumb-sep">/</span>
-                <span class="blog-crumb-current">{{ \Illuminate\Support\Str::limit($post->title, 34) }}</span>
+                <span class="crumb-sep">/</span>
+                <span class="crumb-current">{{ \Illuminate\Support\Str::limit($post->title, 34) }}</span>
             </nav>
 
             <div class="blog-show-grid">

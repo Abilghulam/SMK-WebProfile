@@ -3,8 +3,10 @@
 
         {{-- Logo & Nama Sekolah --}}
         <a href="{{ url('/') }}" class="navbar-brand">
-            <img src="{{ asset('assets/images/logo.png') }}" alt="Logo Sekolah">
-            <span class="brand-name">{{ $schoolProfile->school_name ?? 'SMK' }}</span>
+            <img src="{{ data_get($settings, 'logo_url', asset('assets/images/logo.png')) }}"
+                alt="Logo {{ data_get($settings, 'site_name', 'SMK') }}">
+
+            <span class="brand-name">{{ data_get($settings, 'site_name', 'SMK Negeri 9 Muaro Jambi') }}</span>
         </a>
 
         {{-- Toggle (Mobile) --}}

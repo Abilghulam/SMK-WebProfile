@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Agenda Sekolah | SMK Negeri')
-@section('meta_description', 'Agenda dan kegiatan sekolah SMK Negeri')
+@section('title', 'Agenda Sekolah | SMK Negeri 9 Muaro Jambi')
+@section('meta_description', 'Agenda dan kegiatan sekolah SMK Negeri 9 Muaro Jambi')
 
 @section('content')
 

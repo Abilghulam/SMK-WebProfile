@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             FacilitySeeder::class,
             PostSeeder::class,
+            GallerySeeder::class,
+            GalleryItemSeeder::class,
         ]);
     }
 
