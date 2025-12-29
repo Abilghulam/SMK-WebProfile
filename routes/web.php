@@ -8,6 +8,10 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LegalDocumentController;
 
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController;
+
+// User Routes
 Route::get('/', [HomeController::class, 'index']);
 
 Route::prefix('akademik')->group(function () {
@@ -59,4 +63,22 @@ Route::get('/layanan/legalitas/{slug}', [LegalDocumentController::class, 'show']
 Route::get('/layanan/legalitas/{slug}/download', [\App\Http\Controllers\LegalDocumentController::class, 'download'])
     ->name('legal.download');
 
+// Admin Routes
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 
+Route::get('/admin/otp', [AdminAuthController::class, 'showOtpForm'])->name('admin.otp.form');
+Route::post('/admin/otp', [AdminAuthController::class, 'verifyOtp'])->name('admin.otp.verify');
+
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth', 'admin.otp', 'admin.access'])
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+Route::get('/settings')
+    ->middleware('super_admin')
+    ->name('settings');

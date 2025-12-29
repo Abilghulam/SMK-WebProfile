@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             GallerySeeder::class,
             GalleryItemSeeder::class,
             LegalDocumentSeeder::class,
+            AdminUsersSeeder::class,
         ]);
     }
 
