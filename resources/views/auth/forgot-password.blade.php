@@ -103,7 +103,12 @@
                     <button class="a-btn a-btn--primary" type="submit">Kirim Link</button>
 
                     <div class="a-actions-row">
-                        <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">Kembali</a>
+                        <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
+                            <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            Kembali</a>
                     </div>
                 </form>
             </section>

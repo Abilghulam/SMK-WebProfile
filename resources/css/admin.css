@@ -818,7 +818,7 @@
 /* =========================
    ADMIN AUTH (Login + OTP)
    Corporate-Government
-   Ramping + No Scroll
+   Lega + Santai + Institusional
    ========================= */
 
 :root {
@@ -838,62 +838,69 @@
     --a-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
 }
 
+/* Base */
 .a-auth-body {
     margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
         Arial, "Noto Sans", "Liberation Sans", sans-serif;
     color: var(--a-ink);
+
+    /* lebih santai & lega */
     background: radial-gradient(
-            900px 420px at 18% 18%,
+            900px 460px at 18% 18%,
             rgba(2, 56, 117, 0.1),
-            transparent 55%
+            transparent 56%
         ),
         radial-gradient(
-            700px 340px at 86% 12%,
+            720px 360px at 86% 14%,
             rgba(2, 56, 117, 0.08),
-            transparent 55%
+            transparent 58%
         ),
-        linear-gradient(180deg, #f7f9fe, var(--a-bg));
+        linear-gradient(180deg, #f8fbff, var(--a-bg));
 
-    /* bantu cegah scroll karena spacing */
     min-height: 100svh;
     overflow: hidden;
 }
 
+/* Wrapper center */
 .a-auth {
     min-height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* lebih hemat */
-    padding: 18px 14px;
+    padding: 22px 14px;
 }
 
+/* Shell: bikin semua elemen CENTER & sejajar */
 .a-auth-shell {
-    width: min(560px, 100%); /* <-- ramping */
+    width: min(520px, 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* BRAND BAR */
 .a-auth-brand {
+    width: 100%;
+    max-width: 435px; /* samakan dengan card */
+    margin: 0 auto 18px auto; /* center */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 24px;
-    width: 100%;
+    gap: 14px;
 
-    padding: 12px 12px; /* <-- rapat */
-    background: rgba(255, 255, 255, 0.78);
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.86);
     border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.06);
     backdrop-filter: blur(10px);
 }
 
 .a-auth-brand-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
     min-width: 0;
 }
 
@@ -901,8 +908,8 @@
     width: 52px;
     height: 52px;
     border-radius: 14px;
-    background: rgba(2, 56, 117, 0.06);
-    border: 1px solid rgba(2, 56, 117, 0.14);
+    background: rgba(2, 56, 117, 0.05);
+    border: 1px solid rgba(2, 56, 117, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -918,13 +925,14 @@
 
 .a-auth-brand-text {
     min-width: 0;
-    line-height: 1.5;
+    line-height: 1.35;
 }
 
+/* FONT: lebih ringan & santai */
 .a-auth-brand-name {
-    font-weight: 800;
+    font-weight: 650; /* dulu 800 */
     font-size: 13px;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.1px; /* dulu terasa kaku */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -933,8 +941,10 @@
 .a-auth-brand-sub {
     font-size: 12px;
     color: var(--a-muted);
+    font-weight: 450;
 }
 
+/* Pill lebih soft */
 .a-auth-pill {
     display: inline-flex;
     align-items: center;
@@ -943,30 +953,35 @@
     border-radius: 999px;
     background: rgba(2, 56, 117, 0.06);
     border: 1px solid rgba(2, 56, 117, 0.14);
-    color: rgba(2, 56, 117, 0.94);
-    font-weight: 800;
+    color: rgba(2, 56, 117, 0.92);
+
+    font-weight: 650; /* dulu 800 */
     font-size: 11px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em; /* lebih natural */
     flex: 0 0 auto;
 }
 
+/* CARD */
 .a-card {
-    margin: 12px auto 0; /* <-- kecil */
     width: 100%;
+    max-width: 420px;
+    margin: 0 auto; /* center */
     background: var(--a-card);
     border: 1px solid rgba(15, 23, 42, 0.1);
     border-radius: var(--a-radius);
     box-shadow: var(--a-shadow);
-    padding: 16px; /* <-- rapat */
+
+    /* lebih lega */
+    padding: 22px 22px;
 }
 
 .a-card-head {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding-bottom: 12px;
+    padding-bottom: 14px;
     border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .a-card-ic {
@@ -982,38 +997,42 @@
     color: rgba(2, 56, 117, 0.95);
 }
 
+/* Title lebih “clean” & tidak tebal berlebihan */
 .a-card-title h1 {
     margin: 0;
-    font-size: 18px; /* <-- sedikit turun */
-    letter-spacing: 0.2px;
-    font-weight: 900;
+    font-size: 19px;
+    letter-spacing: 0;
+    font-weight: 700; /* dulu 900 */
 }
 
 .a-card-title p {
-    margin: 4px 0 0;
+    margin: 6px 0 0;
     font-size: 12.5px;
     color: var(--a-muted);
+    font-weight: 450;
 }
 
+/* FORM */
 .a-form {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* <-- rapat */
+    gap: 14px;
     margin-top: 12px;
 }
 
 .a-field {
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
 }
 
+/* Label: jangan uppercase agresif */
 .a-label {
-    font-size: 11px;
-    color: rgba(15, 23, 42, 0.74);
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(15, 23, 42, 0.72);
+    font-weight: 650; /* dulu 900 */
+    letter-spacing: 0.02em;
+    text-transform: none; /* dulu uppercase */
 }
 
 .a-input-wrap {
@@ -1023,13 +1042,13 @@
     background: rgba(248, 250, 252, 0.92);
     border: 1px solid rgba(15, 23, 42, 0.12);
     border-radius: 14px;
-    padding: 9px 11px; /* <-- rapat */
+    padding: 10px 12px;
     transition: border-color 0.18s ease, box-shadow 0.18s ease,
         background 0.18s ease;
 }
 
 .a-input-wrap:focus-within {
-    border-color: rgba(2, 56, 117, 0.28);
+    border-color: rgba(2, 56, 117, 0.3);
     box-shadow: 0 0 0 4px rgba(2, 56, 117, 0.08);
     background: #fff;
 }
@@ -1055,9 +1074,11 @@
     font-size: 16px;
     color: rgba(15, 23, 42, 0.92);
     font-family: inherit;
+    font-weight: 450; /* lebih santai */
 }
 .a-input::placeholder {
     color: rgba(15, 23, 42, 0.42);
+    font-weight: 450;
 }
 
 .a-icon-btn {
@@ -1065,7 +1086,7 @@
     height: 36px;
     border-radius: 12px;
     border: 1px solid rgba(15, 23, 42, 0.1);
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1082,22 +1103,24 @@
     transform: translateY(1px);
 }
 
+/* Row (remember + lupa password) */
 .a-form-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    margin-top: 6px;
+    margin-bottom: 12px;
 }
 
+/* Checkbox: jangan bold banget */
 .a-check {
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 13px;
     color: rgba(15, 23, 42, 0.78);
-    font-weight: 700;
+    font-weight: 550; /* dulu 700 */
 }
 .a-check input {
     width: 16px;
@@ -1105,30 +1128,31 @@
     accent-color: var(--a-brand);
 }
 
+/* Link: lebih halus */
 .a-link {
+    align-items: center;
     appearance: none;
     border: 0;
     background: transparent;
     padding: 0;
     font: inherit;
     color: rgba(2, 56, 117, 0.95);
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 14px;
     cursor: pointer;
     text-decoration: none;
-    transition: text-decoration 0.15s ease;
+    transition: text-decoration 0.15s ease, opacity 0.15s ease;
 }
-
 .a-link:hover {
     text-decoration: underline;
 }
-
 .a-link:disabled {
     cursor: not-allowed;
     color: rgba(15, 23, 42, 0.45);
     text-decoration: none;
 }
 
+/* BUTTON */
 .a-btn {
     width: 100%;
     display: inline-flex;
@@ -1137,14 +1161,18 @@
     gap: 10px;
     border-radius: 14px;
     padding: 11px 14px;
-    font-weight: 900;
+
+    /* font lebih santai */
+    font-weight: 650; /* dulu 900 */
     font-size: 14px;
+
     border: 1px solid transparent;
     cursor: pointer;
-    transition: background 0.16s ease, border-color 0.16s ease,
-        transform 0.12s ease;
+    transition: background 0.18s ease, border-color 0.18s ease,
+        transform 0.14s ease, box-shadow 0.18s ease;
 }
 
+/* PRIMARY */
 .a-btn--primary {
     background: linear-gradient(
         180deg,
@@ -1158,14 +1186,23 @@
 .a-btn--primary:hover {
     background: linear-gradient(
         180deg,
-        rgba(2, 56, 117, 1),
-        rgba(2, 56, 117, 0.92)
+        rgba(3, 66, 135, 1),
+        rgba(2, 56, 117, 0.96)
     );
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
 }
 .a-btn--primary:active {
-    transform: translateY(1px);
+    transform: translateY(0);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.12);
+}
+.a-btn--primary:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(2, 56, 117, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
+/* GHOST */
 .a-btn--ghost {
     width: auto;
     background: rgba(2, 56, 117, 0.06);
@@ -1173,6 +1210,7 @@
     color: rgba(2, 56, 117, 0.94);
     padding: 9px 11px;
     text-decoration: none;
+    font-weight: 600;
 }
 .a-btn--ghost:hover {
     background: rgba(2, 56, 117, 0.09);
@@ -1184,12 +1222,13 @@
     justify-content: flex-start;
 }
 
+/* ALERT */
 .a-alert {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     border-radius: 14px;
-    padding: 11px 12px; /* <-- rapat */
+    padding: 11px 12px;
     border: 1px solid rgba(15, 23, 42, 0.1);
     background: rgba(15, 23, 42, 0.04);
     margin-top: 8px;
@@ -1200,7 +1239,7 @@
     color: rgba(180, 35, 24, 0.96);
 }
 .a-alert-title {
-    font-weight: 900;
+    font-weight: 650;
     font-size: 13px;
     margin-bottom: 6px;
     color: rgba(180, 35, 24, 0.95);
@@ -1210,12 +1249,14 @@
     padding-left: 18px;
     color: rgba(180, 35, 24, 0.9);
     font-size: 13px;
+    font-weight: 450;
 }
 
+/* OTP */
 .a-otp {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 20px;
+    gap: 14px;
 }
 .a-otp-box {
     height: 48px;
@@ -1224,15 +1265,17 @@
     border: 1px solid rgba(15, 23, 42, 0.14);
     background: rgba(248, 250, 252, 0.92);
     text-align: center;
+
     font-size: 17px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
+    font-weight: 650; /* dulu 800 */
+    letter-spacing: 0.06em;
+
     outline: none;
     transition: border-color 0.18s ease, box-shadow 0.18s ease,
         background 0.18s ease;
 }
 .a-otp-box:focus {
-    border-color: rgba(2, 56, 117, 0.28);
+    border-color: rgba(2, 56, 117, 0.3);
     box-shadow: 0 0 0 4px rgba(2, 56, 117, 0.08);
     background: #fff;
 }
@@ -1242,32 +1285,36 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    margin-top: 8px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 14px;
 }
+
 .a-otp-exp {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 12px;
     color: rgba(15, 23, 42, 0.68);
+    font-weight: 450;
 }
 .a-otp-exp strong {
     color: rgba(15, 23, 42, 0.86);
-    font-weight: 900;
+    font-weight: 650; /* dulu 900 */
 }
 .a-otp-sep {
     color: rgba(15, 23, 42, 0.32);
 }
 
+/* FOOTER */
 .a-auth-footer {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 10px; /* <-- kecil */
+    margin-top: 14px;
     color: rgba(15, 23, 42, 0.56);
     font-size: 12px;
+    font-weight: 450;
 }
 .a-auth-footer-dot {
     color: rgba(15, 23, 42, 0.3);
@@ -1279,26 +1326,36 @@
     display: block;
 }
 
+/* Responsive */
 @media (max-width: 640px) {
     .a-auth-body {
         overflow: auto;
-    } /* kecil: izinkan scroll kalau benar-benar sempit */
+    }
     .a-auth {
         padding: 14px 12px;
     }
+
     .a-auth-shell {
         width: min(520px, 100%);
     }
+
+    .a-auth-brand,
     .a-card {
-        padding: 14px;
+        max-width: 100%;
     }
+
+    .a-card {
+        padding: 16px;
+    }
+
     .a-otp {
-        gap: 6px;
+        gap: 8px;
     }
     .a-otp-box {
         height: 46px;
         font-size: 16px;
     }
+
     .a-otp-meta {
         flex-direction: column;
         align-items: flex-start;

@@ -102,7 +102,7 @@
                     </div>
                 @endif
 
-                {{-- OTP verify form --}}
+                {{-- ✅ VERIFY FORM (JANGAN DITUTUP SEBELUM TOMBOL VERIFIKASI) --}}
                 <form class="a-form" method="POST" action="{{ route('admin.otp.verify') }}" novalidate data-otp-form
                     data-expires-at="{{ $expiresAtIso ?? '' }}">
                     @csrf
@@ -120,6 +120,7 @@
                             @endfor
                         </div>
 
+                        {{-- ✅ META: kiri expiry, kanan resend --}}
                         <div class="a-otp-meta">
                             <div class="a-otp-exp">
                                 <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -132,50 +133,51 @@
                                 <span class="a-otp-sep">•</span>
                                 <span>Sisa: <strong data-otp-countdown>—</strong></span>
                             </div>
-                </form>
 
-                {{-- Resend OTP (form terpisah, tapi UI tetap di bar yang sama) --}}
-                <form class="a-form a-form--inline" method="POST" action="{{ route('admin.otp.resend') }}"
-                    data-otp-resend-form data-resend-seconds="{{ (int) ($cooldownRemaining ?? 0) }}">
-                    @csrf
+                            {{-- ✅ RESEND FORM TERPISAH (TIDAK NESTED) --}}
+                            <form class="a-form a-form--inline" method="POST"
+                                action="{{ route('admin.otp.resend') }}" data-otp-resend-form
+                                data-resend-seconds="{{ (int) ($cooldownRemaining ?? 0) }}">
+                                @csrf
 
-                    <button type="submit" class="a-link" data-resend-btn
-                        {{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'disabled' : '' }}
-                        aria-disabled="{{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'true' : 'false' }}">
-                        Kirim ulang
-                        <span class="a-link-muted">
-                            (<span data-resend-count>{{ (int) ($cooldownRemaining ?? 0) }}</span>s)
-                        </span>
+                                <button type="submit" class="a-link" data-resend-btn
+                                    {{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'disabled' : '' }}
+                                    aria-disabled="{{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'true' : 'false' }}">
+                                    Kirim ulang
+                                    <span class="a-link-muted">
+                                        (<span data-resend-count>{{ (int) ($cooldownRemaining ?? 0) }}</span>s)
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <button class="a-btn a-btn--primary" type="submit">
+                        Verifikasi
+                        <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M10 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
                     </button>
+
+                    <div class="a-actions-row">
+                        <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
+                            <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Kembali
+                        </a>
+                    </div>
                 </form>
-        </div>
-        </div>
+                {{-- ✅ END VERIFY FORM --}}
+            </section>
 
-        <button class="a-btn a-btn--primary" type="submit">
-            Verifikasi
-            <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M10 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </button>
-
-        <div class="a-actions-row">
-            <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
-                <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-                Kembali
-            </a>
-        </div>
-
-        </section>
-
-        <footer class="a-auth-footer" aria-label="Footer auth">
-            <span>{{ $site }} — Admin Panel</span>
-            <span class="a-auth-footer-dot">•</span>
-            <span>&copy; {{ now()->year }}</span>
-        </footer>
+            <footer class="a-auth-footer" aria-label="Footer auth">
+                <span>{{ $site }} — Admin Panel</span>
+                <span class="a-auth-footer-dot">•</span>
+                <span>&copy; {{ now()->year }}</span>
+            </footer>
 
         </div>
     </main>
