@@ -10,6 +10,7 @@ use App\Http\Controllers\LegalDocumentController;
 
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AdminPasswordResetController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -64,11 +65,22 @@ Route::get('/layanan/legalitas/{slug}/download', [\App\Http\Controllers\LegalDoc
     ->name('legal.download');
 
 // Admin Routes
+// Login
 Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->middleware('throttle:8,1')
+    ->name('admin.login.submit');
 
+// OTP
 Route::get('/admin/otp', [AdminAuthController::class, 'showOtpForm'])->name('admin.otp.form');
-Route::post('/admin/otp', [AdminAuthController::class, 'verifyOtp'])->name('admin.otp.verify');
+Route::post('/admin/otp', [AdminAuthController::class, 'verifyOtp'])
+    ->middleware('throttle:10,1') 
+    ->name('admin.otp.verify');
+
+// Resend OTP
+Route::post('/admin/otp/resend', [AdminAuthController::class, 'resendOtp'])
+    ->middleware('throttle:3,1') 
+    ->name('admin.otp.resend');
 
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
@@ -82,3 +94,15 @@ Route::prefix('admin')
 Route::get('/settings')
     ->middleware('super_admin')
     ->name('settings');
+
+// Forgot password (request link)
+Route::get('/admin/forgot-password', [AdminPasswordResetController::class, 'requestForm'])
+    ->name('admin.password.request');
+Route::post('/admin/forgot-password', [AdminPasswordResetController::class, 'sendResetLink'])
+    ->name('admin.password.email');
+
+// Reset password (form + submit)
+Route::get('/admin/reset-password/{token}', [AdminPasswordResetController::class, 'resetForm'])
+    ->name('admin.password.reset');
+Route::post('/admin/reset-password', [AdminPasswordResetController::class, 'resetPassword'])
+    ->name('admin.password.update');

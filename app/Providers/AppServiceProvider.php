@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\SchoolProfile;
 use App\Models\Setting;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,13 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.app', 'partials.navbar', 'partials.footer'], function ($view) {
             $view->with('settings', Setting::first());
+        });
+
+                ResetPassword::createUrlUsing(function ($notifiable, string $token) {
+            return route('admin.password.reset', [
+                'token' => $token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ]);
         });
 
     }

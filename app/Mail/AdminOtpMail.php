@@ -19,6 +19,6 @@ class AdminOtpMail extends Mailable
     public function build()
     {
         return $this->subject("Kode Verifikasi Admin - {$this->siteName}")
-            ->view('auth.otp');
+            ->view('emails.kode-otp');
     }
 }
