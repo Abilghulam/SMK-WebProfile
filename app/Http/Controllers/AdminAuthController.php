@@ -14,17 +14,15 @@ use Illuminate\Support\Str;
 
 class AdminAuthController extends Controller
 {
-    // Konfigurasi hardening (bisa kamu pindah ke config kalau mau)
     private int $loginMaxAttempts = 5;
     private int $loginDecaySeconds = 60;
 
     private int $otpTtlMinutes = 3;
-    private int $otpMaxAttempts = 5;         // salah OTP berapa kali
-    private int $otpLockMinutes = 10;        // lock sementara setelah max attempts
-    private int $otpResendCooldownSeconds = 60; // minimal jarak resend
-    private int $otpSendMaxPerHour = 6;      // batasi spam email OTP
+    private int $otpMaxAttempts = 5;        
+    private int $otpLockMinutes = 10;       
+    private int $otpResendCooldownSeconds = 60;
+    private int $otpSendMaxPerHour = 6;     
 
-    // Kalau true, OTP hanya valid untuk IP saat OTP dikirim (lebih aman untuk admin)
     private bool $bindOtpToIp = true;
 
     public function showLogin()
@@ -39,7 +37,7 @@ class AdminAuthController extends Controller
             'password' => ['required','string'],
         ]);
 
-        // Rate limit login (anti brute force)
+        
         $key = Str::lower($request->input('email')).'|'.$request->ip();
 
         if (RateLimiter::tooManyAttempts($key, $this->loginMaxAttempts)) {
@@ -56,19 +54,19 @@ class AdminAuthController extends Controller
                 ->withInput();
         }
 
-        // Login sukses → regenerate session (anti session fixation)
+       
         $request->session()->regenerate();
         RateLimiter::clear($key);
 
-        // Pastikan status OTP di sesi selalu reset ketika login
+       
         $request->session()->put('admin_otp_verified', false);
 
         $user = Auth::user();
 
-        // Bersihkan OTP lama user agar tidak numpuk
+       
         AdminOtp::where('user_id', $user->id)->delete();
 
-        // Kirim OTP pertama
+       
         $this->issueOtpForUser($user->id, $request->ip());
 
         return redirect()->route('admin.otp.form');
@@ -104,7 +102,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.login');
         }
 
-        // IMPORTANT: name input harus "otp" (sesuai view kamu)
+        
         $request->validate([
             'otp' => ['required','digits:6'],
         ]);
@@ -120,7 +118,7 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        // Lock sementara
+      
         if (!empty($otp->locked_until) && now()->lt($otp->locked_until)) {
             $remaining = now()->diffInSeconds($otp->locked_until);
             return back()->withErrors([
@@ -128,23 +126,23 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        // Expired
+       
         if (!empty($otp->expires_at) && now()->greaterThan($otp->expires_at)) {
             return redirect()->route('admin.login')->withErrors([
                 'otp' => 'Kode sudah kedaluwarsa. Silakan login ulang.',
             ]);
         }
 
-        // Bind IP (opsional tapi disarankan untuk admin)
+       
         if ($this->bindOtpToIp && !empty($otp->last_sent_ip) && $otp->last_sent_ip !== $request->ip()) {
             return redirect()->route('admin.login')->withErrors([
                 'otp' => 'Perangkat/IP berubah. Demi keamanan, silakan login ulang.',
             ]);
         }
 
-        // Cek attempt
+      
         if ((int) $otp->attempts >= $this->otpMaxAttempts) {
-            // set lock
+            
             $otp->locked_until = now()->addMinutes($this->otpLockMinutes);
             $otp->save();
 
@@ -153,12 +151,11 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        // Naikkan attempt dulu (biar brute-force nggak bisa “free retry” saat error)
+      
         $otp->increment('attempts');
 
-        // Validasi OTP
         if (!Hash::check($request->otp, $otp->code_hash)) {
-            // Kalau setelah increment mencapai batas, lock sekarang juga
+           
             if ((int) $otp->attempts >= $this->otpMaxAttempts) {
                 $otp->locked_until = now()->addMinutes($this->otpLockMinutes);
                 $otp->save();
@@ -172,21 +169,15 @@ class AdminAuthController extends Controller
             ]);
         }
 
-        // Sukses → tandai session verified
         $request->session()->put('admin_otp_verified', true);
 
-        // Optional: regenerate session lagi setelah OTP sukses (lebih aman)
         $request->session()->regenerate();
 
-        // Hapus OTP agar tidak bisa dipakai ulang
         $otp->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'Verifikasi berhasil.');
     }
 
-    /**
-     * Resend OTP (pastikan kamu punya route untuk ini kalau mau dipakai)
-     */
     public function resendOtp(Request $request)
     {
         if (!Auth::check()) {
@@ -200,7 +191,6 @@ class AdminAuthController extends Controller
             return redirect()->route('admin.login')->with('error', 'Sesi OTP tidak ditemukan. Silakan login ulang.');
         }
 
-        // Cooldown resend
         if (!empty($otp->sent_at)) {
             $nextAllowed = $otp->sent_at->copy()->addSeconds($this->otpResendCooldownSeconds);
             if (now()->lt($nextAllowed)) {
@@ -209,7 +199,6 @@ class AdminAuthController extends Controller
             }
         }
 
-        // Limit kirim OTP per jam (anti spam)
         $rateKey = 'admin-otp-send:'.$user->id;
         if (RateLimiter::tooManyAttempts($rateKey, $this->otpSendMaxPerHour)) {
             $seconds = RateLimiter::availableIn($rateKey);
@@ -217,7 +206,6 @@ class AdminAuthController extends Controller
         }
         RateLimiter::hit($rateKey, 3600);
 
-        // Invalidate OTP lama & kirim baru
         AdminOtp::where('user_id', $user->id)->delete();
         $this->issueOtpForUser($user->id, $request->ip());
 
@@ -234,9 +222,6 @@ class AdminAuthController extends Controller
         return redirect()->route('admin.login');
     }
 
-    /**
-     * Generate + simpan OTP (hash) + kirim email
-     */
     private function issueOtpForUser(int $userId, string $ip): void
     {
         $code = (string) random_int(100000, 999999);
@@ -253,8 +238,7 @@ class AdminAuthController extends Controller
 
         $siteName = optional(Setting::first())->site_name ?? config('app.name');
 
-        // Kirim email OTP
-        $userEmail = Auth::user()?->email; // aman karena dipanggil setelah login
+        $userEmail = Auth::user()?->email; 
         if ($userEmail) {
             Mail::to($userEmail)->send(new AdminOtpMail($code, $siteName, $this->otpTtlMinutes));
         }
