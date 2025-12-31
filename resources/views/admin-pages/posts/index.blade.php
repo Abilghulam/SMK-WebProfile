@@ -51,7 +51,6 @@
                 <div class="adm-filter-actions">
                     <button class="adm-icon-btn adm-icon-btn--apply" type="submit" title="Terapkan filter"
                         aria-label="Terapkan filter">
-                        {{-- icon check --}}
                         <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />
@@ -60,7 +59,6 @@
 
                     <a class="adm-icon-btn adm-icon-btn--reset" href="{{ route('admin.posts.index') }}"
                         title="Reset filter" aria-label="Reset filter">
-                        {{-- icon rotate --}}
                         <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M21 12a9 9 0 10-3 6.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" />

@@ -33,11 +33,10 @@
 
         </div>
 
-        <div class="adm-field">
+        <div class="adm-field adm-field--grow">
             <label class="adm-label">Slug</label>
-            <input class="adm-input" type="text" name="slug" value="{{ old('slug', $post->slug ?? '') }}"
-                placeholder="otomatis dari judul">
-            <div class="adm-help">Kosongkan untuk auto.</div>
+            <input class="adm-input adm-input--muted" type="text" name="slug"
+                value="{{ old('slug', $post->slug ?? '') }}" placeholder="Slug otomatis dari judul" readonly>
         </div>
 
         <div class="adm-field adm-field--full">
@@ -46,14 +45,14 @@
                 required>
         </div>
 
-        <div class="adm-field adm-field--full">
+        <div class="adm-field">
             <label class="adm-label">Deskripsi Singkat</label>
             <textarea class="adm-textarea" name="excerpt" rows="3">{{ old('excerpt', $post->excerpt ?? '') }}</textarea>
         </div>
 
-        <div class="adm-field adm-field--full">
+        <div class="adm-field">
             <label class="adm-label">Deskripsi</label>
-            <textarea class="adm-textarea" name="content" rows="10">{{ old('content', $post->content ?? '') }}</textarea>
+            <textarea class="adm-textarea" name="content" rows="3">{{ old('content', $post->content ?? '') }}</textarea>
         </div>
 
         <div class="adm-field adm-field--full">
@@ -63,13 +62,13 @@
         </div>
 
         <div class="adm-field" data-field="event_start_at">
-            <label class="adm-label">Event Start</label>
+            <label class="adm-label">Tanggal Mulai</label>
             <input type="datetime-local" name="event_start_at" class="adm-input"
                 value="{{ old('event_start_at', optional($post->event_start_at ?? null)->format('Y-m-d\TH:i')) }}">
         </div>
 
         <div class="adm-field" data-field="event_end_at">
-            <label class="adm-label">Event End</label>
+            <label class="adm-label">Tanggal Selesai</label>
             <input type="datetime-local" name="event_end_at" class="adm-input"
                 value="{{ old('event_end_at', optional($post->event_end_at ?? null)->format('Y-m-d\TH:i')) }}">
         </div>
@@ -82,31 +81,43 @@
 
         <div class="adm-field" data-field="level">
             <label class="adm-label">Level</label>
-            <input type="text" name="level" class="adm-input" value="{{ old('level', $post->level ?? '') }}">
+            <input type="text" name="level" class="adm-input" placeholder="Kabupaten / Provinsi / Nasional"
+                value="{{ old('level', $post->level ?? '') }}">
         </div>
 
         <div class="adm-field" data-field="awarded_at">
-            <label class="adm-label">Awarded At</label>
+            <label class="adm-label">Tanggal</label>
             <input type="date" name="awarded_at" class="adm-input"
                 value="{{ old('awarded_at', optional($post->awarded_at ?? null)->format('Y-m-d')) }}">
         </div>
 
         <div class="adm-field adm-field--full">
-            <div class="adm-check-row">
+            @php
+                $isPublished = (int) old('is_published', $post->is_published ?? 1);
+                $isFeatured = (int) old('is_featured', $post->is_featured ?? 0);
+            @endphp
+
+            <div class="adm-check-row" data-publish-row>
+                {{-- Draft / Published as segmented toggles (radio) --}}
                 <label class="adm-check">
-                    <input type="checkbox" name="is_published" value="1"
-                        {{ old('is_published', $post->is_published ?? 1) ? 'checked' : '' }}>
+                    <input type="radio" name="is_published" value="0" {{ $isPublished === 0 ? 'checked' : '' }}>
+                    <span>Draft</span>
+                </label>
+
+                <label class="adm-check">
+                    <input type="radio" name="is_published" value="1" {{ $isPublished === 1 ? 'checked' : '' }}>
                     <span>Published</span>
                 </label>
 
+                {{-- Featured --}}
                 <label class="adm-check">
-                    <input type="checkbox" name="is_featured" value="1"
-                        {{ old('is_featured', $post->is_featured ?? 0) ? 'checked' : '' }}>
+                    <input type="checkbox" name="is_featured" value="1" {{ $isFeatured ? 'checked' : '' }}>
                     <span>Featured</span>
                 </label>
 
-                <div class="adm-publish-at">
-                    <label class="adm-label" style="margin:0;">Published At (opsional)</label>
+                {{-- Published At --}}
+                <div class="adm-publish-at" data-publish-at>
+                    <label class="adm-label" style="margin:0;">Published At</label>
                     <input class="adm-input" type="datetime-local" name="published_at"
                         value="{{ old('published_at', optional($post->published_at ?? null)->format('Y-m-d\TH:i')) }}">
                 </div>

@@ -279,3 +279,97 @@ document.addEventListener("DOMContentLoaded", () => {
     typeSelect.addEventListener("change", applyTypeRules);
     applyTypeRules(); // init saat halaman load (create & edit)
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Cari field judul & slug (aman tanpa ubah class)
+    const titleInput =
+        document.querySelector('input[name="title"]') ||
+        document.querySelector('textarea[name="title"]');
+
+    const slugInput = document.querySelector('input[name="slug"]');
+
+    if (!titleInput || !slugInput) return;
+
+    // Kalau slug sudah ada (edit mode), anggap user mungkin mau mempertahankan.
+    // Auto-sync aktif hanya jika slug kosong atau slug belum pernah disentuh manual.
+    let slugTouched = false;
+
+    // Tandai kalau user mengedit slug manual
+    slugInput.addEventListener("input", () => {
+        // Jika user mulai mengetik sesuatu, dianggap "touched"
+        // tapi kalau user mengosongkan slug, auto-sync akan aktif lagi
+        slugTouched = slugInput.value.trim().length > 0;
+    });
+
+    // Fungsi slugify yang rapi untuk bahasa Indonesia juga
+    function slugify(text) {
+        return (
+            text
+                .toString()
+                .normalize("NFD") // pisah accent
+                .replace(/[\u0300-\u036f]/g, "") // hapus accent
+                .toLowerCase()
+                .trim()
+                // ganti & jadi "dan" (opsional, tapi terasa institusional)
+                .replace(/&/g, " dan ")
+                // hapus karakter aneh
+                .replace(/[^a-z0-9\s-]/g, "")
+                // spasi jadi dash
+                .replace(/\s+/g, "-")
+                // rapikan multiple dash
+                .replace(/-+/g, "-")
+                // hapus dash di awal/akhir
+                .replace(/^-|-$/g, "")
+        );
+    }
+
+    // Sync slug saat judul berubah (hanya jika slug belum disentuh / slug kosong)
+    function syncSlugFromTitle() {
+        const title = titleInput.value || "";
+        const slug = slugify(title);
+
+        // Auto-update hanya jika:
+        // - slug belum disentuh user, atau
+        // - slug input kosong (user sengaja kosongkan untuk auto)
+        if (!slugTouched || slugInput.value.trim() === "") {
+            slugInput.value = slug;
+        }
+    }
+
+    // Event yang enak: input (real-time) + change
+    titleInput.addEventListener("input", syncSlugFromTitle);
+    titleInput.addEventListener("change", syncSlugFromTitle);
+
+    // Jika form edit dan slug memang kosong, langsung sync dari title saat load
+    if (slugInput.value.trim() === "") {
+        syncSlugFromTitle();
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const row = document.querySelector("[data-publish-row]");
+    if (!row) return;
+
+    const pubAtWrap = row.querySelector("[data-publish-at]");
+    const pubAtInput = pubAtWrap?.querySelector('input[name="published_at"]');
+    const radios = row.querySelectorAll(
+        'input[name="is_published"][type="radio"]'
+    );
+
+    function sync() {
+        const val = row.querySelector(
+            'input[name="is_published"]:checked'
+        )?.value;
+        const isDraft = val === "0";
+
+        if (!pubAtInput) return;
+
+        pubAtInput.disabled = isDraft;
+        pubAtWrap.style.opacity = isDraft ? "0.6" : "1";
+
+        if (isDraft) pubAtInput.value = "";
+    }
+
+    radios.forEach((r) => r.addEventListener("change", sync));
+    sync();
+});

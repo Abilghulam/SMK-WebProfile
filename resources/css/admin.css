@@ -1451,9 +1451,9 @@
 
 .adm-field > label,
 .adm-field .adm-label {
-    font-weight: 600;
+    font-weight: 650;
     font-size: 12px;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.08em;
     color: rgba(15, 23, 42, 0.72);
 }
 
@@ -1530,6 +1530,19 @@
     background: #fff;
     border-color: rgba(2, 56, 117, 0.28);
     box-shadow: 0 0 0 4px rgba(2, 56, 117, 0.08);
+}
+
+.adm-input[readonly],
+.adm-input--muted {
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.adm-input[readonly]:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .adm-file {
@@ -1778,22 +1791,101 @@
 .adm-check-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px 18px;
+    gap: 12px 12px;
     align-items: center;
+    padding-top: 6px;
 }
 
+/* base "chip" */
 .adm-check {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-weight: 750;
+
+    padding: 10px 12px;
+    border-radius: 12px;
+
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.74);
+
     color: rgba(15, 23, 42, 0.78);
+    font-weight: 600; /* softer */
+    line-height: 1;
+    cursor: pointer;
+
+    transition: background 0.16s ease, border-color 0.16s ease,
+        transform 0.12s ease, box-shadow 0.16s ease;
 }
 
+.adm-check:hover {
+    border-color: rgba(2, 56, 117, 0.22);
+    background: rgba(2, 56, 117, 0.04);
+}
+
+.adm-check:active {
+    transform: translateY(1px);
+}
+
+/* hide native input, keep accessible */
 .adm-check input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--adm-brand);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* add small indicator dot/icon-ish */
+.adm-check > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.adm-check > span::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 2px solid rgba(15, 23, 42, 0.28);
+    background: transparent;
+    transition: background 0.16s ease, border-color 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+/* checked state: brand highlight */
+.adm-check input:checked + span::before {
+    border-color: rgba(2, 56, 117, 0.9);
+    background: rgba(2, 56, 117, 0.9);
+    box-shadow: 0 0 0 3px rgba(2, 56, 117, 0.12);
+}
+
+.adm-check input:checked + span {
+    color: rgba(2, 56, 117, 0.98);
+}
+
+/* focus visible */
+.adm-check input:focus-visible + span {
+    outline: none;
+}
+
+.adm-check:has(input:focus-visible) {
+    box-shadow: 0 0 0 3px rgba(2, 56, 117, 0.16);
+    border-color: rgba(2, 56, 117, 0.28);
+}
+
+/* published at block better aligned */
+.adm-publish-at {
+    display: grid;
+    gap: 6px;
+    min-width: 260px;
+}
+
+/* small screen: stack nicely */
+@media (max-width: 640px) {
+    .adm-publish-at {
+        min-width: 100%;
+    }
 }
 
 .adm-publish-at {
