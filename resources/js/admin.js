@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Definisikan field aktif per type
     // Sesuaikan key type kamu: NEWS, AGENDA, ACHIEVEMENT, EVENT (atau Kegiatan)
     const TYPE_FIELDS = {
-        NEWS: [
+        news: [
             "title",
             "slug",
             "excerpt",
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "published_at",
             "is_featured",
         ],
-        AGENDA: [
+        agenda: [
             "title",
             "slug",
             "excerpt",
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "event_end_at",
             "location",
         ],
-        ACHIEVEMENT: [
+        achievement: [
             "title",
             "slug",
             "excerpt",
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "awarded_at",
             "level",
         ],
-        EVENT: [
+        event: [
             "title",
             "slug",
             "excerpt",
