@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\SchoolProfile;
 use App\Models\Setting;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('id');
+
         View::share('settings', Setting::query()->first());
 
         View::composer(['partials.navbar', 'partials.footer'], function ($view) {

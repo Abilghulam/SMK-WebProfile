@@ -171,3 +171,186 @@ function initResendOtpUI() {
 
     tick();
 }
+
+/* =========================
+   ADMIN POSTS UI (interactive)
+   - auto slug from title
+   - type-based fields enable/disable
+   - draft/published sync
+   - featured locks published
+   ========================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("[data-posts-form]");
+    if (!form) return;
+
+    const typeSelect = form.querySelector("[data-posts-type]");
+    const titleInput = form.querySelector("[data-posts-title]");
+    const slugView = form.querySelector("[data-posts-slug]");
+    const slugHidden = form.querySelector("[data-posts-slug-hidden]");
+    const slugToggle = form.querySelector("[data-posts-slug-toggle]");
+
+    const publishedCb = form.querySelector("[data-posts-published]");
+    const featuredCb = form.querySelector("[data-posts-featured]");
+    const draftCb = form.querySelector("[data-posts-draft]");
+
+    const onlyAgenda = [...form.querySelectorAll('[data-posts-only="agenda"]')];
+    const onlyAchievement = [
+        ...form.querySelectorAll('[data-posts-only="achievement"]'),
+    ];
+
+    // --- utils
+    const slugify = (str) => {
+        return String(str || "")
+            .toLowerCase()
+            .trim()
+            .replace(/['"]/g, "")
+            .replace(/[^a-z0-9\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-")
+            .replace(/^-|-$/g, "");
+    };
+
+    const setMuted = (el, muted) => {
+        if (!el) return;
+        el.classList.toggle("is-muted", !!muted);
+        const inputs = el.querySelectorAll("input, select, textarea, button");
+        inputs.forEach((i) => {
+            if (i.hasAttribute("data-keep-enabled")) return;
+            // jangan disable hidden (biar tetap submit jika dibutuhkan)
+            if (i.type === "hidden") return;
+            i.disabled = !!muted;
+        });
+    };
+
+    const clearFieldValues = (el) => {
+        const inputs = el.querySelectorAll("input, textarea, select");
+        inputs.forEach((i) => {
+            if (i.name === "type") return;
+            if (i.type === "checkbox" || i.type === "radio") {
+                // jangan reset publish/featured dari sini
+                return;
+            }
+            if (i.tagName === "SELECT") {
+                i.selectedIndex = 0;
+            } else {
+                i.value = "";
+            }
+        });
+    };
+
+    // --- type-based fields
+    const applyTypeRules = (type) => {
+        const isAgenda = type === "agenda";
+        const isAchievement = type === "achievement";
+
+        onlyAgenda.forEach((wrap) => {
+            setMuted(wrap, !isAgenda);
+            if (!isAgenda) clearFieldValues(wrap);
+        });
+
+        onlyAchievement.forEach((wrap) => {
+            setMuted(wrap, !isAchievement);
+            if (!isAchievement) clearFieldValues(wrap);
+        });
+    };
+
+    // --- draft/published sync
+    const syncDraftPublished = () => {
+        if (!publishedCb || !draftCb) return;
+
+        // Draft = kebalikan dari Published
+        draftCb.checked = !publishedCb.checked;
+
+        // Kalau featured aktif => harus published
+        if (featuredCb && featuredCb.checked) {
+            publishedCb.checked = true;
+            draftCb.checked = false;
+            publishedCb.disabled = true;
+        } else {
+            publishedCb.disabled = false;
+        }
+    };
+
+    // --- featured locks published
+    if (featuredCb && publishedCb && draftCb) {
+        featuredCb.addEventListener("change", () => {
+            syncDraftPublished();
+        });
+    }
+
+    if (publishedCb && draftCb) {
+        publishedCb.addEventListener("change", () => {
+            syncDraftPublished();
+        });
+
+        draftCb.addEventListener("change", () => {
+            // draft clicked => toggle published
+            publishedCb.checked = !draftCb.checked;
+            syncDraftPublished();
+        });
+    }
+
+    // --- slug lock/unlock + auto generate
+    let slugLocked = true;
+
+    const lockSlug = () => {
+        slugLocked = true;
+        if (slugView) slugView.setAttribute("readonly", "readonly");
+    };
+
+    const unlockSlug = () => {
+        slugLocked = false;
+        if (slugView) slugView.removeAttribute("readonly");
+        if (slugView) slugView.focus();
+    };
+
+    if (slugToggle && slugView) {
+        slugToggle.addEventListener("click", () => {
+            slugLocked ? unlockSlug() : lockSlug();
+        });
+    }
+
+    const setSlug = (value) => {
+        const v = value || "";
+        if (slugView) slugView.value = v;
+        if (slugHidden) slugHidden.value = v;
+    };
+
+    // Auto slug from title (only when locked OR slug empty)
+    if (titleInput) {
+        titleInput.addEventListener("input", () => {
+            const current = slugHidden
+                ? slugHidden.value
+                : slugView
+                ? slugView.value
+                : "";
+            const canAuto = slugLocked || !current;
+            if (!canAuto) return;
+            setSlug(slugify(titleInput.value));
+        });
+    }
+
+    // If slug edited manually, keep hidden in sync
+    if (slugView) {
+        slugView.addEventListener("input", () => {
+            if (!slugHidden) return;
+            slugHidden.value = slugify(slugView.value);
+        });
+        slugView.addEventListener("blur", () => {
+            setSlug(slugify(slugView.value));
+        });
+    }
+
+    // type change
+    if (typeSelect) {
+        typeSelect.addEventListener("change", () => {
+            applyTypeRules(typeSelect.value);
+        });
+    }
+
+    // init
+    applyTypeRules(typeSelect ? typeSelect.value : "news");
+    syncDraftPublished();
+    lockSlug();
+});

@@ -21,6 +21,7 @@
     {{-- Admin CSS --}}
     @vite(['resources/css/admin.css', 'resources/js/admin.js'])
 
+
     @stack('styles')
 </head>
 

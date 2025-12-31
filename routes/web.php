@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminPasswordResetController;
 
+use App\Http\Controllers\Admin\AdminPostsController;
+
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
 
@@ -89,7 +91,15 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin.otp', 'admin.access'])
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    });
+
+        // POSTS
+        Route::get('/posts', [AdminPostsController::class, 'index'])->name('posts.index');
+        Route::get('/posts/create', [AdminPostsController::class, 'create'])->name('posts.create');
+        Route::post('/posts', [AdminPostsController::class, 'store'])->name('posts.store');
+        Route::get('/posts/{post}/edit', [AdminPostsController::class, 'edit'])->name('posts.edit');
+        Route::put('/posts/{post}', [AdminPostsController::class, 'update'])->name('posts.update');
+        Route::delete('/posts/{post}', [AdminPostsController::class, 'destroy'])->name('posts.destroy');
+});
 
 Route::get('/settings')
     ->middleware('super_admin')
