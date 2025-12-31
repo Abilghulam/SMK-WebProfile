@@ -97,7 +97,7 @@
                                 </td>
 
                                 <td>
-                                    <span class="adm-badge adm-badge--neutral">{{ strtoupper($post->type) }}</span>
+                                    <span class="adm-badge adm-badge--neutral">{{ $post->type_label }}</span>
                                 </td>
 
                                 <td>

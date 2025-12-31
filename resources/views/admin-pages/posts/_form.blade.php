@@ -23,18 +23,18 @@
     <div class="adm-form-grid">
         <div class="adm-field">
             <label class="adm-label">Type</label>
-            <select class="adm-select" name="type" required>
-                @foreach ($typeOptions as $k => $v)
-                    <option value="{{ $k }}"
-                        {{ old('type', $post->type ?? 'news') === $k ? 'selected' : '' }}>
-                        {{ $v }}
+            <select name="type" class="adm-select" data-post-type>
+                @foreach (\App\Models\Post::TYPE_LABELS as $key => $label)
+                    <option value="{{ $key }}" {{ old('type', $post->type ?? '') === $key ? 'selected' : '' }}>
+                        {{ $label }}
                     </option>
                 @endforeach
             </select>
+
         </div>
 
         <div class="adm-field">
-            <label class="adm-label">Slug (opsional)</label>
+            <label class="adm-label">Slug</label>
             <input class="adm-input" type="text" name="slug" value="{{ old('slug', $post->slug ?? '') }}"
                 placeholder="otomatis dari judul">
             <div class="adm-help">Kosongkan untuk auto.</div>
@@ -62,33 +62,32 @@
             <div class="adm-help">JPG/PNG/WEBP maks 2MB.</div>
         </div>
 
-        <div class="adm-field">
-            <label class="adm-label">Event Start (opsional)</label>
-            <input class="adm-input" type="datetime-local" name="event_start_at"
+        <div class="adm-field" data-field="event_start_at">
+            <label class="adm-label">Event Start</label>
+            <input type="datetime-local" name="event_start_at" class="adm-input"
                 value="{{ old('event_start_at', optional($post->event_start_at ?? null)->format('Y-m-d\TH:i')) }}">
         </div>
 
-        <div class="adm-field">
-            <label class="adm-label">Event End (opsional)</label>
-            <input class="adm-input" type="datetime-local" name="event_end_at"
+        <div class="adm-field" data-field="event_end_at">
+            <label class="adm-label">Event End</label>
+            <input type="datetime-local" name="event_end_at" class="adm-input"
                 value="{{ old('event_end_at', optional($post->event_end_at ?? null)->format('Y-m-d\TH:i')) }}">
         </div>
 
-        <div class="adm-field adm-field--full">
-            <label class="adm-label">Lokasi (opsional)</label>
-            <input class="adm-input" type="text" name="location"
+        <div class="adm-field adm-field--full" data-field="location">
+            <label class="adm-label">Lokasi</label>
+            <input type="text" name="location" class="adm-input"
                 value="{{ old('location', $post->location ?? '') }}">
         </div>
 
-        <div class="adm-field">
-            <label class="adm-label">Level (opsional)</label>
-            <input class="adm-input" type="text" name="level" value="{{ old('level', $post->level ?? '') }}"
-                placeholder="Kabupaten/Provinsi/Nasional">
+        <div class="adm-field" data-field="level">
+            <label class="adm-label">Level</label>
+            <input type="text" name="level" class="adm-input" value="{{ old('level', $post->level ?? '') }}">
         </div>
 
-        <div class="adm-field">
-            <label class="adm-label">Awarded At (opsional)</label>
-            <input class="adm-input" type="date" name="awarded_at"
+        <div class="adm-field" data-field="awarded_at">
+            <label class="adm-label">Awarded At</label>
+            <input type="date" name="awarded_at" class="adm-input"
                 value="{{ old('awarded_at', optional($post->awarded_at ?? null)->format('Y-m-d')) }}">
         </div>
 

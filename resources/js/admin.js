@@ -171,3 +171,111 @@ function initResendOtpUI() {
 
     tick();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const typeSelect = document.querySelector("[data-post-type]");
+    if (!typeSelect) return;
+
+    // Definisikan field aktif per type
+    // Sesuaikan key type kamu: NEWS, AGENDA, ACHIEVEMENT, EVENT (atau Kegiatan)
+    const TYPE_FIELDS = {
+        NEWS: [
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "thumbnail",
+            "is_published",
+            "published_at",
+            "is_featured",
+        ],
+        AGENDA: [
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "thumbnail",
+            "is_published",
+            "published_at",
+            "is_featured",
+            "event_start_at",
+            "event_end_at",
+            "location",
+        ],
+        ACHIEVEMENT: [
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "thumbnail",
+            "is_published",
+            "published_at",
+            "is_featured",
+            "awarded_at",
+            "level",
+        ],
+        EVENT: [
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "thumbnail",
+            "is_published",
+            "published_at",
+            "is_featured",
+            "event_start_at",
+            "event_end_at",
+            "location",
+        ],
+    };
+
+    // Kalau di DB kamu pakai "Kegiatan" sebagai EVENT, samakan key-nya ya.
+    // Misal type di DB = "AGENDA" untuk agenda, "ACHIEVEMENT" untuk prestasi.
+
+    const allFieldWrappers = Array.from(
+        document.querySelectorAll("[data-field]")
+    );
+
+    function setDisabled(wrapper, disabled, clearValue = false) {
+        wrapper.classList.toggle("is-disabled", disabled);
+
+        const inputs = wrapper.querySelectorAll("input, select, textarea");
+        inputs.forEach((el) => {
+            el.disabled = disabled;
+
+            // Opsional: bersihkan value kalau dimatikan (biar tidak "nyangkut" saat save)
+            if (disabled && clearValue) {
+                if (el.type === "checkbox" || el.type === "radio") {
+                    el.checked = false;
+                } else {
+                    el.value = "";
+                }
+            }
+        });
+    }
+
+    function applyTypeRules() {
+        const type = typeSelect.value;
+        const allowed = new Set(TYPE_FIELDS[type] || []);
+
+        allFieldWrappers.forEach((wrapper) => {
+            const fieldName = wrapper.dataset.field;
+
+            // Field yang tidak kamu atur rules-nya → biarkan saja tampil & aktif
+            // Tapi untuk ketat (recommended), kamu bisa masukkan semua field utama di TYPE_FIELDS
+            const isManaged = Object.values(TYPE_FIELDS).some((arr) =>
+                arr.includes(fieldName)
+            );
+            if (!isManaged) return;
+
+            const isAllowed = allowed.has(fieldName);
+
+            // Hide + disable kalau tidak relevan
+            wrapper.classList.toggle("is-hidden", !isAllowed);
+            setDisabled(wrapper, !isAllowed, true);
+        });
+    }
+
+    typeSelect.addEventListener("change", applyTypeRules);
+    applyTypeRules(); // init saat halaman load (create & edit)
+});

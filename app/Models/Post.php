@@ -8,6 +8,18 @@ use Illuminate\Support\Str;
 
 class Post extends Model
 {
+    public const TYPE_LABELS = [
+        'NEWS'        => 'Berita',
+        'AGENDA'      => 'Agenda',
+        'ACHIEVEMENT' => 'Prestasi',
+        'EVENT'       => 'Kegiatan',
+    ];
+
+    public function getTypeLabelAttribute(): string
+    {
+        return self::TYPE_LABELS[$this->type] ?? $this->type;
+    }
+
     protected $table = 'posts';
 
     protected $fillable = [

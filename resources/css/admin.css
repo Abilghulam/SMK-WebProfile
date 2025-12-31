@@ -1435,15 +1435,20 @@
    ADMIN CONTENT FORM GRID
    Rapih + responsif
    ========================= */
-
-/* 1) Field */
 .adm-field {
     display: grid;
-    gap: 8px; /* lebih lega dari 6px */
+    gap: 8px;
     align-content: start;
 }
 
-/* Label & help text kalau ada */
+.adm-field.is-hidden {
+    display: none;
+}
+.adm-field.is-disabled {
+    opacity: 0.65;
+    filter: grayscale(0.1);
+}
+
 .adm-field > label,
 .adm-field .adm-label {
     font-weight: 600;
@@ -1457,12 +1462,10 @@
     color: rgba(15, 23, 42, 0.55);
 }
 
-/* 2) Grow: jangan bikin overflow/scroll */
 .adm-field--grow {
-    min-width: 0; /* IMPORTANT: biar input bisa shrink */
+    min-width: 0;
 }
 
-/* 3) Full width */
 .adm-field--full {
     grid-column: 1 / -1;
     min-width: 0;
@@ -1510,6 +1513,10 @@
     color: var(--adm-ink);
     transition: border-color 0.16s ease, box-shadow 0.16s ease,
         background 0.16s ease;
+}
+
+.adm-select {
+    cursor: pointer;
 }
 
 .adm-textarea {
@@ -1708,6 +1715,7 @@
 
 .adm-badge {
     display: inline-flex;
+    text-transform: capitalize;
     align-items: center;
     border-radius: 999px;
     padding: 6px 10px;
