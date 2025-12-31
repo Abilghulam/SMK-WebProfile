@@ -4,8 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lupa Password</title>
+    <title>Lupa Password | SMKN 9 Muaro Jambi</title>
     @vite(['resources/css/admin.css', 'resources/js/admin.js'])
+
+    {{-- Favicon --}}
+    @if (!empty($settings?->favicon))
+        <link rel="icon" href="{{ asset($settings->favicon) }}">
+    @endif
 </head>
 
 <body class="a-auth-body">

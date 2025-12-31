@@ -4,8 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Verifikasi OTP</title>
+    <title>Verifikasi OTP | SMKN 9 Muaro Jambi</title>
     @vite(['resources/css/admin.css', 'resources/js/admin.js'])
+
+    {{-- Favicon --}}
+    @if (!empty($settings?->favicon))
+        <link rel="icon" href="{{ asset($settings->favicon) }}">
+    @endif
 </head>
 
 <body class="a-auth-body">
@@ -102,9 +107,9 @@
                     </div>
                 @endif
 
-                {{-- ✅ VERIFY FORM (JANGAN DITUTUP SEBELUM TOMBOL VERIFIKASI) --}}
-                <form class="a-form" method="POST" action="{{ route('admin.otp.verify') }}" novalidate data-otp-form
-                    data-expires-at="{{ $expiresAtIso ?? '' }}">
+                {{-- VERIFY FORM (hanya untuk input OTP + hidden) --}}
+                <form id="otp-verify-form" class="a-form" method="POST" action="{{ route('admin.otp.verify') }}"
+                    novalidate data-otp-form data-expires-at="{{ $expiresAtIso ?? '' }}">
                     @csrf
 
                     <input type="hidden" name="otp" value="" data-otp-hidden>
@@ -119,65 +124,59 @@
                                     aria-label="Digit OTP {{ $i + 1 }}">
                             @endfor
                         </div>
-
-                        {{-- ✅ META: kiri expiry, kanan resend --}}
-                        <div class="a-otp-meta">
-                            <div class="a-otp-exp">
-                                <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="1.8"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor"
-                                        stroke-width="1.8" />
-                                </svg>
-                                <span>Kedaluwarsa: <strong data-otp-exp-text>—</strong></span>
-                                <span class="a-otp-sep">•</span>
-                                <span>Sisa: <strong data-otp-countdown>—</strong></span>
-                            </div>
-
-                            {{-- ✅ RESEND FORM TERPISAH (TIDAK NESTED) --}}
-                            <form class="a-form a-form--inline" method="POST"
-                                action="{{ route('admin.otp.resend') }}" data-otp-resend-form
-                                data-resend-seconds="{{ (int) ($cooldownRemaining ?? 0) }}">
-                                @csrf
-
-                                <button type="submit" class="a-link" data-resend-btn
-                                    {{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'disabled' : '' }}
-                                    aria-disabled="{{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'true' : 'false' }}">
-                                    Kirim ulang
-                                    <span class="a-link-muted">
-                                        (<span data-resend-count>{{ (int) ($cooldownRemaining ?? 0) }}</span>s)
-                                    </span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <button class="a-btn a-btn--primary" type="submit">
-                        Verifikasi
-                        <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M10 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </button>
-
-                    <div class="a-actions-row">
-                        <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
-                            <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Kembali
-                        </a>
                     </div>
                 </form>
-                {{-- ✅ END VERIFY FORM --}}
+
+                {{-- META: di atas tombol verifikasi (dan boleh berisi resend form karena sudah di luar verify form) --}}
+                <div class="a-otp-meta" aria-label="OTP Meta">
+                    <div class="a-otp-exp">
+                        <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8" />
+                        </svg>
+                        <span>Kedaluwarsa: <strong data-otp-exp-text>—</strong></span>
+                        <span class="a-otp-sep">•</span>
+                        <span>Sisa: <strong data-otp-countdown>—</strong></span>
+                    </div>
+
+                    {{-- RESEND FORM (terpisah, valid) --}}
+                    <form class="a-form a-form--inline" method="POST" action="{{ route('admin.otp.resend') }}"
+                        data-otp-resend-form data-resend-seconds="{{ (int) ($cooldownRemaining ?? 0) }}">
+                        @csrf
+
+                        <button type="submit" class="a-link" data-resend-btn
+                            {{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'disabled' : '' }}
+                            aria-disabled="{{ ((int) ($cooldownRemaining ?? 0)) > 0 ? 'true' : 'false' }}">
+                            Kirim ulang
+                            <span class="a-link-muted">
+                                (<span data-resend-count>{{ (int) ($cooldownRemaining ?? 0) }}</span>s)
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                {{-- ✅ Tombol verifikasi tetap di bawah meta, tapi submit ke form verify --}}
+                <button class="a-btn a-btn--primary" type="submit" form="otp-verify-form">
+                    Verifikasi
+                    <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M10 7l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="a-actions-row">
+                    <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
+                        <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Kembali
+                    </a>
+                </div>
             </section>
 
-            <footer class="a-auth-footer" aria-label="Footer auth">
-                <span>{{ $site }} — Admin Panel</span>
-                <span class="a-auth-footer-dot">•</span>
-                <span>&copy; {{ now()->year }}</span>
-            </footer>
+
 
         </div>
     </main>

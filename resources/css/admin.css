@@ -1131,6 +1131,7 @@
 /* Link: lebih halus */
 .a-link {
     align-items: center;
+    margin-bottom: 12px;
     appearance: none;
     border: 0;
     background: transparent;
@@ -1220,6 +1221,7 @@
 .a-actions-row {
     display: flex;
     justify-content: flex-start;
+    margin-top: 10px;
 }
 
 /* ALERT */
