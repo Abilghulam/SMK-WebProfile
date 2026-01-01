@@ -1,5 +1,5 @@
 @if (session('success'))
-    <div class="admin-flash admin-flash--success" role="status" data-flash>
+    <div class="admin-flash admin-flash--success" role="status" data-flash data-flash-autoclose="5000">
         <span class="admin-flash-ic" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
                 <path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.8"
@@ -21,7 +21,7 @@
 @endif
 
 @if (session('error'))
-    <div class="admin-flash admin-flash--error" role="alert" data-flash>
+    <div class="admin-flash admin-flash--error" role="alert" data-flash data-flash-autoclose="0">
         <span class="admin-flash-ic" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
                 <path d="M12 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
@@ -43,7 +43,7 @@
 @endif
 
 @if ($errors->any())
-    <div class="admin-flash admin-flash--error" role="alert" data-flash>
+    <div class="admin-flash admin-flash--error" role="alert" data-flash data-flash-autoclose="0">
         <span class="admin-flash-ic" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
                 <path d="M12 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
@@ -70,15 +70,3 @@
         </button>
     </div>
 @endif
-
-<script>
-    (function() {
-        document.querySelectorAll('[data-flash]').forEach(function(flash) {
-            const btn = flash.querySelector('[data-flash-close]');
-            if (!btn) return;
-            btn.addEventListener('click', function() {
-                flash.style.display = 'none';
-            });
-        });
-    })();
-</script>

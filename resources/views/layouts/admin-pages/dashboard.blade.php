@@ -57,8 +57,8 @@
                 </div>
                 <div class="adm-stat-body">
                     <div class="adm-stat-label">Konten Blog</div>
-                    <div class="adm-stat-value">—</div>
-                    <div class="adm-stat-meta">Berita, agenda, prestasi</div>
+                    <div class="adm-stat-value">{{ number_format($stats['blog']['value'] ?? 0) }}</div>
+                    <div class="adm-stat-meta">{{ $stats['blog']['meta'] ?? 'Berita, agenda, prestasi' }}</div>
                 </div>
             </article>
 
@@ -72,8 +72,8 @@
                 </div>
                 <div class="adm-stat-body">
                     <div class="adm-stat-label">Dokumen Legalitas</div>
-                    <div class="adm-stat-value">—</div>
-                    <div class="adm-stat-meta">Unduhan & publikasi</div>
+                    <div class="adm-stat-value">{{ number_format($stats['legal']['value'] ?? 0) }}</div>
+                    <div class="adm-stat-meta">{{ $stats['legal']['meta'] ?? 'Unduhan & publikasi' }}</div>
                 </div>
             </article>
 
@@ -89,8 +89,8 @@
                 </div>
                 <div class="adm-stat-body">
                     <div class="adm-stat-label">Dokumentasi</div>
-                    <div class="adm-stat-value">—</div>
-                    <div class="adm-stat-meta">Album & item galeri</div>
+                    <div class="adm-stat-value">{{ number_format($stats['docs']['value'] ?? 0) }}</div>
+                    <div class="adm-stat-meta">{{ $stats['docs']['meta'] ?? 'Album & item galeri' }}</div>
                 </div>
             </article>
 
@@ -104,8 +104,8 @@
                 </div>
                 <div class="adm-stat-body">
                     <div class="adm-stat-label">Akademik</div>
-                    <div class="adm-stat-value">—</div>
-                    <div class="adm-stat-meta">Program & fasilitas</div>
+                    <div class="adm-stat-value">{{ number_format($stats['acad']['value'] ?? 0) }}</div>
+                    <div class="adm-stat-meta">{{ $stats['acad']['meta'] ?? 'Program & fasilitas' }}</div>
                 </div>
             </article>
         </div>
@@ -118,7 +118,7 @@
                     <p class="adm-card-sub">Shortcut untuk pekerjaan yang paling sering dilakukan.</p>
                 </div>
 
-                <div class="adm-actions">
+                <div class="adm-actions--fast">
                     <a class="adm-action" href="{{ url('/admin/posts') }}">
                         <span class="adm-action-ic" aria-hidden="true">
                             <svg viewBox="0 0 24 24" fill="none">

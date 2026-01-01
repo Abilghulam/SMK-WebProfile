@@ -373,3 +373,54 @@ document.addEventListener("DOMContentLoaded", () => {
     radios.forEach((r) => r.addEventListener("change", sync));
     sync();
 });
+
+// Flash Otomatis
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-flash]").forEach((flash) => {
+        // animate in
+        flash.classList.add("is-in");
+
+        const closeBtn = flash.querySelector("[data-flash-close]");
+        const ms = parseInt(
+            flash.getAttribute("data-flash-autoclose") || "0",
+            10
+        );
+
+        let timer = null;
+
+        function closeFlash() {
+            if (timer) clearTimeout(timer);
+            flash.classList.remove("is-in");
+            flash.classList.add("is-out");
+
+            // wait transition then remove
+            const removeDelay = 220;
+            window.setTimeout(() => {
+                if (flash && flash.parentNode)
+                    flash.parentNode.removeChild(flash);
+            }, removeDelay);
+        }
+
+        // manual close
+        if (closeBtn) {
+            closeBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                closeFlash();
+            });
+        }
+
+        // auto close (0 = disabled)
+        if (ms > 0) {
+            timer = window.setTimeout(closeFlash, ms);
+
+            // UX: pause timer on hover
+            flash.addEventListener("mouseenter", () => {
+                if (timer) clearTimeout(timer);
+            });
+
+            flash.addEventListener("mouseleave", () => {
+                timer = window.setTimeout(closeFlash, 1200);
+            });
+        }
+    });
+});

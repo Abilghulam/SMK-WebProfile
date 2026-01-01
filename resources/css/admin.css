@@ -439,6 +439,37 @@
     padding-left: 18px;
 }
 
+/* ===== Flash interactions (animate in/out) ===== */
+.admin-flash {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    will-change: opacity, transform;
+}
+
+.admin-flash.is-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.admin-flash.is-out {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+/* tombol X: hover halus */
+.admin-flash-x {
+    transition: background 0.16s ease, transform 0.12s ease;
+}
+
+.admin-flash-x:hover {
+    background: rgba(15, 23, 42, 0.06);
+}
+
+.admin-flash-x:active {
+    transform: translateY(1px);
+}
+
 /* ===============================
    DASHBOARD UI
 ================================ */
@@ -551,56 +582,94 @@
     display: grid;
     gap: 12px;
 }
+
 .adm-grid--stats {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-.adm-grid--two {
-    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
 }
 
+.adm-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Card */
 .adm-stat {
     border-radius: var(--adm-radius);
-    border: 1px solid rgba(15, 23, 42, 0.1);
     background: #fff;
-    padding: 14px 14px;
+    padding: 16px 16px;
+
     display: flex;
-    gap: 12px;
+    gap: 14px;
     align-items: flex-start;
+
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
 }
+
+/* Icon */
 .adm-stat-ic {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 14px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(2, 56, 117, 0.06);
-    border: 1px solid rgba(2, 56, 117, 0.12);
+
+    background: rgba(15, 23, 42, 0.04);
     color: rgba(2, 56, 117, 0.95);
     flex-shrink: 0;
 }
+
 .adm-stat-ic svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Text */
+.adm-stat-body {
+    min-width: 0;
 }
 
 .adm-stat-label {
-    font-size: 12px;
-    color: rgba(15, 23, 42, 0.62);
+    font-size: 13px;
     font-weight: 600;
+    color: rgba(15, 23, 42, 0.75);
 }
+
+/* VALUE MENONJOL */
 .adm-stat-value {
-    font-size: 18px;
-    font-weight: 700;
-    margin-top: 2px;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-top: 8px;
+
+    color: rgba(2, 56, 117, 0.98);
+    font-variant-numeric: tabular-nums;
 }
+
 .adm-stat-meta {
-    font-size: 12px;
-    color: rgba(15, 23, 42, 0.56);
-    margin-top: 4px;
+    font-size: 12.5px;
+    color: rgba(15, 23, 42, 0.6);
+    margin-top: 6px;
+}
+
+@media (max-width: 560px) {
+    .adm-grid--stats {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-stat {
+        padding: 14px 14px;
+    }
+
+    .adm-stat-value {
+        font-size: 32px;
+    }
 }
 
 .adm-card {
+    display: flex;
+    flex-direction: column;
     border-radius: var(--adm-radius);
     border: 1px solid rgba(15, 23, 42, 0.1);
     background: #fff;
@@ -671,6 +740,11 @@
     color: rgba(2, 56, 117, 0.75);
 }
 
+.adm-actions--fast {
+    display: grid;
+    gap: 10px;
+}
+
 .adm-list {
     margin: 10px 0 0;
     padding-left: 18px;
@@ -721,9 +795,6 @@
 ================================ */
 
 @media (max-width: 1180px) {
-    .adm-grid--stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
     .adm-hero {
         grid-template-columns: 1fr;
     }
@@ -758,9 +829,6 @@
 @media (max-width: 520px) {
     .admin-user-meta {
         display: none;
-    }
-    .adm-grid--stats {
-        grid-template-columns: 1fr;
     }
 }
 
@@ -1469,28 +1537,6 @@
 .adm-field--full {
     grid-column: 1 / -1;
     min-width: 0;
-}
-
-/* =========================
-   OPTIONAL: kalau ada wrapper grid form
-   Ganti .adm-grid dengan class wrapper yang kamu pakai
-   ========================= */
-.adm-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px 16px; /* row gap, col gap */
-    align-items: start;
-}
-
-/* di layar kecil jadi 1 kolom */
-@media (max-width: 860px) {
-    .adm-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-    .adm-field--full {
-        grid-column: auto; /* otomatis, karena sudah 1 kolom */
-    }
 }
 
 .adm-label {
