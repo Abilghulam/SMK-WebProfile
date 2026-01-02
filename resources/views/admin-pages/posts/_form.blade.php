@@ -113,13 +113,6 @@
                     <input type="checkbox" name="is_featured" value="1" {{ $isFeatured ? 'checked' : '' }}>
                     <span>Featured</span>
                 </label>
-
-                {{-- Published At --}}
-                <div class="adm-publish-at" data-publish-at>
-                    <label class="adm-label" style="margin:0;">Published At</label>
-                    <input class="adm-input" type="datetime-local" name="published_at"
-                        value="{{ old('published_at', optional($post->published_at ?? null)->format('Y-m-d\TH:i')) }}">
-                </div>
             </div>
         </div>
     </div>

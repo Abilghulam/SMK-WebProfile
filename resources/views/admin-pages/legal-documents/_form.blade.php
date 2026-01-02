@@ -59,7 +59,7 @@
 
     <div class="adm-field">
         <label class="adm-label">Upload PDF</label>
-        <input class="adm-select" type="file" name="file" accept="application/pdf">
+        <input class="adm-file" type="file" name="file" accept="application/pdf">
         <div class="adm-help">PDF maks 5MB.</div>
         @error('file')
             <div class="adm-error">{{ $message }}</div>
@@ -84,19 +84,29 @@
     </div>
 
     <div class="adm-field adm-field--full">
-        <div class="adm-check-row">
-            <label class="adm-check">
-                <input type="checkbox" name="is_published" value="1"
-                    {{ old('is_published', $doc->is_published ?? 1) ? 'checked' : '' }}>
-                <span>Published</span>
-            </label>
+        <div class="adm-field adm-field--full">
+            <div class="adm-check-row">
+                @php
+                    // Default: published (1)
+                    $pubVal = (string) old('is_published', isset($doc) ? (int) $doc->is_published : 1);
+                @endphp
 
-            <div class="adm-publish-at">
-                <label class="adm-label" style="margin:0;">Published At</label>
-                <input class="adm-input" type="datetime-local" name="published_at"
-                    value="{{ old('published_at', optional($doc->published_at ?? null)->format('Y-m-d\TH:i')) }}">
+                <label class="adm-check">
+                    <input type="radio" name="is_published" value="1" {{ $pubVal === '1' ? 'checked' : '' }}>
+                    <span>Published</span>
+                </label>
+
+                <label class="adm-check">
+                    <input type="radio" name="is_published" value="0" {{ $pubVal === '0' ? 'checked' : '' }}>
+                    <span>Draft</span>
+                </label>
             </div>
+
+            @error('is_published')
+                <div class="adm-error">{{ $message }}</div>
+            @enderror
         </div>
+
         @error('published_at')
             <div class="adm-error">{{ $message }}</div>
         @enderror

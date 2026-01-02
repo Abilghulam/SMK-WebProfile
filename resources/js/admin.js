@@ -424,3 +424,116 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const ICONS = {
+        // Published -> tombol menampilkan aksi "Jadikan Draft" (paper + pencil)
+        draftAction: `
+      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M13.4 12.6l4-4a1.7 1.7 0 0 1 2.4 2.4l-4 4-3.2.8.8-3.2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M12.7 13.3l2 2"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+    `,
+
+        // Draft -> tombol menampilkan aksi "Publish" (paper + arrow up)
+        publishAction: `
+      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M12 16V9"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      <path d="M9.5 11.5 12 9l2.5 2.5"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9 18h6"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+    `,
+    };
+
+    function setToggleIcon(form) {
+        const svg = form.querySelector("[data-toggle-ic]");
+        if (!svg) return;
+
+        const published = form.dataset.published === "1";
+        // kalau sekarang published, tombol harus menampilkan aksi "Draft"
+        svg.innerHTML = published ? ICONS.draftAction : ICONS.publishAction;
+    }
+
+    function updateBadge(card, isPublished) {
+        const badge = card.querySelector("[data-legal-status-badge]");
+        if (!badge) return;
+
+        badge.classList.remove("adm-badge--success", "adm-badge--muted");
+        badge.classList.add(
+            isPublished ? "adm-badge--success" : "adm-badge--muted"
+        );
+
+        badge.textContent = isPublished ? "Published" : "Draft";
+        badge.dataset.status = isPublished ? "published" : "draft";
+
+        badge.classList.remove("is-updating");
+        // retrigger animation
+        void badge.offsetWidth;
+        badge.classList.add("is-updating");
+    }
+
+    async function patchToggle(form) {
+        const btn = form.querySelector("[data-toggle-btn]");
+        const url = form.getAttribute("action");
+        const token = form.querySelector('input[name="_token"]')?.value;
+
+        // Cari card terdekat (supaya update badge untuk card itu saja)
+        const card = form.closest(".adm-legal-card") || document;
+
+        btn?.classList.add("is-loading");
+
+        try {
+            const res = await fetch(url, {
+                method: "POST", // Laravel spoof PATCH via _method
+                headers: {
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": token || "",
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({ _method: "PATCH" }).toString(),
+            });
+
+            if (!res.ok) {
+                // fallback: submit biasa
+                form.submit();
+                return;
+            }
+
+            const data = await res.json();
+            // data.is_published boolean
+            const isPublished = !!data.is_published;
+
+            form.dataset.published = isPublished ? "1" : "0";
+
+            // Update title/aria tombol sesuai aksi berikutnya
+            const nextTitle = isPublished ? "Jadikan Draft" : "Publish";
+            btn?.setAttribute("title", nextTitle);
+            btn?.setAttribute("aria-label", nextTitle);
+
+            setToggleIcon(form);
+            updateBadge(card, isPublished);
+        } catch (e) {
+            // fallback
+            form.submit();
+        } finally {
+            btn?.classList.remove("is-loading");
+        }
+    }
+
+    // init + bind
+    document.querySelectorAll(".adm-toggle-publish-form").forEach((form) => {
+        setToggleIcon(form);
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            patchToggle(form);
+        });
+    });
+});

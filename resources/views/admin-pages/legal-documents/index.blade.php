@@ -139,11 +139,10 @@
 
                     <div class="adm-legal-actions">
                         <div class="adm-legal-status">
-                            @if ($doc->is_published)
-                                <span class="adm-badge adm-badge--success">Published</span>
-                            @else
-                                <span class="adm-badge adm-badge--muted">Draft</span>
-                            @endif
+                            <span class="adm-badge {{ $doc->is_published ? 'adm-badge--success' : 'adm-badge--muted' }}"
+                                data-legal-status-badge data-status="{{ $doc->is_published ? 'published' : 'draft' }}">
+                                {{ $doc->is_published ? 'Published' : 'Draft' }}
+                            </span>
                         </div>
 
                         @if ($doc->download_url)
@@ -168,18 +167,17 @@
                             </svg>
                         </a>
 
-                        <form method="POST" action="{{ route('admin.legal-documents.toggle-publish', $doc) }}">
+                        <form method="POST" action="{{ route('admin.legal-documents.toggle-publish', $doc) }}"
+                            class="adm-toggle-publish-form" data-published="{{ $doc->is_published ? '1' : '0' }}">
                             @csrf
                             @method('PATCH')
-                            <button class="adm-icon-btn" type="submit"
+
+                            <button class="adm-icon-btn adm-toggle-publish-btn" type="submit"
                                 title="{{ $doc->is_published ? 'Jadikan Draft' : 'Publish' }}"
-                                aria-label="Toggle publish">
-                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10Z" stroke="currentColor"
-                                        stroke-width="1.8" stroke-linejoin="round" />
-                                    <path d="M9.5 12l1.8 1.8L15.8 9.3" stroke="currentColor" stroke-width="1.8"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                aria-label="{{ $doc->is_published ? 'Jadikan Draft' : 'Publish' }}" data-toggle-btn>
+                                {{-- SINGLE ICON (path diisi via JS sesuai status) --}}
+                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+                                    data-toggle-ic></svg>
                             </button>
                         </form>
 
@@ -187,7 +185,7 @@
                             onsubmit="return confirm('Hapus dokumen ini?')">
                             @csrf
                             @method('DELETE')
-                            <button class="adm-icon-btn adm-icon-btn--danger" type="submit" title="Hapus"
+                            <button class="adm-icon-btn adm-icon-btn--delete" type="submit" title="Hapus"
                                 aria-label="Hapus">
                                 <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />

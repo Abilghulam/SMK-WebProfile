@@ -98,9 +98,12 @@ class AdminLegalDocumentsController extends Controller
             $data['file_size'] = $file->getSize();
         }
 
-        // published_at: kalau draft -> null biar aman/rapi
-        if (empty($data['is_published'])) {
-            $data['is_published'] = false;
+        $data['is_published'] = (bool) ($data['is_published'] ?? true);
+
+        // Auto set published_at
+        if ($data['is_published']) {
+            $data['published_at'] = now();
+        } else {
             $data['published_at'] = null;
         }
 
@@ -165,8 +168,18 @@ class AdminLegalDocumentsController extends Controller
             }
         }
 
-        if (empty($data['is_published'])) {
-            $data['is_published'] = false;
+        $data['is_published'] = (bool) ($data['is_published'] ?? false);
+
+        if ($data['is_published']) {
+            // kalau baru publish dari draft → set sekarang
+            if (empty($doc->published_at)) {
+                $data['published_at'] = now();
+            } else {
+                // tetap pakai yang lama
+                $data['published_at'] = $doc->published_at;
+            }
+        } else {
+            // jadi draft → kosongkan
             $data['published_at'] = null;
         }
 
@@ -192,26 +205,31 @@ class AdminLegalDocumentsController extends Controller
             ->with('success', 'Dokumen legalitas berhasil dihapus.');
     }
 
-    public function togglePublish(LegalDocument $legal_document)
+    public function togglePublish(Request $request, LegalDocument $legal_document)
     {
-        $doc = $legal_document;
+        $legal_document->is_published = ! (bool) $legal_document->is_published;
 
-        $doc->is_published = !$doc->is_published;
-
-        // kalau baru dipublish & published_at kosong -> set now()
-        if ($doc->is_published && empty($doc->published_at)) {
-            $doc->published_at = now();
+        // kalau publish dan belum ada published_at, set otomatis
+        if ($legal_document->is_published && empty($legal_document->published_at)) {
+            $legal_document->published_at = now();
         }
 
-        // kalau jadi draft -> null
-        if (!$doc->is_published) {
-            $doc->published_at = null;
+        $legal_document->save();
+        $legal_document->refresh(); 
+
+        // Kalau request AJAX -> wajib balikin JSON
+        if ($request->expectsJson() || $request->wantsJson()) {
+            return response()->json([
+                'ok' => true,
+                'id' => $legal_document->id,
+                'is_published' => (bool) $legal_document->is_published,
+                'published_at' => optional($legal_document->published_at)->toIso8601String(),
+            ]);
         }
 
-        $doc->save();
-
-        return back()->with('success', 'Status publikasi berhasil diubah.');
+        return back()->with('success', 'Status publikasi berhasil diperbarui.');
     }
+
 
     private function validatePayload(Request $request, ?int $ignoreId = null): array
     {
