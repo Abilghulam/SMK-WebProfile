@@ -28,7 +28,6 @@ class SchoolProfile extends Model
         'accreditation',
         'curriculum',
         'logo',
-        'address',
         'youtube_url',
     ];
 }

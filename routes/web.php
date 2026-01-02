@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminPasswordResetController;
 
 use App\Http\Controllers\Admin\AdminPostsController;
+use App\Http\Controllers\admin\AdminHomeManagementController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -99,6 +100,18 @@ Route::prefix('admin')
         Route::get('/posts/{post}/edit', [AdminPostsController::class, 'edit'])->name('posts.edit');
         Route::put('/posts/{post}', [AdminPostsController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post}', [AdminPostsController::class, 'destroy'])->name('posts.destroy');
+
+        // HOME MANAGEMENT
+        Route::get('/home', [AdminHomeManagementController::class, 'index'])->name('home.index');
+
+        Route::get('/home/profile', [AdminHomeManagementController::class, 'editProfile'])->name('home.profile.edit');
+        Route::put('/home/profile', [AdminHomeManagementController::class, 'updateProfile'])->name('home.profile.update');
+
+        Route::get('/home/statistics', [AdminHomeManagementController::class, 'editStatistics'])->name('home.statistics.edit');
+        Route::put('/home/statistics', [AdminHomeManagementController::class, 'updateStatistics'])->name('home.statistics.update');
+
+        Route::get('/home/principal', [AdminHomeManagementController::class, 'editPrincipal'])->name('home.principal.edit');
+        Route::put('/home/principal', [AdminHomeManagementController::class, 'updatePrincipal'])->name('home.principal.update');
 });
 
 Route::get('/settings')
@@ -116,3 +129,4 @@ Route::get('/admin/reset-password/{token}', [AdminPasswordResetController::class
     ->name('admin.password.reset');
 Route::post('/admin/reset-password', [AdminPasswordResetController::class, 'resetPassword'])
     ->name('admin.password.update');
+

@@ -49,6 +49,22 @@
         @if ($isAdmin)
             <div class="admin-nav-section">Konten</div>
 
+            <a class="admin-nav-link {{ request()->is('admin/home-management*') ? 'active' : '' }}"
+                href="{{ url('/admin/home') }}">
+                <span class="admin-nav-ic" aria-hidden="true">
+                    {{-- home/settings (modern & institusional) --}}
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M3.5 10.5 12 4l8.5 6.5V20a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 20v-9.5Z"
+                            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M8 21v-7h8v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M8.2 10.2h.01M12 10.2h.01M15.8 10.2h.01" stroke="currentColor" stroke-width="2.4"
+                            stroke-linecap="round" />
+                    </svg>
+                </span>
+                Home Management
+            </a>
+
+
             <a class="admin-nav-link {{ request()->is('admin/posts*') ? 'active' : '' }}"
                 href="{{ url('/admin/posts') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
