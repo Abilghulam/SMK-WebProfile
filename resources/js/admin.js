@@ -519,6 +519,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setToggleIcon(form);
             updateBadge(card, isPublished);
+            updatePublishedAt(card, data.published_at || null, isPublished);
         } catch (e) {
             // fallback
             form.submit();
@@ -536,4 +537,56 @@ document.addEventListener("DOMContentLoaded", () => {
             patchToggle(form);
         });
     });
+
+    function formatPublishedAt(isoString) {
+        if (!isoString) return "—";
+
+        const d = new Date(isoString);
+        if (Number.isNaN(d.getTime())) return "—";
+
+        // Format: "03 Jan 2026 10:15"
+        const day = String(d.getDate()).padStart(2, "0");
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
+        ];
+        const mon = months[d.getMonth()];
+        const year = d.getFullYear();
+
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+
+        return `${day} ${mon} ${year} ${hh}:${mm}`;
+    }
+
+    function updatePublishedAt(card, publishedAtIso, isPublished) {
+        const el = card.querySelector("[data-legal-published-at]");
+        if (!el) return;
+
+        // Jika jadi Draft: kamu mau kosongkan atau tetap tampil terakhir?
+        // Pilih salah satu:
+        // A) Kosongkan saat Draft
+        if (!isPublished) {
+            el.textContent = "—";
+            return;
+        }
+
+        // B) Tampilkan waktu publish (kalau publish)
+        el.textContent = formatPublishedAt(publishedAtIso);
+
+        // animasi kecil biar kerasa update (opsional)
+        el.classList.remove("is-updating");
+        void el.offsetWidth;
+        el.classList.add("is-updating");
+    }
 });

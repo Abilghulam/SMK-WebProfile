@@ -106,10 +106,6 @@
                 <div class="adm-error">{{ $message }}</div>
             @enderror
         </div>
-
-        @error('published_at')
-            <div class="adm-error">{{ $message }}</div>
-        @enderror
     </div>
 
     <div class="adm-form-actions">

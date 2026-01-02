@@ -205,30 +205,32 @@ class AdminLegalDocumentsController extends Controller
             ->with('success', 'Dokumen legalitas berhasil dihapus.');
     }
 
-    public function togglePublish(Request $request, LegalDocument $legal_document)
-    {
-        $legal_document->is_published = ! (bool) $legal_document->is_published;
+public function togglePublish(Request $request, LegalDocument $legal_document)
+{
+    $legal_document->is_published = ! (bool) $legal_document->is_published;
 
-        // kalau publish dan belum ada published_at, set otomatis
-        if ($legal_document->is_published && empty($legal_document->published_at)) {
-            $legal_document->published_at = now();
-        }
-
-        $legal_document->save();
-        $legal_document->refresh(); 
-
-        // Kalau request AJAX -> wajib balikin JSON
-        if ($request->expectsJson() || $request->wantsJson()) {
-            return response()->json([
-                'ok' => true,
-                'id' => $legal_document->id,
-                'is_published' => (bool) $legal_document->is_published,
-                'published_at' => optional($legal_document->published_at)->toIso8601String(),
-            ]);
-        }
-
-        return back()->with('success', 'Status publikasi berhasil diperbarui.');
+    if ($legal_document->is_published) {
+        // publish / publish ulang -> selalu update waktu sekarang
+        $legal_document->published_at = now();
+    } else {
+        // draft -> kosongkan publikasi
+        $legal_document->published_at = null;
     }
+
+    $legal_document->save();
+    $legal_document->refresh();
+
+    if ($request->expectsJson() || $request->wantsJson()) {
+        return response()->json([
+            'ok' => true,
+            'id' => $legal_document->id,
+            'is_published' => (bool) $legal_document->is_published,
+            'published_at' => optional($legal_document->published_at)->toIso8601String(),
+        ]);
+    }
+
+    return back()->with('success', 'Status publikasi berhasil diperbarui.');
+}
 
 
     private function validatePayload(Request $request, ?int $ignoreId = null): array

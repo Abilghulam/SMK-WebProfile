@@ -133,7 +133,9 @@
 
                         <div class="adm-legal-meta-item">
                             <span class="adm-muted">Publikasi</span>
-                            <strong>{{ optional($doc->published_at)->format('d M Y H:i') ?? '—' }}</strong>
+                            <strong data-legal-published-at>
+                                {{ optional($doc->published_at)->format('d M Y H:i') ?? '—' }}
+                            </strong>
                         </div>
                     </div>
 
