@@ -4741,10 +4741,6 @@ body.lb-lock {
     color: #0f172a;
 }
 
-.legal-filebadge--file {
-    color: #0f172a;
-}
-
 @media (hover: hover) {
     .legal-card:hover .legal-filebadge {
         transform: translateY(-1px);

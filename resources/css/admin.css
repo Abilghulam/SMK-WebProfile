@@ -2072,3 +2072,242 @@
         width: 100%;
     }
 }
+
+/* =========================
+   LEGAL DOCS (adm-legal*)
+   Lebih lega, institusional, modern
+   ========================= */
+
+.adm-legal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.adm-legal-card {
+    background: #fff;
+    border-radius: var(--adm-radius);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+
+    /* lebih “flat” dan profesional */
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+
+    padding: 16px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 188px;
+
+    transition: transform 0.14s ease, box-shadow 0.14s ease,
+        border-color 0.14s ease;
+}
+
+.adm-legal-card:hover {
+    transform: translateY(-1px);
+    border-color: rgba(2, 56, 117, 0.14);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, 0.07);
+}
+
+.adm-legal-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.adm-legal-filebadge {
+    width: 42px;
+    height: 48px;
+    flex: 0 0 42px; /* kunci lebar: no grow, no shrink */
+    flex-shrink: 0; /* ekstra aman */
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.04);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+
+    transition: transform 0.18s ease, box-shadow 0.18s ease,
+        background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.adm-legal-filebadge-ic {
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
+
+.adm-legal-filebadge-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+}
+
+.adm-legal-filebadge--pdf {
+    background: rgba(220, 38, 38, 0.06);
+    border-color: rgba(220, 38, 38, 0.18);
+    color: #991b1b;
+}
+
+.adm-legal-filebadge--doc {
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.18);
+    color: #1d4ed8;
+}
+
+.adm-legal-filebadge--xls {
+    background: rgba(22, 163, 74, 0.06);
+    border-color: rgba(22, 163, 74, 0.18);
+    color: #166534;
+}
+
+.adm-legal-filebadge--file {
+    color: #0f172a;
+}
+
+@media (hover: hover) {
+    .adm-legal-card:hover .adm-legal-filebadge {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+        background-color: rgba(15, 23, 42, 0.05);
+        border-color: rgba(15, 23, 42, 0.14);
+    }
+}
+
+.adm-legal-main {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.adm-legal-title {
+    font-weight: 650;
+    color: rgba(15, 23, 42, 0.92);
+    line-height: 1.28;
+
+    /* biar lega dan rapi */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.adm-legal-sub {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.adm-dot {
+    color: rgba(15, 23, 42, 0.28);
+}
+
+/* slug jangan dominan */
+.adm-legal-sub .adm-muted {
+    color: rgba(15, 23, 42, 0.55);
+    font-size: 12.5px;
+
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.adm-legal-status {
+    margin-right: auto;
+    padding-left: 0;
+    flex: 0 0 auto;
+    padding-left: 6px;
+}
+
+.adm-legal-desc {
+    color: rgba(15, 23, 42, 0.66);
+    font-size: 13px;
+    line-height: 1.6;
+
+    /* biar nggak “panjang banget” dan bikin padat */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* meta: dibuat seperti panel ringkas biar tidak ruwet */
+.adm-legal-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.adm-legal-meta-item {
+    display: grid;
+    gap: 4px;
+    font-size: 12px;
+    min-width: 0;
+}
+
+.adm-legal-meta-item .adm-muted {
+    font-size: 11.5px;
+    color: rgba(15, 23, 42, 0.56);
+}
+
+.adm-legal-meta-item strong {
+    font-weight: 650;
+    color: rgba(15, 23, 42, 0.88);
+
+    /* jaga kalau panjang */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* actions: dipisah area supaya lebih clean */
+.adm-legal-actions {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+    .adm-legal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .adm-legal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-legal-card {
+        padding: 14px;
+    }
+
+    .adm-legal-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .adm-legal-status {
+        padding-left: 0;
+    }
+}

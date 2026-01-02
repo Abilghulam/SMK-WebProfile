@@ -12,8 +12,9 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminPasswordResetController;
 
-use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\admin\AdminHomeManagementController;
+use App\Http\Controllers\Admin\AdminPostsController;
+use App\Http\Controllers\Admin\AdminLegalDocumentsController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -93,15 +94,7 @@ Route::prefix('admin')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        // POSTS
-        Route::get('/posts', [AdminPostsController::class, 'index'])->name('posts.index');
-        Route::get('/posts/create', [AdminPostsController::class, 'create'])->name('posts.create');
-        Route::post('/posts', [AdminPostsController::class, 'store'])->name('posts.store');
-        Route::get('/posts/{post}/edit', [AdminPostsController::class, 'edit'])->name('posts.edit');
-        Route::put('/posts/{post}', [AdminPostsController::class, 'update'])->name('posts.update');
-        Route::delete('/posts/{post}', [AdminPostsController::class, 'destroy'])->name('posts.destroy');
-
-        // HOME MANAGEMENT
+         // HOME MANAGEMENT
         Route::get('/home', [AdminHomeManagementController::class, 'index'])->name('home.index');
 
         Route::get('/home/profile', [AdminHomeManagementController::class, 'editProfile'])->name('home.profile.edit');
@@ -112,8 +105,25 @@ Route::prefix('admin')
 
         Route::get('/home/principal', [AdminHomeManagementController::class, 'editPrincipal'])->name('home.principal.edit');
         Route::put('/home/principal', [AdminHomeManagementController::class, 'updatePrincipal'])->name('home.principal.update');
+
+        // POSTS
+        Route::get('/posts', [AdminPostsController::class, 'index'])->name('posts.index');
+        Route::get('/posts/create', [AdminPostsController::class, 'create'])->name('posts.create');
+        Route::post('/posts', [AdminPostsController::class, 'store'])->name('posts.store');
+        Route::get('/posts/{post}/edit', [AdminPostsController::class, 'edit'])->name('posts.edit');
+        Route::put('/posts/{post}', [AdminPostsController::class, 'update'])->name('posts.update');
+        Route::delete('/posts/{post}', [AdminPostsController::class, 'destroy'])->name('posts.destroy');
+
+        // LEGAL DOCUMENT
+        Route::resource('legal-documents', AdminLegalDocumentsController::class)
+            ->except(['show']);
+
+        // toggle publish cepat (opsional)
+        Route::patch('legal-documents/{legal_document}/toggle-publish', [AdminLegalDocumentsController::class, 'togglePublish'])
+            ->name('legal-documents.toggle-publish');
 });
 
+// Role Super Admin Only
 Route::get('/settings')
     ->middleware('super_admin')
     ->name('settings');

@@ -21,6 +21,12 @@
     @endif
 
     <div class="adm-form-grid">
+        <div class="adm-field adm-field--full">
+            <label class="adm-label">Judul</label>
+            <input class="adm-input" type="text" name="title" value="{{ old('title', $post->title ?? '') }}"
+                required>
+        </div>
+
         <div class="adm-field">
             <label class="adm-label">Type</label>
             <select name="type" class="adm-select" data-post-type>
@@ -30,19 +36,12 @@
                     </option>
                 @endforeach
             </select>
-
         </div>
 
         <div class="adm-field adm-field--grow">
             <label class="adm-label">Slug</label>
             <input class="adm-input adm-input--muted" type="text" name="slug"
                 value="{{ old('slug', $post->slug ?? '') }}" placeholder="Slug otomatis dari judul" readonly>
-        </div>
-
-        <div class="adm-field adm-field--full">
-            <label class="adm-label">Judul</label>
-            <input class="adm-input" type="text" name="title" value="{{ old('title', $post->title ?? '') }}"
-                required>
         </div>
 
         <div class="adm-field">

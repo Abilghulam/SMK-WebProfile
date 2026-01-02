@@ -30,6 +30,18 @@ class LegalDocument extends Model
         'file_size' => 'integer',
     ];
 
+        public const CATEGORY_LABELS = [
+        'legalitas' => 'Legalitas',
+        'template' => 'Template',
+        'administrasi' => 'Administrasi',
+        'panduan' => 'Panduan',
+    ];
+
+    public function getCategoryLabelAttribute(): string
+    {
+        return self::CATEGORY_LABELS[$this->category] ?? ucfirst($this->category);
+    }
+
     protected static function booted()
     {
         static::creating(function ($doc) {
@@ -60,5 +72,12 @@ class LegalDocument extends Model
         if (!empty($this->external_url)) return $this->external_url;
         if (!empty($this->file_path)) return asset('storage/' . $this->file_path);
         return null;
+    }
+
+    public function categoryLabel(): string
+    {
+        return $this->category
+            ? Str::of($this->category)->replace('_', ' ')->title()
+            : '—';
     }
 }
