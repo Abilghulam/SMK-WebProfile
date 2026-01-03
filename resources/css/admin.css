@@ -2367,3 +2367,418 @@
         transform: translateY(0);
     }
 }
+
+/* =========================
+   DOKUMENTASI (adm-doc*)
+   ========================= */
+
+.adm-doc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.adm-doc-card {
+    background: #fff;
+    border-radius: var(--adm-radius);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+}
+
+.adm-doc-cover {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: rgba(15, 23, 42, 0.04);
+}
+.adm-doc-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.adm-doc-cover-top {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.adm-doc-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adm-doc-title {
+    font-weight: 650;
+    color: rgba(15, 23, 42, 0.92);
+    line-height: 1.25;
+}
+
+.adm-doc-sub {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: -2px;
+}
+
+.adm-doc-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 6px;
+}
+
+.adm-doc-meta-item {
+    display: grid;
+    gap: 3px;
+    font-size: 12px;
+}
+.adm-doc-meta-item strong {
+    font-weight: 650;
+    color: rgba(15, 23, 42, 0.86);
+}
+
+.adm-doc-actions {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* cover preview on edit */
+.adm-doc-cover-preview {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.04);
+    margin-bottom: 10px;
+}
+.adm-doc-cover-preview img {
+    width: 100%;
+    display: block;
+}
+
+/* items grid */
+.adm-doc-items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.adm-doc-item-card {
+    background: #fff;
+    border-radius: var(--adm-radius);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.adm-doc-item-media {
+    aspect-ratio: 16/10;
+    background: rgba(15, 23, 42, 0.04);
+}
+.adm-doc-item-media img,
+.adm-doc-item-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.adm-doc-item-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adm-doc-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.adm-doc-item-caption {
+    font-size: 13px;
+    color: rgba(15, 23, 42, 0.76);
+    line-height: 1.5;
+}
+
+.adm-doc-item-actions {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+    .adm-doc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .adm-doc-items-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .adm-doc-grid {
+        grid-template-columns: 1fr;
+    }
+    .adm-doc-items-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   DOC ITEMS MODAL (adm-modal*)
+   ========================= */
+
+.adm-modal[hidden] {
+    display: none !important;
+}
+
+.adm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+}
+
+.adm-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(6px);
+}
+
+.adm-modal-card {
+    position: relative;
+    width: min(560px, 100%);
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: 0 20px 70px rgba(15, 23, 42, 0.18);
+    overflow: hidden;
+    animation: admModalIn 0.18s ease both;
+}
+
+@keyframes admModalIn {
+    from {
+        transform: translateY(8px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.adm-modal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 14px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(248, 250, 252, 0.82);
+}
+
+.adm-modal-head-left {
+    display: flex;
+    gap: 12px;
+    min-width: 0;
+}
+
+.adm-modal-ic {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: rgba(2, 56, 117, 0.06);
+    border: 1px solid rgba(2, 56, 117, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(2, 56, 117, 0.95);
+    flex: 0 0 auto;
+}
+.adm-modal-ic svg {
+    width: 18px;
+    height: 18px;
+}
+
+.adm-modal-title-wrap {
+    min-width: 0;
+}
+.adm-modal-title {
+    font-weight: 650;
+    color: rgba(15, 23, 42, 0.92);
+    line-height: 1.2;
+}
+.adm-modal-sub {
+    margin-top: 3px;
+    font-size: 12.5px;
+    color: rgba(15, 23, 42, 0.58);
+}
+
+.adm-modal-x {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(255, 255, 255, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(15, 23, 42, 0.72);
+    transition: background 0.15s ease, border-color 0.15s ease,
+        transform 0.12s ease;
+}
+.adm-modal-x:hover {
+    background: rgba(2, 56, 117, 0.06);
+    border-color: rgba(2, 56, 117, 0.18);
+}
+.adm-modal-x:active {
+    transform: translateY(1px);
+}
+.adm-modal-x svg {
+    width: 18px;
+    height: 18px;
+}
+
+.adm-modal-body {
+    padding: 14px;
+    display: grid;
+    gap: 12px;
+}
+
+.adm-modal-preview {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(248, 250, 252, 0.92);
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+}
+.adm-modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.adm-modal-preview-fallback {
+    font-size: 13px;
+    color: rgba(15, 23, 42, 0.6);
+}
+
+.adm-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 14px 14px;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(248, 250, 252, 0.7);
+}
+
+/* File picker */
+.adm-file-input {
+    display: none;
+}
+
+.adm-file {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(248, 250, 252, 0.92);
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    cursor: pointer;
+    transition: border-color 0.18s ease, background 0.18s ease,
+        box-shadow 0.18s ease;
+}
+.adm-file:hover {
+    background: #fff;
+    border-color: rgba(2, 56, 117, 0.22);
+    box-shadow: 0 0 0 4px rgba(2, 56, 117, 0.06);
+}
+
+.adm-file-ic {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: rgba(2, 56, 117, 0.06);
+    border: 1px solid rgba(2, 56, 117, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(2, 56, 117, 0.95);
+}
+.adm-file-ic svg {
+    width: 18px;
+    height: 18px;
+}
+
+.adm-file-text {
+    font-weight: 600;
+    color: rgba(15, 23, 42, 0.88);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.adm-file-hint {
+    font-size: 12px;
+    color: rgba(15, 23, 42, 0.55);
+    padding-left: 8px;
+}
+
+.adm-help {
+    font-size: 12px;
+    color: rgba(15, 23, 42, 0.55);
+    margin-top: 6px;
+}
+
+@media (max-width: 520px) {
+    .adm-modal {
+        padding: 12px;
+    }
+    .adm-modal-card {
+        width: 100%;
+    }
+    .adm-file {
+        grid-template-columns: 42px 1fr;
+    }
+    .adm-file-hint {
+        display: none;
+    }
+}

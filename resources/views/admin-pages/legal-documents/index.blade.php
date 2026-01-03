@@ -33,7 +33,6 @@
                     </select>
                 </div>
 
-
                 <div class="adm-field">
                     <label class="adm-label">Status</label>
                     <select class="adm-select" name="status">

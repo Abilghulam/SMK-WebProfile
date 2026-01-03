@@ -107,11 +107,11 @@
 
                             {{-- IMAGE --}}
                             @if ($type === 'image')
-                                <button type="button" class="doc-photo doc-photo-btn"
-                                    data-lb-src="{{ asset($item->path) }}" data-lb-caption="{{ $item->caption ?? '' }}"
+                                <button type="button" class="doc-photo doc-photo-btn" data-lb-src="{{ $item->url }}"
+                                    data-lb-caption="{{ $item->caption ?? '' }}"
                                     data-lb-alt="{{ $item->caption ?? $gallery->title }}"
                                     data-lb-index="{{ $index }}" aria-label="Buka foto dokumentasi">
-                                    <img src="{{ asset($item->path) }}" alt="{{ $item->caption ?? $gallery->title }}"
+                                    <img src="{{ $item->url }}" alt="{{ $item->caption ?? $gallery->title }}"
                                         loading="lazy">
 
                                     <div class="doc-photo-overlay">

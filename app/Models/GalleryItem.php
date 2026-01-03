@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class GalleryItem extends Model
 {
@@ -27,5 +28,22 @@ class GalleryItem extends Model
 
     public const TYPE_IMAGE = 'image';
     public const TYPE_VIDEO = 'video';
+
+    public function getUrlAttribute(): string
+    {
+        $path = ltrim((string) $this->path, '/');
+
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+
+        // kalau sudah storage/..., biarkan
+        if (Str::startsWith($path, 'storage/')) {
+            return asset($path);
+        }
+
+        // default: diasumsikan storage/app/public/{path}
+        return asset('storage/' . $path);
+    }
 
 }

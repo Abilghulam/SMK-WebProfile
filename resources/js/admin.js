@@ -590,3 +590,268 @@ document.addEventListener("DOMContentLoaded", () => {
         el.classList.add("is-updating");
     }
 });
+
+// Toggle Publish (isPublished)
+document.addEventListener("DOMContentLoaded", () => {
+    const ICONS = {
+        // jika sekarang PUBLISHED => tombol menampilkan aksi "Jadikan Draft" (paper + pencil)
+        draftAction: `
+      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M13.4 12.6l4-4a1.7 1.7 0 0 1 2.4 2.4l-4 4-3.2.8.8-3.2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M12.7 13.3l2 2"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+    `,
+
+        // jika sekarang DRAFT => tombol menampilkan aksi "Publish" (paper + arrow up)
+        publishAction: `
+      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M12 16V9"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      <path d="M9.5 11.5 12 9l2.5 2.5"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M9 18h6"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+    `,
+    };
+
+    function setToggleIcon(form) {
+        const svg = form.querySelector("[data-toggle-ic]");
+        if (!svg) return;
+
+        const published = form.dataset.published === "1";
+        svg.innerHTML = published ? ICONS.draftAction : ICONS.publishAction;
+    }
+
+    function updateBadge(card, isPublished) {
+        const badge = card.querySelector("[data-doc-status-badge]");
+        if (!badge) return;
+
+        badge.classList.remove("adm-badge--success", "adm-badge--muted");
+        badge.classList.add(
+            isPublished ? "adm-badge--success" : "adm-badge--muted"
+        );
+        badge.textContent = isPublished ? "Published" : "Draft";
+
+        badge.classList.remove("is-updating");
+        void badge.offsetWidth; // retrigger
+        badge.classList.add("is-updating");
+    }
+
+    function formatDateTime(isoString) {
+        if (!isoString) return "—";
+        const d = new Date(isoString);
+        if (Number.isNaN(d.getTime())) return "—";
+
+        const day = String(d.getDate()).padStart(2, "0");
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
+        ];
+        const mon = months[d.getMonth()];
+        const year = d.getFullYear();
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+        return `${day} ${mon} ${year} ${hh}:${mm}`;
+    }
+
+    function updateUpdatedAt(card, updatedAtIso) {
+        const el = card.querySelector("[data-doc-updated-at]");
+        if (!el) return;
+
+        el.textContent = formatDateTime(updatedAtIso);
+
+        el.classList.remove("is-updating");
+        void el.offsetWidth;
+        el.classList.add("is-updating");
+    }
+
+    async function patchToggle(form) {
+        const btn = form.querySelector("[data-toggle-btn]");
+        const url = form.getAttribute("action");
+        const token = form.querySelector('input[name="_token"]')?.value;
+
+        // sesuaikan selector card ini dengan wrapper card dokumentasi kamu
+        const card = form.closest(".adm-doc-card") || document;
+
+        btn?.classList.add("is-loading");
+
+        try {
+            const res = await fetch(url, {
+                method: "POST", // spoof PATCH via _method
+                headers: {
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": token || "",
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({ _method: "PATCH" }).toString(),
+            });
+
+            if (!res.ok) {
+                form.submit();
+                return;
+            }
+
+            const data = await res.json();
+            const isPublished = !!data.is_published;
+
+            form.dataset.published = isPublished ? "1" : "0";
+
+            const nextTitle = isPublished ? "Jadikan Draft" : "Publish";
+            btn?.setAttribute("title", nextTitle);
+            btn?.setAttribute("aria-label", nextTitle);
+
+            setToggleIcon(form);
+            updateBadge(card, isPublished);
+            updateUpdatedAt(card, data.updated_at || null);
+        } catch (e) {
+            form.submit();
+        } finally {
+            btn?.classList.remove("is-loading");
+        }
+    }
+
+    // init + bind
+    document
+        .querySelectorAll(".adm-doc-toggle-publish-form")
+        .forEach((form) => {
+            setToggleIcon(form);
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                patchToggle(form);
+            });
+        });
+});
+
+// Modal Edit Gallery Items
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.querySelector("[data-item-modal]");
+    if (!modal) return;
+
+    const form = modal.querySelector("[data-item-form]");
+    const captionInput = modal.querySelector("[data-caption-input]");
+    const fileInput = modal.querySelector("[data-file-input]");
+    const fileText = modal.querySelector("[data-file-text]");
+    const previewImg = modal.querySelector("[data-preview-img]");
+    const previewFallback = modal.querySelector("[data-preview-fallback]");
+    const saveBtn = modal.querySelector("[data-save-btn]");
+
+    function openModal({ action, caption, src, type }) {
+        form.setAttribute("action", action);
+        captionInput.value = caption || "";
+
+        // reset file
+        fileInput.value = "";
+        if (fileText) fileText.textContent = "Pilih file";
+
+        // preview
+        if (type === "image" && src) {
+            previewImg.src = src;
+            previewImg.hidden = false;
+            previewFallback.hidden = true;
+        } else {
+            previewImg.removeAttribute("src");
+            previewImg.hidden = true;
+            previewFallback.hidden = false;
+        }
+
+        modal.hidden = false;
+        captionInput.focus();
+    }
+
+    function closeModal() {
+        modal.hidden = true;
+    }
+
+    // bind open buttons
+    document.querySelectorAll("[data-item-edit]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            openModal({
+                action: btn.dataset.action,
+                caption: btn.dataset.caption,
+                src: btn.dataset.src,
+                type: btn.dataset.type || "image",
+            });
+        });
+    });
+
+    // close handlers
+    modal.querySelectorAll("[data-modal-close]").forEach((el) => {
+        el.addEventListener("click", closeModal);
+    });
+
+    // esc close
+    document.addEventListener("keydown", (e) => {
+        if (!modal.hidden && e.key === "Escape") closeModal();
+    });
+
+    // file preview + label
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files?.[0];
+        if (!file) return;
+
+        if (fileText) fileText.textContent = file.name;
+
+        // update preview only if image
+        if (file.type.startsWith("image/")) {
+            const url = URL.createObjectURL(file);
+            previewImg.src = url;
+            previewImg.hidden = false;
+            previewFallback.hidden = true;
+        }
+    });
+
+    // submit via fetch (multipart)
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const url = form.getAttribute("action");
+        const token = form.querySelector('input[name="_token"]')?.value;
+
+        const fd = new FormData(form);
+        fd.set("_method", "PATCH"); // ensure spoof
+
+        // UI lock
+        saveBtn?.setAttribute("disabled", "disabled");
+
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": token || "",
+                },
+                body: fd,
+            });
+
+            if (!res.ok) {
+                // fallback
+                form.submit();
+                return;
+            }
+
+            // Sederhana: reload biar data sinkron (caption + path)
+            window.location.reload();
+        } catch (err) {
+            alert("Gagal menyimpan perubahan.");
+        } finally {
+            saveBtn?.removeAttribute("disabled");
+        }
+    });
+});

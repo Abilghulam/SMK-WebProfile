@@ -91,8 +91,8 @@
                 Legalitas
             </a>
 
-            <a class="admin-nav-link {{ request()->is('admin/galleries*') ? 'active' : '' }}"
-                href="{{ url('/admin/galleries') }}">
+            <a class="admin-nav-link {{ request()->is('admin/documentation*') ? 'active' : '' }}"
+                href="{{ url('/admin/documentation') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"

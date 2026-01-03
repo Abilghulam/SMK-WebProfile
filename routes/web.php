@@ -15,6 +15,9 @@ use App\Http\Controllers\AdminPasswordResetController;
 use App\Http\Controllers\admin\AdminHomeManagementController;
 use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminLegalDocumentsController;
+use App\Http\Controllers\Admin\AdminGalleriesController;
+use App\Http\Controllers\Admin\AdminGalleryItemsController;
+
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -121,6 +124,30 @@ Route::prefix('admin')
         // toggle publish cepat (opsional)
         Route::patch('legal-documents/{legal_document}/toggle-publish', [AdminLegalDocumentsController::class, 'togglePublish'])
             ->name('legal-documents.toggle-publish');
+        
+        // DOKUMENTASI (Galleries + Items)
+        Route::prefix('documentation')->name('documentation.')->group(function () {
+            // galleries (album)
+            Route::get('/', [AdminGalleriesController::class, 'index'])->name('galleries.index');
+            Route::get('/create', [AdminGalleriesController::class, 'create'])->name('galleries.create');
+            Route::post('/', [AdminGalleriesController::class, 'store'])->name('galleries.store');
+            Route::get('/{gallery}/edit', [AdminGalleriesController::class, 'edit'])->name('galleries.edit');
+            Route::put('/{gallery}', [AdminGalleriesController::class, 'update'])->name('galleries.update');
+            Route::delete('/{gallery}', [AdminGalleriesController::class, 'destroy'])->name('galleries.destroy');
+
+            // toggle publish album
+            Route::patch('/{gallery}/toggle-publish', [AdminGalleriesController::class, 'togglePublish'])
+                ->name('galleries.toggle-publish');
+
+            // items dalam album
+            Route::get('/{gallery}/items', [AdminGalleryItemsController::class, 'index'])->name('items.index');
+            Route::post('/{gallery}/items', [AdminGalleryItemsController::class, 'store'])->name('items.store');
+
+            // item actions
+            Route::patch('/items/{item}', [AdminGalleryItemsController::class, 'update'])->name('items.update');
+            Route::delete('/items/{item}', [AdminGalleryItemsController::class, 'destroy'])->name('items.destroy');
+        });
+
 });
 
 // Role Super Admin Only

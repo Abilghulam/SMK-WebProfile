@@ -77,20 +77,36 @@ class Gallery extends Model
     {
         // 1) kalau cover_image ada, pakai itu
         if (!empty($this->cover_image)) {
-            return asset($this->cover_image);
+            $path = ltrim($this->cover_image, '/');
+
+            // kalau sudah URL penuh
+            if (Str::startsWith($path, ['http://', 'https://'])) {
+                return $path;
+            }
+
+            // kalau sudah mengandung "storage/", biarkan
+            if (Str::startsWith($path, 'storage/')) {
+                return asset($path);
+            }
+
+            // default: diasumsikan file ada di storage/app/public/{path}
+            return asset('storage/' . $path);
         }
 
         // 2) fallback: ambil item image pertama (kalau relasi sudah diload)
         if ($this->relationLoaded('items')) {
             $firstImage = $this->items->firstWhere('type', 'image');
             if ($firstImage && !empty($firstImage->path)) {
-                return asset($firstImage->path);
+                $p = ltrim($firstImage->path, '/');
+
+                if (Str::startsWith($p, ['http://', 'https://'])) return $p;
+                if (Str::startsWith($p, 'storage/')) return asset($p);
+
+                return asset('storage/' . $p);
             }
         }
 
         // 3) fallback terakhir
         return asset('assets/images/placeholder.png');
     }
-
-
 }
