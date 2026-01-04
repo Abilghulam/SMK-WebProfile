@@ -70,7 +70,7 @@ class AdminGalleryItemsController extends Controller
             'sort_order' => ['nullable', 'integer', 'min:0'],
         ]);
 
-        if ($request->hasFile('image')) {
+    if ($request->hasFile('image')) {
         Storage::disk('public')->delete($item->path);
         $path = $request->file('image')->store('gallery-items/images', 'public');
         $item->path = $path;
@@ -80,9 +80,15 @@ class AdminGalleryItemsController extends Controller
       $item->caption = $data['caption'] ?? null;
       $item->update($data);
 
-        if ($request->expectsJson()) {
-            return response()->json(['ok' => true]);
-        }
+    if ($request->expectsJson()) {
+        return response()->json([
+            'ok' => true,
+            'id' => $item->id,
+            'caption' => $item->caption,
+            'type' => $item->type,
+            'url' => $item->type === 'image' ? $item->url : null, // pastikan model punya accessor url
+        ]);
+    }
 
         return back()->with('success', 'Item berhasil diperbarui.');
     }

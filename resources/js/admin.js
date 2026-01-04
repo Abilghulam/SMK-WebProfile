@@ -229,9 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ],
     };
 
-    // Kalau di DB kamu pakai "Kegiatan" sebagai EVENT, samakan key-nya ya.
-    // Misal type di DB = "AGENDA" untuk agenda, "ACHIEVEMENT" untuk prestasi.
-
     const allFieldWrappers = Array.from(
         document.querySelectorAll("[data-field]")
     );
@@ -243,7 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inputs.forEach((el) => {
             el.disabled = disabled;
 
-            // Opsional: bersihkan value kalau dimatikan (biar tidak "nyangkut" saat save)
             if (disabled && clearValue) {
                 if (el.type === "checkbox" || el.type === "radio") {
                     el.checked = false;
@@ -261,8 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
         allFieldWrappers.forEach((wrapper) => {
             const fieldName = wrapper.dataset.field;
 
-            // Field yang tidak kamu atur rules-nya → biarkan saja tampil & aktif
-            // Tapi untuk ketat (recommended), kamu bisa masukkan semua field utama di TYPE_FIELDS
             const isManaged = Object.values(TYPE_FIELDS).some((arr) =>
                 arr.includes(fieldName)
             );
@@ -277,11 +271,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     typeSelect.addEventListener("change", applyTypeRules);
-    applyTypeRules(); // init saat halaman load (create & edit)
+    applyTypeRules();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Cari field judul & slug (aman tanpa ubah class)
     const titleInput =
         document.querySelector('input[name="title"]') ||
         document.querySelector('textarea[name="title"]');
@@ -290,57 +283,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!titleInput || !slugInput) return;
 
-    // Kalau slug sudah ada (edit mode), anggap user mungkin mau mempertahankan.
-    // Auto-sync aktif hanya jika slug kosong atau slug belum pernah disentuh manual.
     let slugTouched = false;
 
-    // Tandai kalau user mengedit slug manual
     slugInput.addEventListener("input", () => {
-        // Jika user mulai mengetik sesuatu, dianggap "touched"
-        // tapi kalau user mengosongkan slug, auto-sync akan aktif lagi
         slugTouched = slugInput.value.trim().length > 0;
     });
 
-    // Fungsi slugify yang rapi untuk bahasa Indonesia juga
     function slugify(text) {
-        return (
-            text
-                .toString()
-                .normalize("NFD") // pisah accent
-                .replace(/[\u0300-\u036f]/g, "") // hapus accent
-                .toLowerCase()
-                .trim()
-                // ganti & jadi "dan" (opsional, tapi terasa institusional)
-                .replace(/&/g, " dan ")
-                // hapus karakter aneh
-                .replace(/[^a-z0-9\s-]/g, "")
-                // spasi jadi dash
-                .replace(/\s+/g, "-")
-                // rapikan multiple dash
-                .replace(/-+/g, "-")
-                // hapus dash di awal/akhir
-                .replace(/^-|-$/g, "")
-        );
+        return text
+            .toString()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .trim()
+
+            .replace(/&/g, " dan ")
+
+            .replace(/[^a-z0-9\s-]/g, "")
+
+            .replace(/\s+/g, "-")
+
+            .replace(/-+/g, "-")
+
+            .replace(/^-|-$/g, "");
     }
 
-    // Sync slug saat judul berubah (hanya jika slug belum disentuh / slug kosong)
     function syncSlugFromTitle() {
         const title = titleInput.value || "";
         const slug = slugify(title);
 
-        // Auto-update hanya jika:
-        // - slug belum disentuh user, atau
-        // - slug input kosong (user sengaja kosongkan untuk auto)
         if (!slugTouched || slugInput.value.trim() === "") {
             slugInput.value = slug;
         }
     }
 
-    // Event yang enak: input (real-time) + change
     titleInput.addEventListener("input", syncSlugFromTitle);
     titleInput.addEventListener("change", syncSlugFromTitle);
 
-    // Jika form edit dan slug memang kosong, langsung sync dari title saat load
     if (slugInput.value.trim() === "") {
         syncSlugFromTitle();
     }
@@ -393,7 +372,6 @@ document.addEventListener("DOMContentLoaded", () => {
             flash.classList.remove("is-in");
             flash.classList.add("is-out");
 
-            // wait transition then remove
             const removeDelay = 220;
             window.setTimeout(() => {
                 if (flash && flash.parentNode)
@@ -401,7 +379,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, removeDelay);
         }
 
-        // manual close
         if (closeBtn) {
             closeBtn.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -409,11 +386,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // auto close (0 = disabled)
         if (ms > 0) {
             timer = window.setTimeout(closeFlash, ms);
 
-            // UX: pause timer on hover
             flash.addEventListener("mouseenter", () => {
                 if (timer) clearTimeout(timer);
             });
@@ -572,19 +547,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function updatePublishedAt(card, publishedAtIso, isPublished) {
         const el = card.querySelector("[data-legal-published-at]");
         if (!el) return;
-
-        // Jika jadi Draft: kamu mau kosongkan atau tetap tampil terakhir?
-        // Pilih salah satu:
-        // A) Kosongkan saat Draft
         if (!isPublished) {
             el.textContent = "—";
             return;
         }
 
-        // B) Tampilkan waktu publish (kalau publish)
         el.textContent = formatPublishedAt(publishedAtIso);
 
-        // animasi kecil biar kerasa update (opsional)
         el.classList.remove("is-updating");
         void el.offsetWidth;
         el.classList.add("is-updating");
@@ -751,16 +720,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const previewFallback = modal.querySelector("[data-preview-fallback]");
     const saveBtn = modal.querySelector("[data-save-btn]");
 
-    function openModal({ action, caption, src, type }) {
-        form.setAttribute("action", action);
-        captionInput.value = caption || "";
+    let activeItemId = null; // item yang sedang diedit
 
-        // reset file
-        fileInput.value = "";
-        if (fileText) fileText.textContent = "Pilih file";
+    // =========================
+    // Scroll lock helpers
+    // =========================
+    function lockScroll() {
+        document.documentElement.classList.add("adm-scroll-lock");
+        document.body.classList.add("adm-scroll-lock");
+    }
+    function unlockScroll() {
+        document.documentElement.classList.remove("adm-scroll-lock");
+        document.body.classList.remove("adm-scroll-lock");
+    }
 
-        // preview
-        if (type === "image" && src) {
+    // =========================
+    // Modal helpers
+    // =========================
+    function setPreviewImage(src) {
+        if (src) {
             previewImg.src = src;
             previewImg.hidden = false;
             previewFallback.hidden = true;
@@ -769,23 +747,46 @@ document.addEventListener("DOMContentLoaded", () => {
             previewImg.hidden = true;
             previewFallback.hidden = false;
         }
+    }
+
+    function openModal({ action, caption, src, type, itemId }) {
+        activeItemId = itemId || null;
+
+        form.setAttribute("action", action);
+        captionInput.value = caption || "";
+
+        // reset file UI
+        fileInput.value = "";
+        if (fileText) fileText.textContent = "Pilih file";
+
+        // preview
+        if (type === "image" && src) setPreviewImage(src);
+        else setPreviewImage("");
 
         modal.hidden = false;
-        captionInput.focus();
+        lockScroll();
+
+        // fokus enak
+        setTimeout(() => captionInput.focus(), 0);
     }
 
     function closeModal() {
         modal.hidden = true;
+        activeItemId = null;
+        unlockScroll();
     }
 
-    // bind open buttons
+    // =========================
+    // Bind open buttons
+    // =========================
     document.querySelectorAll("[data-item-edit]").forEach((btn) => {
         btn.addEventListener("click", () => {
             openModal({
                 action: btn.dataset.action,
-                caption: btn.dataset.caption,
-                src: btn.dataset.src,
+                caption: btn.dataset.caption || "",
+                src: btn.dataset.src || "",
                 type: btn.dataset.type || "image",
+                itemId: btn.dataset.itemId || null,
             });
         });
     });
@@ -795,28 +796,70 @@ document.addEventListener("DOMContentLoaded", () => {
         el.addEventListener("click", closeModal);
     });
 
-    // esc close
+    // close with esc
     document.addEventListener("keydown", (e) => {
         if (!modal.hidden && e.key === "Escape") closeModal();
     });
 
-    // file preview + label
+    // =========================
+    // File preview + label
+    // =========================
     fileInput.addEventListener("change", () => {
         const file = fileInput.files?.[0];
         if (!file) return;
 
         if (fileText) fileText.textContent = file.name;
 
-        // update preview only if image
-        if (file.type.startsWith("image/")) {
+        // preview if image
+        if (file.type && file.type.startsWith("image/")) {
             const url = URL.createObjectURL(file);
-            previewImg.src = url;
-            previewImg.hidden = false;
-            previewFallback.hidden = true;
+            setPreviewImage(url);
         }
     });
 
-    // submit via fetch (multipart)
+    // =========================
+    // Update UI target in page
+    // =========================
+    function findActiveItemEl() {
+        if (!activeItemId) return null;
+        return document.querySelector(
+            `[data-doc-item][data-item-id="${activeItemId}"]`
+        );
+    }
+
+    function updateItemUI(payload) {
+        const itemEl = findActiveItemEl();
+        if (!itemEl) return;
+
+        // caption text
+        const capEl = itemEl.querySelector("[data-item-caption]");
+        if (capEl) capEl.textContent = payload.caption || "—";
+
+        // image thumb if available
+        if (payload.type === "image" && payload.url) {
+            const imgEl = itemEl.querySelector("[data-item-thumb]");
+            if (imgEl) {
+                imgEl.src = payload.url;
+
+                // alt ikut update biar rapi
+                imgEl.alt = payload.caption || imgEl.alt || "";
+            }
+        }
+
+        // Update dataset tombol edit biar kalau dibuka lagi nilainya sudah baru
+        const editBtn = itemEl.querySelector("[data-item-edit]");
+        if (editBtn) {
+            editBtn.dataset.caption = payload.caption || "";
+            if (payload.type === "image" && payload.url) {
+                editBtn.dataset.src = payload.url;
+                editBtn.dataset.type = "image";
+            }
+        }
+    }
+
+    // =========================
+    // Submit via fetch (multipart)
+    // =========================
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -824,7 +867,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const token = form.querySelector('input[name="_token"]')?.value;
 
         const fd = new FormData(form);
-        fd.set("_method", "PATCH"); // ensure spoof
+        fd.set("_method", "PATCH");
 
         // UI lock
         saveBtn?.setAttribute("disabled", "disabled");
@@ -841,17 +884,161 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!res.ok) {
-                // fallback
+                // fallback submit biasa kalau server tidak return JSON/validation
                 form.submit();
                 return;
             }
 
-            // Sederhana: reload biar data sinkron (caption + path)
-            window.location.reload();
+            const data = await res.json();
+            if (!data || !data.ok) {
+                form.submit();
+                return;
+            }
+
+            // Update UI
+            updateItemUI(data);
+
+            // Close modal
+            closeModal();
         } catch (err) {
             alert("Gagal menyimpan perubahan.");
         } finally {
             saveBtn?.removeAttribute("disabled");
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const ICONS = {
+        // Active -> action is "Nonaktifkan" (eye-off)
+        deactivate: `
+                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
+                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M10 10a3 3 0 0 1 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                `,
+        // Inactive -> action is "Aktifkan" (eye)
+        activate: `
+                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
+                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                        stroke="currentColor" stroke-width="1.8" />
+                `,
+    };
+
+    function setToggleIcon(form) {
+        const svg = form.querySelector("[data-toggle-ic]");
+        if (!svg) return;
+
+        const active = form.dataset.active === "1";
+        // if active, button shows "deactivate"
+        svg.innerHTML = active ? ICONS.deactivate : ICONS.activate;
+    }
+
+    function updateBadge(card, isActive) {
+        const badge = card.querySelector("[data-dep-status-badge]");
+        if (!badge) return;
+
+        badge.classList.remove("adm-badge--success", "adm-badge--muted");
+        badge.classList.add(
+            isActive ? "adm-badge--success" : "adm-badge--muted"
+        );
+        badge.textContent = isActive ? "Aktif" : "Nonaktif";
+
+        badge.classList.remove("is-updating");
+        void badge.offsetWidth;
+        badge.classList.add("is-updating");
+    }
+
+    function formatUpdatedAt(isoString) {
+        if (!isoString) return "—";
+        const d = new Date(isoString);
+        if (Number.isNaN(d.getTime())) return "—";
+
+        const day = String(d.getDate()).padStart(2, "0");
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
+        ];
+        const mon = months[d.getMonth()];
+        const year = d.getFullYear();
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+        return `${day} ${mon} ${year} ${hh}:${mm}`;
+    }
+
+    function updateUpdatedAt(card, isoString) {
+        const el = card.querySelector("[data-dep-updated-at]");
+        if (!el) return;
+        el.textContent = formatUpdatedAt(isoString);
+
+        el.classList.remove("is-updating");
+        void el.offsetWidth;
+        el.classList.add("is-updating");
+    }
+
+    async function patchToggle(form) {
+        const btn = form.querySelector("[data-toggle-btn]");
+        const url = form.getAttribute("action");
+        const token = form.querySelector('input[name="_token"]')?.value;
+        const card = form.closest(".adm-dep-card") || document;
+
+        btn?.classList.add("is-loading");
+
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": token || "",
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({
+                    _method: "PATCH",
+                }).toString(),
+            });
+
+            if (!res.ok) {
+                form.submit();
+                return;
+            }
+
+            const data = await res.json();
+            const isActive = !!data.is_active;
+
+            form.dataset.active = isActive ? "1" : "0";
+
+            const nextTitle = isActive ? "Nonaktifkan" : "Aktifkan";
+            btn?.setAttribute("title", nextTitle);
+            btn?.setAttribute("aria-label", nextTitle);
+
+            setToggleIcon(form);
+            updateBadge(card, isActive);
+            updateUpdatedAt(card, data.updated_at || null);
+        } catch (e) {
+            form.submit();
+        } finally {
+            btn?.classList.remove("is-loading");
+        }
+    }
+
+    document.querySelectorAll(".adm-dep-toggle-active-form").forEach((form) => {
+        setToggleIcon(form);
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            patchToggle(form);
+        });
     });
 });

@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\AdminPostsController;
 use App\Http\Controllers\Admin\AdminLegalDocumentsController;
 use App\Http\Controllers\Admin\AdminGalleriesController;
 use App\Http\Controllers\Admin\AdminGalleryItemsController;
-
+use \App\Http\Controllers\Admin\AdminDepartmentsController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -147,6 +147,14 @@ Route::prefix('admin')
             Route::patch('/items/{item}', [AdminGalleryItemsController::class, 'update'])->name('items.update');
             Route::delete('/items/{item}', [AdminGalleryItemsController::class, 'destroy'])->name('items.destroy');
         });
+
+        // DEPARTMENTS
+        Route::resource('departments', AdminDepartmentsController::class)
+            ->except(['show']);
+
+        Route::patch('departments/{department}/toggle-active', [AdminDepartmentsController::class, 'toggleActive'])
+            ->name('departments.toggle-active');
+
 
 });
 

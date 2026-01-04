@@ -126,15 +126,28 @@
                         </div>
 
                         <div class="adm-doc-actions">
-                            <a class="adm-icon-btn" href="{{ route('admin.documentation.items.index', $gal) }}"
-                                title="Kelola item" aria-label="Kelola item">
-                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"
-                                        stroke="currentColor" stroke-width="1.8" />
-                                    <path d="M8.5 10.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor"
+                            <a class="adm-icon-btn adm-icon-btn--gear"
+                                href="{{ route('admin.documentation.items.index', $gal) }}" title="Kelola item"
+                                aria-label="Kelola item">
+                                <svg class="adm-ic adm-ic--gear" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <!-- outer gear -->
+                                    <path d="M12 8.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7Z" stroke="currentColor"
                                         stroke-width="1.8" />
-                                    <path d="m21 16-5-5-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                        stroke-linejoin="round" />
+
+                                    <path d="M19.4 15a7.8 7.8 0 0 0 .1-1
+                       a7.8 7.8 0 0 0-.1-1l2-1.5
+                       l-2-3.4-2.3.6
+                       a7.9 7.9 0 0 0-1.7-1
+                       l-.4-2.4h-4l-.4 2.4
+                       a7.9 7.9 0 0 0-1.7 1
+                       l-2.3-.6-2 3.4 2 1.5
+                       a7.8 7.8 0 0 0-.1 1
+                       a7.8 7.8 0 0 0 .1 1l-2 1.5
+                       2 3.4 2.3-.6
+                       a7.9 7.9 0 0 0 1.7 1
+                       l.4 2.4h4l.4-2.4
+                       a7.9 7.9 0 0 0 1.7-1
+                       l2.3.6 2-3.4-2-1.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
                                 </svg>
                             </a>
 

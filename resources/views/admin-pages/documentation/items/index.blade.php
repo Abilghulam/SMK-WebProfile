@@ -67,12 +67,13 @@
 
         <section class="adm-doc-items-grid">
             @forelse ($items as $it)
-                <article class="adm-doc-item-card">
+                <article class="adm-doc-item-card" data-doc-item data-item-id="{{ $it->id }}">
                     <div class="adm-doc-item-media">
                         @if ($it->type === 'video')
                             <video src="{{ asset('storage/' . $it->path) }}" controls></video>
                         @else
-                            <img src="{{ asset('storage/' . $it->path) }}" alt="{{ $it->caption ?? 'item' }}">
+                            <img class="adm-doc-thumb" data-item-thumb src="{{ $it->url }}"
+                                alt="{{ $it->caption ?? '' }}">
                         @endif
                     </div>
 
@@ -82,15 +83,14 @@
                             <span class="adm-muted">#{{ $it->sort_order }}</span>
                         </div>
 
-                        @if ($it->caption)
-                            <div class="adm-doc-item-caption">{{ $it->caption }}</div>
-                        @else
-                            <div class="adm-doc-item-caption adm-muted">—</div>
-                        @endif
+                        <div class="adm-doc-item-caption" data-item-caption>
+                            {{ $it->caption ?? '—' }}
+                        </div>
 
                         <div class="adm-doc-item-actions">
                             <button class="adm-icon-btn" type="button" title="Edit item" aria-label="Edit item"
-                                data-item-edit data-action="{{ route('admin.documentation.items.update', $it) }}"
+                                data-item-edit data-item-id="{{ $it->id }}"
+                                data-action="{{ route('admin.documentation.items.update', $it) }}"
                                 data-caption="{{ $it->caption ?? '' }}" data-type="{{ $it->type ?? 'image' }}"
                                 data-src="{{ $it->type === 'image' ? $it->url : '' }}">
                                 <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">

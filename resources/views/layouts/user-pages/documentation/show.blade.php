@@ -291,14 +291,14 @@
                 @if ($type === 'image')
                     {
                         type: "image",
-                        src: "{{ asset($item->path) }}",
+                        src: "{{ $item->url ?? asset('storage/' . $item->path) }}",
                         caption: @json($item->caption ?? ''),
                         alt: @json($item->caption ?? $gallery->title),
                     },
                 @elseif ($type === 'video')
                     @php $embed = $toEmbedUrl($item->path); @endphp {
                         type: "video",
-                        video: @json($embed), // embed url
+                        video: @json($embed),
                         caption: @json($item->caption ?? $gallery->title),
                         alt: @json($item->caption ?? $gallery->title),
                     },
@@ -306,5 +306,6 @@
             @endforeach
         ];
     </script>
+
 
 @endsection
