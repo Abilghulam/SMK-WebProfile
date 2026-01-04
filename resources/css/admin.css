@@ -2902,37 +2902,67 @@ body.adm-scroll-lock {
 
 .adm-dep-card {
     background: #fff;
-    border-radius: var(--adm-radius);
-    border: 1px solid rgba(15, 23, 42, 0.06);
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-    padding: 14px;
+    border-radius: calc(var(--adm-radius) + 4px);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    min-height: 170px;
+    gap: 12px;
+    min-height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* aksen halus (institusional, bukan garis rame) */
+.adm-dep-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        900px 260px at -160px -140px,
+        rgba(2, 56, 117, 0.08),
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .adm-dep-card {
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+            border-color 0.18s ease;
+    }
+    .adm-dep-card:hover {
+        transform: translateY(-1px);
+        border-color: rgba(2, 56, 117, 0.14);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+    }
 }
 
 .adm-dep-top {
     display: flex;
     align-items: flex-start;
     gap: 12px;
+    position: relative;
+    z-index: 1;
 }
 
 .adm-dep-ic {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(2, 56, 117, 0.06);
-    border: 1px solid rgba(2, 56, 117, 0.12);
+    background: rgba(2, 56, 117, 0.07);
+    border: 1px solid rgba(2, 56, 117, 0.14);
     color: rgba(2, 56, 117, 0.95);
     flex: 0 0 auto;
 }
+
 .adm-dep-ic svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
 }
 
 .adm-dep-main {
@@ -2941,9 +2971,11 @@ body.adm-scroll-lock {
 }
 
 .adm-dep-title {
-    font-weight: 750;
-    color: rgba(15, 23, 42, 0.92);
-    line-height: 1.25;
+    font-weight: 700;
+    color: rgba(15, 23, 42, 0.94);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-size: 14.5px;
 }
 
 .adm-dep-sub {
@@ -2954,41 +2986,86 @@ body.adm-scroll-lock {
     flex-wrap: wrap;
 }
 
+.adm-dep-sub .adm-muted {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: rgba(15, 23, 42, 0.55);
+}
+
 .adm-dep-status {
     flex: 0 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .adm-dep-desc {
+    position: relative;
+    z-index: 1;
     color: rgba(15, 23, 42, 0.68);
     font-size: 13px;
     line-height: 1.55;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 .adm-dep-meta {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
-    padding-top: 6px;
+    padding-top: 2px;
 }
 
 .adm-dep-meta-item {
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    background: rgba(248, 250, 252, 0.7);
+    border-radius: 14px;
+    padding: 10px 10px;
     display: grid;
-    gap: 3px;
+    gap: 4px;
     font-size: 12px;
 }
-.adm-dep-meta-item strong {
-    font-weight: 700;
-    color: rgba(15, 23, 42, 0.86);
+
+.adm-dep-meta-item .adm-muted {
+    color: rgba(15, 23, 42, 0.55);
+    font-weight: 650;
+    letter-spacing: 0.02em;
+    font-size: 11.5px;
 }
 
+.adm-dep-meta-item strong {
+    font-weight: 700;
+    color: rgba(15, 23, 42, 0.88);
+    letter-spacing: -0.01em;
+}
+
+/* actions lebih halus */
 .adm-dep-actions {
+    position: relative;
+    z-index: 1;
     margin-top: auto;
-    padding-top: 10px;
+    padding-top: 12px;
     border-top: 1px solid rgba(15, 23, 42, 0.06);
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: flex-end;
+}
+
+/* responsive meta */
+@media (max-width: 1100px) {
+    .adm-dep-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .adm-dep-meta {
+        grid-template-columns: 1fr;
+    }
 }
 
 .adm-dep-radio {

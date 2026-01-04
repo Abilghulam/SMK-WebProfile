@@ -93,7 +93,7 @@
                             onsubmit="return confirm('Hapus program keahlian ini?')">
                             @csrf
                             @method('DELETE')
-                            <button class="adm-icon-btn adm-icon-btn--danger" type="submit" title="Hapus"
+                            <button class="adm-icon-btn adm-icon-btn--delete" type="submit" title="Hapus"
                                 aria-label="Hapus">
                                 <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
