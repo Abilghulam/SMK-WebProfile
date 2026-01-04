@@ -15,7 +15,7 @@
 @endphp
 
 <div class="adm-dep-form-grid">
-    <div class="adm-field adm-field--full">
+    <div class="adm-field">
         <label class="adm-label">Nama Program</label>
         <input class="adm-input" type="text" name="name" value="{{ old('name', $department->name) }}" required>
         @error('name')
@@ -34,39 +34,11 @@
     </div>
 
     <div class="adm-field">
-        <label class="adm-label">Status</label>
-        <div class="adm-dep-radio">
-            <label class="adm-check">
-                <input type="radio" name="is_active" value="1"
-                    {{ old('is_active', $department->is_active ?? 1) ? 'checked' : '' }}>
-                <span>Aktif</span>
-            </label>
-
-            <label class="adm-check">
-                <input type="radio" name="is_active" value="0"
-                    {{ !old('is_active', $department->is_active ?? 1) ? 'checked' : '' }}>
-                <span>Nonaktif</span>
-            </label>
-        </div>
-        @error('is_active')
-            <div class="adm-error">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <div class="adm-field adm-field--full">
         <label class="adm-label">Ringkasan Singkat</label>
         <input class="adm-input" type="text" name="short_description"
             value="{{ old('short_description', $department->short_description) }}"
             placeholder="Satu kalimat ringkas (opsional)">
         @error('short_description')
-            <div class="adm-error">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <div class="adm-field adm-field--full">
-        <label class="adm-label">Deskripsi</label>
-        <textarea class="adm-input" name="description" rows="6" required placeholder="Deskripsi lengkap program...">{{ old('description', $department->description) }}</textarea>
-        @error('description')
             <div class="adm-error">{{ $message }}</div>
         @enderror
     </div>
@@ -80,31 +52,19 @@
         @enderror
     </div>
 
-    <div class="adm-field">
-        <label class="adm-label">Model Pembelajaran</label>
-        <input class="adm-input" type="text" name="learning_model"
-            value="{{ old('learning_model', $department->learning_model) }}" placeholder="Contoh: Teaching Factory">
-        @error('learning_model')
+    <div class="adm-field adm-field--full">
+        <label class="adm-label">Deskripsi</label>
+        <textarea class="adm-input" name="description" rows="6" required placeholder="Deskripsi lengkap program...">{{ old('description', $department->description) }}</textarea>
+        @error('description')
             <div class="adm-error">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="adm-field">
-        <label class="adm-label">PKL / Internship</label>
-        <div class="adm-dep-radio">
-            <label class="adm-check">
-                <input type="radio" name="has_internship" value="1"
-                    {{ old('has_internship', $department->has_internship ?? 1) ? 'checked' : '' }}>
-                <span>Ya</span>
-            </label>
-
-            <label class="adm-check">
-                <input type="radio" name="has_internship" value="0"
-                    {{ !old('has_internship', $department->has_internship ?? 1) ? 'checked' : '' }}>
-                <span>Tidak</span>
-            </label>
-        </div>
-        @error('has_internship')
+        <label class="adm-label">Model Pembelajaran</label>
+        <input class="adm-input" type="text" name="learning_model"
+            value="{{ old('learning_model', $department->learning_model) }}" placeholder="Contoh: Teaching Factory">
+        @error('learning_model')
             <div class="adm-error">{{ $message }}</div>
         @enderror
     </div>
@@ -151,6 +111,47 @@ Administrator jaringan">{{ $careerText }}</textarea>
             placeholder="Contoh:
 Praktikum lab
 Kunjungan industri">{{ $activitiesText }}</textarea>
+    </div>
+
+    <div class="adm-field">
+        <label class="adm-label">PKL / Internship</label>
+        <div class="adm-dep-radio">
+            <label class="adm-check">
+                <input type="radio" name="has_internship" value="1"
+                    {{ old('has_internship', $department->has_internship ?? 1) ? 'checked' : '' }}>
+                <span>Ya</span>
+            </label>
+
+            <label class="adm-check">
+                <input type="radio" name="has_internship" value="0"
+                    {{ !old('has_internship', $department->has_internship ?? 1) ? 'checked' : '' }}>
+                <span>Tidak</span>
+            </label>
+        </div>
+        @error('has_internship')
+            <div class="adm-error">{{ $message }}</div>
+        @enderror
+    </div>
+
+
+    <div class="adm-field">
+        <label class="adm-label">Status</label>
+        <div class="adm-dep-radio">
+            <label class="adm-check">
+                <input type="radio" name="is_active" value="1"
+                    {{ old('is_active', $department->is_active ?? 1) ? 'checked' : '' }}>
+                <span>Aktif</span>
+            </label>
+
+            <label class="adm-check">
+                <input type="radio" name="is_active" value="0"
+                    {{ !old('is_active', $department->is_active ?? 1) ? 'checked' : '' }}>
+                <span>Nonaktif</span>
+            </label>
+        </div>
+        @error('is_active')
+            <div class="adm-error">{{ $message }}</div>
+        @enderror
     </div>
 </div>
 

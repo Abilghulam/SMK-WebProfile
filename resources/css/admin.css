@@ -3008,6 +3008,11 @@ body.adm-scroll-lock {
     grid-column: 1 / -1;
 }
 
+.adm-dep-form-grid .adm-field--third {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-column: span 1;
+}
+
 /* tiny “updated” animations used by JS */
 [data-dep-updated-at].is-updating {
     animation: depPulse 0.35s ease;

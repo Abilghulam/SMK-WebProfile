@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initResendOtpUI();
 });
 
-/**
- * OTP input UX + hidden sync + expiry countdown
- */
+// OTP Input
 function initOtpUI() {
     const otpForm = document.querySelector("[data-otp-form]");
     if (!otpForm) return;
@@ -137,9 +135,7 @@ function initOtpExpiryCountdown(otpForm) {
     tick();
 }
 
-/**
- * Resend OTP cooldown countdown
- */
+// Resend OTP Cooldown Countdown
 function initResendOtpUI() {
     const resendForm = document.querySelector("[data-otp-resend-form]");
     if (!resendForm) return;
@@ -172,12 +168,11 @@ function initResendOtpUI() {
     tick();
 }
 
+// Type Definition
 document.addEventListener("DOMContentLoaded", () => {
     const typeSelect = document.querySelector("[data-post-type]");
     if (!typeSelect) return;
 
-    // Definisikan field aktif per type
-    // Sesuaikan key type kamu: NEWS, AGENDA, ACHIEVEMENT, EVENT (atau Kegiatan)
     const TYPE_FIELDS = {
         news: [
             "title",
@@ -274,6 +269,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTypeRules();
 });
 
+// Auto Slug
 document.addEventListener("DOMContentLoaded", () => {
     const titleInput =
         document.querySelector('input[name="title"]') ||
@@ -325,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// isPublished
 document.addEventListener("DOMContentLoaded", () => {
     const row = document.querySelector("[data-publish-row]");
     if (!row) return;
@@ -400,6 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// Auto Rotation Ikon Publish dan Draft
 document.addEventListener("DOMContentLoaded", () => {
     const ICONS = {
         // Published -> tombol menampilkan aksi "Jadikan Draft" (paper + pencil)
