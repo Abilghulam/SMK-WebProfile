@@ -11,7 +11,7 @@
             <div class="adm-actions">
                 <a class="adm-btn adm-btn--primary" href="{{ route('admin.legal-documents.create') }}">
                     <span class="adm-btn-ic" aria-hidden="true">＋</span>
-                    Tambah Post
+                    Tambah Dokumen
                 </a>
             </div>
         </div>
@@ -173,7 +173,7 @@
                             @csrf
                             @method('PATCH')
 
-                            <button class="adm-icon-btn adm-toggle-publish-btn" type="submit"
+                            <button class="adm-icon-btn adm-icon-btn--apply adm-toggle-publish-btn" type="submit"
                                 title="{{ $doc->is_published ? 'Jadikan Draft' : 'Publish' }}"
                                 aria-label="{{ $doc->is_published ? 'Jadikan Draft' : 'Publish' }}" data-toggle-btn>
                                 {{-- SINGLE ICON (path diisi via JS sesuai status) --}}

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>@yield('title', 'Admin Panel') | {{ $settings->site_name ?? 'SMK Negeri' }}</title>
+    <title>@yield('title', 'Dashboard Admin') | {{ $settings->site_name ?? 'SMK Negeri' }}</title>
 
     {{-- Favicon --}}
     @if (!empty($settings?->favicon))

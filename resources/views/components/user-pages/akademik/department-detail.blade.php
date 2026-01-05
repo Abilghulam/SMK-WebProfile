@@ -32,9 +32,9 @@
                 {{-- Main Content --}}
                 <article class="detail-main">
 
-                    @if ($department->image)
+                    @if ($department->cover_url)
                         <div class="detail-cover">
-                            <img src="{{ asset($department->image) }}" alt="{{ $department->name }}" loading="lazy">
+                            <img src="{{ asset($department->cover_url) }}" alt="{{ $department->name }}" loading="lazy">
                         </div>
                     @endif
 

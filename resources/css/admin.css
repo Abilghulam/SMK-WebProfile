@@ -2636,6 +2636,18 @@
     );
 }
 
+@media (hover: hover) {
+    .adm-doc-card {
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+            border-color 0.18s ease;
+    }
+    .adm-doc-card:hover {
+        transform: translateY(-1px);
+        border-color: rgba(2, 56, 117, 0.14);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+    }
+}
+
 /* responsive */
 @media (max-width: 1100px) {
     .adm-doc-grid {
@@ -2939,6 +2951,98 @@ body.adm-scroll-lock {
     }
 }
 
+/* =========================
+   DEP COVER + ABBR
+   ========================= */
+
+.adm-dep-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: calc(var(--adm-radius) + 2px);
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.04);
+    position: relative;
+    z-index: 1;
+}
+
+.adm-dep-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.adm-dep-cover-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    color: rgba(2, 56, 117, 0.55);
+}
+
+.adm-dep-cover-fallback svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* overlay topbar di atas cover */
+.adm-dep-cover-top {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.adm-dep-cover-top .adm-abbr {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(15, 23, 42, 0.14);
+    color: rgba(15, 23, 42, 0.86);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(6px);
+}
+
+/* Badge singkatan */
+.adm-dep-abbr {
+    position: absolute;
+    left: 0;
+    top: -10px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    color: rgba(2, 56, 117, 0.92);
+    font-weight: 800;
+    letter-spacing: 0.1fem;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    margin-right: 0; /* biar tidak ngikut rule adm-badge lama */
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(6px);
+}
+
+.adm-dep-cover-top .adm-dep-abbr {
+    position: static;
+    left: auto;
+    top: auto;
+    z-index: auto;
+    letter-spacing: 0.1em;
+}
+
+/* =========================
+   DEP TOP
+   ========================= */
+
 .adm-dep-top {
     display: flex;
     align-items: flex-start;
@@ -2993,10 +3097,19 @@ body.adm-scroll-lock {
 }
 
 .adm-dep-status {
-    flex: 0 0 auto;
-    position: relative;
-    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12),
+        0 6px 14px rgba(15, 23, 42, 0.08);
+    backdrop-filter: saturate(1.1) blur(2px);
 }
+
+/* =========================
+   DEP DESC + META
+   ========================= */
 
 .adm-dep-desc {
     position: relative;
@@ -3004,7 +3117,6 @@ body.adm-scroll-lock {
     color: rgba(15, 23, 42, 0.68);
     font-size: 13px;
     line-height: 1.55;
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
@@ -3018,6 +3130,11 @@ body.adm-scroll-lock {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
     padding-top: 2px;
+}
+
+/* Meta compact (tanpa PKL) */
+.adm-dep-meta--compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .adm-dep-meta-item {
@@ -3043,7 +3160,10 @@ body.adm-scroll-lock {
     letter-spacing: -0.01em;
 }
 
-/* actions lebih halus */
+/* =========================
+   ACTIONS
+   ========================= */
+
 .adm-dep-actions {
     position: relative;
     z-index: 1;
@@ -3056,17 +3176,9 @@ body.adm-scroll-lock {
     justify-content: flex-end;
 }
 
-/* responsive meta */
-@media (max-width: 1100px) {
-    .adm-dep-meta {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-@media (max-width: 640px) {
-    .adm-dep-meta {
-        grid-template-columns: 1fr;
-    }
-}
+/* =========================
+   FORM HELPERS
+   ========================= */
 
 .adm-dep-radio {
     display: flex;
@@ -3081,6 +3193,7 @@ body.adm-scroll-lock {
     gap: 12px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+
 .adm-dep-form-grid .adm-field--full {
     grid-column: 1 / -1;
 }
@@ -3090,10 +3203,15 @@ body.adm-scroll-lock {
     grid-column: span 1;
 }
 
+/* =========================
+   JS ANIMATIONS
+   ========================= */
+
 /* tiny “updated” animations used by JS */
 [data-dep-updated-at].is-updating {
     animation: depPulse 0.35s ease;
 }
+
 @keyframes depPulse {
     from {
         transform: translateY(-1px);
@@ -3108,6 +3226,7 @@ body.adm-scroll-lock {
 [data-dep-status-badge].is-updating {
     animation: depBadgePop 0.35s ease;
 }
+
 @keyframes depBadgePop {
     from {
         transform: translateY(-1px) scale(0.98);
@@ -3124,16 +3243,21 @@ body.adm-scroll-lock {
     opacity: 0.7;
     pointer-events: none;
 }
+
 .adm-toggle-active-btn.is-loading .adm-ic {
     animation: depSpin 0.8s linear infinite;
 }
+
 @keyframes depSpin {
     to {
         transform: rotate(360deg);
     }
 }
 
-/* responsive */
+/* =========================
+   RESPONSIVE
+   ========================= */
+
 @media (max-width: 1100px) {
     .adm-dep-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3142,11 +3266,22 @@ body.adm-scroll-lock {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
 @media (max-width: 640px) {
     .adm-dep-grid {
         grid-template-columns: 1fr;
     }
     .adm-dep-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .adm-dep-abbr {
+        top: -12px;
+        left: 0;
+    }
+    .adm-dep-cover {
+        aspect-ratio: 16 / 10;
+    }
+    .adm-dep-meta--compact {
         grid-template-columns: 1fr;
     }
 }

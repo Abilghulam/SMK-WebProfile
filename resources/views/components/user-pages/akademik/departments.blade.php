@@ -8,8 +8,11 @@
     @include('components.user-pages.shared.hero', [
         'kicker' => 'Akademik',
         'title' => 'Program Keahlian',
-        'subtitle' => 'Informasi jurusan dan kompetensi keahlian di ' . ($schoolProfile->school_name ?? 'SMK Negeri 9 Muaro Jambi') . '.',
-        'bgImage' => asset('assets/images/hero-bg.jpg')
+        'subtitle' =>
+            'Informasi jurusan dan kompetensi keahlian di ' .
+            ($schoolProfile->school_name ?? 'SMK Negeri 9 Muaro Jambi') .
+            '.',
+        'bgImage' => asset('assets/images/hero-bg.jpg'),
     ])
 
     {{-- ===== KONTEN UTAMA PROGRAM KEAHLIAN ===== --}}
@@ -24,20 +27,17 @@
                 </p>
             </div>
 
-            @if($departments->count())
+            @if ($departments->count())
                 <div class="departments-grid">
 
-                    @foreach($departments as $department)
+                    @foreach ($departments as $department)
                         <article class="department-card">
 
                             {{-- Image --}}
                             <div class="department-image">
-                                @if($department->image)
-                                    <img
-                                        src="{{ asset($department->image) }}"
-                                        alt="{{ $department->name }}"
-                                        loading="lazy"
-                                    >
+                                @if ($department->cover_url)
+                                    <img src="{{ asset($department->cover_url) }}" alt="{{ $department->name }}"
+                                        loading="lazy">
                                 @else
                                     <div class="image-placeholder">
                                         <span>{{ strtoupper(substr($department->name, 0, 1)) }}</span>
@@ -52,14 +52,10 @@
                                 </h3>
 
                                 <p class="department-desc">
-                                    {{ $department->short_description
-                                        ?? \Illuminate\Support\Str::limit(strip_tags($department->description), 120) }}
+                                    {{ $department->short_description ?? \Illuminate\Support\Str::limit(strip_tags($department->description), 120) }}
                                 </p>
 
-                                <a
-                                    href="{{ route('departments.show', $department->slug) }}"
-                                    class="department-link"
-                                >
+                                <a href="{{ route('departments.show', $department->slug) }}" class="department-link">
                                     Lihat Detail
                                     <span aria-hidden="true">→</span>
                                 </a>

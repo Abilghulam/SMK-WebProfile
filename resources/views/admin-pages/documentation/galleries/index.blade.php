@@ -1,7 +1,5 @@
 @extends('layouts.app-admin')
 
-@section('title', 'Dokumentasi | Admin')
-
 @section('content')
     <div class="adm-page">
         <div class="adm-page-head">
@@ -13,7 +11,7 @@
             <div class="adm-actions">
                 <a class="adm-btn adm-btn--primary" href="{{ route('admin.documentation.galleries.create') }}">
                     <span class="adm-btn-ic" aria-hidden="true">＋</span>
-                    Tambah Post
+                    Tambah Album
                 </a>
             </div>
         </div>
@@ -135,19 +133,20 @@
                                         stroke-width="1.8" />
 
                                     <path d="M19.4 15a7.8 7.8 0 0 0 .1-1
-                       a7.8 7.8 0 0 0-.1-1l2-1.5
-                       l-2-3.4-2.3.6
-                       a7.9 7.9 0 0 0-1.7-1
-                       l-.4-2.4h-4l-.4 2.4
-                       a7.9 7.9 0 0 0-1.7 1
-                       l-2.3-.6-2 3.4 2 1.5
-                       a7.8 7.8 0 0 0-.1 1
-                       a7.8 7.8 0 0 0 .1 1l-2 1.5
-                       2 3.4 2.3-.6
-                       a7.9 7.9 0 0 0 1.7 1
-                       l.4 2.4h4l.4-2.4
-                       a7.9 7.9 0 0 0 1.7-1
-                       l2.3.6 2-3.4-2-1.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                                               a7.8 7.8 0 0 0-.1-1l2-1.5
+                                               l-2-3.4-2.3.6
+                                               a7.9 7.9 0 0 0-1.7-1
+                                               l-.4-2.4h-4l-.4 2.4
+                                               a7.9 7.9 0 0 0-1.7 1
+                                               l-2.3-.6-2 3.4 2 1.5
+                                               a7.8 7.8 0 0 0-.1 1
+                                               a7.8 7.8 0 0 0 .1 1l-2 1.5
+                                               2 3.4 2.3-.6
+                                               a7.9 7.9 0 0 0 1.7 1
+                                               l.4 2.4h4l.4-2.4
+                                               a7.9 7.9 0 0 0 1.7-1
+                                               l2.3.6 2-3.4-2-1.5Z" stroke="currentColor" stroke-width="1.6"
+                                        stroke-linejoin="round" />
                                 </svg>
                             </a>
 
@@ -166,8 +165,8 @@
                                 @csrf
                                 @method('PATCH')
 
-                                <button class="adm-icon-btn adm-toggle-publish-btn" type="submit" data-toggle-btn
-                                    title="{{ $gal->is_published ? 'Jadikan Draft' : 'Publish' }}"
+                                <button class="adm-icon-btn adm-icon-btn--apply adm-toggle-publish-btn" type="submit"
+                                    data-toggle-btn title="{{ $gal->is_published ? 'Jadikan Draft' : 'Publish' }}"
                                     aria-label="{{ $gal->is_published ? 'Jadikan Draft' : 'Publish' }}">
                                     <svg class="adm-ic" data-toggle-ic viewBox="0 0 24 24" fill="none"
                                         aria-hidden="true"></svg>
@@ -178,7 +177,7 @@
                                 onsubmit="return confirm('Hapus album ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="adm-icon-btn adm-icon-btn--danger" type="submit" title="Hapus"
+                                <button class="adm-icon-btn adm-icon-btn--delete" type="submit" title="Hapus"
                                     aria-label="Hapus">
                                     <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                         <path d="M3 6h18" stroke="currentColor" stroke-width="2"
