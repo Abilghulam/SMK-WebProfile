@@ -3198,11 +3198,6 @@ body.adm-scroll-lock {
     grid-column: 1 / -1;
 }
 
-.adm-dep-form-grid .adm-field--third {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-column: span 1;
-}
-
 /* =========================
    JS ANIMATIONS
    ========================= */
@@ -3283,5 +3278,304 @@ body.adm-scroll-lock {
     }
     .adm-dep-meta--compact {
         grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   FACILITIES (adm-fac*)
+   ========================= */
+
+.adm-fac-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.adm-fac-card {
+    background: #fff;
+    border-radius: calc(var(--adm-radius) + 4px);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.adm-fac-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        900px 260px at -160px -140px,
+        rgba(2, 56, 117, 0.08),
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .adm-fac-card {
+        transition: transform 0.18s ease, box-shadow 0.18s ease,
+            border-color 0.18s ease;
+    }
+    .adm-fac-card:hover {
+        transform: translateY(-1px);
+        border-color: rgba(2, 56, 117, 0.14);
+        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+    }
+}
+
+/* cover */
+.adm-fac-cover {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: calc(var(--adm-radius) + 2px);
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.04);
+    position: relative;
+    z-index: 1;
+}
+.adm-fac-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.adm-fac-cover-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(2, 56, 117, 0.55);
+}
+.adm-fac-cover-fallback svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* overlay top */
+.adm-fac-cover-top {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    pointer-events: none;
+}
+
+/* hanya badge kategori yang dipucatkan, jangan override success/muted */
+.adm-fac-cover-top .adm-badge:not(.adm-badge--success):not(.adm-badge--muted) {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(15, 23, 42, 0.14);
+    color: rgba(15, 23, 42, 0.86);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+    backdrop-filter: blur(6px);
+}
+
+.adm-fac-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12),
+        0 6px 14px rgba(15, 23, 42, 0.08);
+    backdrop-filter: saturate(1.1) blur(2px);
+    pointer-events: auto;
+}
+
+/* top */
+.adm-fac-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.adm-fac-ic {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2, 56, 117, 0.07);
+    border: 1px solid rgba(2, 56, 117, 0.14);
+    color: rgba(2, 56, 117, 0.95);
+    flex: 0 0 auto;
+}
+.adm-fac-ic svg {
+    width: 19px;
+    height: 19px;
+}
+
+.adm-fac-main {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.adm-fac-title {
+    font-weight: 700;
+    color: rgba(15, 23, 42, 0.94);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-size: 14.5px;
+}
+
+/* desc */
+.adm-fac-desc {
+    position: relative;
+    z-index: 1;
+    color: rgba(15, 23, 42, 0.68);
+    font-size: 13px;
+    line-height: 1.55;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+/* meta */
+.adm-fac-meta {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 2px;
+}
+
+.adm-fac-form-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.adm-fac-form-grid .adm-field--full {
+    grid-column: 1 / -1;
+}
+
+.adm-fac-meta-item {
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    background: rgba(248, 250, 252, 0.7);
+    border-radius: 14px;
+    padding: 10px;
+    display: grid;
+    gap: 4px;
+    font-size: 12px;
+}
+.adm-fac-meta-item strong {
+    font-weight: 700;
+    color: rgba(15, 23, 42, 0.88);
+    letter-spacing: -0.01em;
+}
+
+/* actions */
+.adm-fac-actions {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* preview on edit */
+.adm-fac-cover-preview {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: rgba(15, 23, 42, 0.04);
+    margin-bottom: 10px;
+}
+.adm-fac-cover-preview img {
+    width: 100%;
+    display: block;
+}
+
+/* radio */
+.adm-fac-radio {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* small update anims */
+[data-fac-updated-at].is-updating {
+    animation: facPulse 0.35s ease;
+}
+@keyframes facPulse {
+    from {
+        transform: translateY(-1px);
+        opacity: 0.75;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+[data-fac-status-badge].is-updating {
+    animation: facBadgePop 0.35s ease;
+}
+@keyframes facBadgePop {
+    from {
+        transform: translateY(-1px) scale(0.98);
+        opacity: 0.85;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* loading state for toggle btn */
+.adm-toggle-active-btn.is-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+.adm-toggle-active-btn.is-loading .adm-ic {
+    animation: facSpin 0.8s linear infinite;
+}
+@keyframes facSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+    .adm-fac-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .adm-fac-grid {
+        grid-template-columns: 1fr;
+    }
+    .adm-fac-cover {
+        aspect-ratio: 16/10;
     }
 }

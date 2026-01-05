@@ -1,10 +1,14 @@
 @extends('layouts.app-admin')
 
+@section('title', 'Panel Dokumentasi')
+@section('kicker', 'Konten')
+@section('page_title', 'Dokumentasi')
+
 @section('content')
     <div class="adm-page">
         <div class="adm-page-head">
             <div>
-                <h1 class="adm-h1">Dokumentasi</h1>
+                <h1 class="adm-h1">Daftar Album Dokumentasi</h1>
                 <p class="adm-subtitle">Kelola album dokumentasi dan item galeri.</p>
             </div>
 
@@ -133,20 +137,20 @@
                                         stroke-width="1.8" />
 
                                     <path d="M19.4 15a7.8 7.8 0 0 0 .1-1
-                                               a7.8 7.8 0 0 0-.1-1l2-1.5
-                                               l-2-3.4-2.3.6
-                                               a7.9 7.9 0 0 0-1.7-1
-                                               l-.4-2.4h-4l-.4 2.4
-                                               a7.9 7.9 0 0 0-1.7 1
-                                               l-2.3-.6-2 3.4 2 1.5
-                                               a7.8 7.8 0 0 0-.1 1
-                                               a7.8 7.8 0 0 0 .1 1l-2 1.5
-                                               2 3.4 2.3-.6
-                                               a7.9 7.9 0 0 0 1.7 1
-                                               l.4 2.4h4l.4-2.4
-                                               a7.9 7.9 0 0 0 1.7-1
-                                               l2.3.6 2-3.4-2-1.5Z" stroke="currentColor" stroke-width="1.6"
-                                        stroke-linejoin="round" />
+                                                               a7.8 7.8 0 0 0-.1-1l2-1.5
+                                                               l-2-3.4-2.3.6
+                                                               a7.9 7.9 0 0 0-1.7-1
+                                                               l-.4-2.4h-4l-.4 2.4
+                                                               a7.9 7.9 0 0 0-1.7 1
+                                                               l-2.3-.6-2 3.4 2 1.5
+                                                               a7.8 7.8 0 0 0-.1 1
+                                                               a7.8 7.8 0 0 0 .1 1l-2 1.5
+                                                               2 3.4 2.3-.6
+                                                               a7.9 7.9 0 0 0 1.7 1
+                                                               l.4 2.4h4l.4-2.4
+                                                               a7.9 7.9 0 0 0 1.7-1
+                                                               l2.3.6 2-3.4-2-1.5Z" stroke="currentColor"
+                                        stroke-width="1.6" stroke-linejoin="round" />
                                 </svg>
                             </a>
 

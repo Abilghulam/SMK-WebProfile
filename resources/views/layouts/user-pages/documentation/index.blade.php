@@ -27,11 +27,11 @@
     <section class="page-section doc-landing">
         <div class="container">
 
-            <div class="doc-topbar">
-                <div class="doc-topbar-left">
-                    <h2 class="doc-h2">Album Dokumentasi</h2>
-                    <p class="doc-sub">Pilih album untuk melihat dokumentasi foto kegiatan sekolah.</p>
-                </div>
+            <div class="section-header section-header--left">
+                <h2>Album Dokumentasi</h2>
+                <p>
+                    Pilih album untuk melihat dokumentasi foto dan video kegiatan sekolah
+                </p>
             </div>
 
             {{-- Filter --}}

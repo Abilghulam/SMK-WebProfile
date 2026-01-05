@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AdminLegalDocumentsController;
 use App\Http\Controllers\Admin\AdminGalleriesController;
 use App\Http\Controllers\Admin\AdminGalleryItemsController;
 use \App\Http\Controllers\Admin\AdminDepartmentsController;
+use App\Http\Controllers\Admin\AdminFacilitiesController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -155,7 +156,11 @@ Route::prefix('admin')
         Route::patch('departments/{department}/toggle-active', [AdminDepartmentsController::class, 'toggleActive'])
             ->name('departments.toggle-active');
 
+        // FACILITIES
+        Route::resource('facilities', AdminFacilitiesController::class)->except(['show']);
 
+        Route::patch('facilities/{facility}/toggle-active', [AdminFacilitiesController::class, 'toggleActive'])
+            ->name('facilities.toggle-active');
 });
 
 // Role Super Admin Only

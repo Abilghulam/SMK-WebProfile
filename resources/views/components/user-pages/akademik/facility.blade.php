@@ -9,10 +9,9 @@
         'kicker' => 'Akademik',
         'title' => 'Fasilitas Sekolah',
         'subtitle' => 'Sarana dan prasarana penunjang pembelajaran.',
-        'bgImage' => asset('assets/images/hero-bg.jpg')
+        'bgImage' => asset('assets/images/hero-bg.jpg'),
     ])
 
-    {{-- ===== KONTEN UTAMA FASILITAS ===== --}}
     <section class="page-section facilities-section">
         <div class="container">
 
@@ -24,19 +23,34 @@
                 </p>
             </div>
 
-            @if($facilities->count())
+            {{-- Filter Kategori --}}
+            @if (!empty($categories) && $categories->count())
+                <div class="fac-filter">
+                    <a class="fac-chip {{ empty($category) ? 'active' : '' }}" href="{{ route('facilities.index') }}">
+                        Semua
+                    </a>
+
+                    @foreach ($categories as $cat)
+                        <a class="fac-chip {{ $category === $cat ? 'active' : '' }}"
+                            href="{{ route('facilities.index', ['category' => $cat]) }}">
+                            {{ \Illuminate\Support\Str::of($cat)->replace(['-', '_'], ' ')->title() }}
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+
+            @if ($facilities->count())
                 <div class="facilities-grid">
+                    @foreach ($facilities as $facility)
+                        @php
+                            // pastikan image yang disimpan itu path storage 'facilities/xxx.jpg'
+                            $imgUrl = $facility->image ? asset('storage/' . $facility->image) : null;
+                        @endphp
 
-                    @foreach($facilities as $facility)
                         <article class="facility-card">
-
                             <div class="facility-media">
-                                @if($facility->image)
-                                    <img
-                                        src="{{ asset($facility->image) }}"
-                                        alt="{{ $facility->name }}"
-                                        loading="lazy"
-                                    >
+                                @if ($imgUrl)
+                                    <img src="{{ $imgUrl }}" alt="{{ $facility->name }}" loading="lazy">
                                 @else
                                     <div class="facility-placeholder">
                                         <span>{{ strtoupper(substr($facility->name, 0, 1)) }}</span>
@@ -51,10 +65,8 @@
                                     {{ \Illuminate\Support\Str::limit(strip_tags($facility->description ?? ''), 160) }}
                                 </p>
                             </div>
-
                         </article>
                     @endforeach
-
                 </div>
             @else
                 <div class="empty-state">

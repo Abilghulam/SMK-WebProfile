@@ -1,7 +1,8 @@
 @extends('layouts.app-admin')
 
-@section('page_kicker', 'Konten')
-@section('page_title', 'Blog / Posts')
+@section('title', 'Panel Blog')
+@section('kicker', 'Konten')
+@section('page_title', 'Blog (Post)')
 
 @section('content')
     <div class="adm-page">

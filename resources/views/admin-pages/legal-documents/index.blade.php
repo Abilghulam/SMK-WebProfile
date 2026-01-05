@@ -1,10 +1,14 @@
 @extends('layouts.app-admin')
 
+@section('title', 'Panel Legalitas')
+@section('kicker', 'Konten')
+@section('page_title', 'Legalitas')
+
 @section('content')
     <div class="adm-page">
         <div class="adm-page-head">
             <div>
-                <h1 class="adm-h1">Legalitas</h1>
+                <h1 class="adm-h1">Daftar Dokumen Legalitas</h1>
                 <p class="adm-subtitle">Kelola dokumen legal sekolah: upload PDF atau tautan eksternal.</p>
             </div>
 

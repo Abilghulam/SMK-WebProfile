@@ -49,8 +49,8 @@
         @if ($isAdmin)
             <div class="admin-nav-section">Konten</div>
 
-            <a class="admin-nav-link {{ request()->is('admin/home-management*') ? 'active' : '' }}"
-                href="{{ url('/admin/home') }}">
+            <a class="admin-nav-link {{ request()->routeIs('admin.home.*') ? 'active' : '' }}"
+                href="{{ route('admin.home.index') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
                     {{-- home/settings (modern & institusional) --}}
                     <svg viewBox="0 0 24 24" fill="none">

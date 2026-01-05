@@ -1040,3 +1040,140 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Facility Ikon
+document.addEventListener("DOMContentLoaded", () => {
+    const ICONS = {
+        // Active -> tombol menampilkan aksi "Nonaktifkan" (eye-off)
+        deactivateAction: `
+                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
+                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M9.5 9.5a3.5 3.5 0 0 1 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                `,
+        // Inactive -> tombol menampilkan aksi "Aktifkan" (eye)
+        activateAction: `
+                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
+                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                    <path d="M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"
+                        stroke="currentColor" stroke-width="1.8" />
+                `,
+    };
+
+    function setToggleIcon(form) {
+        const svg = form.querySelector("[data-toggle-ic]");
+        if (!svg) return;
+
+        const active = form.dataset.active === "1";
+        svg.innerHTML = active ? ICONS.deactivateAction : ICONS.activateAction;
+    }
+
+    function updateBadge(card, isActive) {
+        const badge = card.querySelector("[data-fac-status-badge]");
+        if (!badge) return;
+
+        badge.classList.remove("adm-badge--success", "adm-badge--muted");
+        badge.classList.add(
+            isActive ? "adm-badge--success" : "adm-badge--muted"
+        );
+        badge.textContent = isActive ? "Aktif" : "Nonaktif";
+
+        badge.classList.remove("is-updating");
+        void badge.offsetWidth;
+        badge.classList.add("is-updating");
+    }
+
+    function formatDate(isoString) {
+        if (!isoString) return "—";
+        const d = new Date(isoString);
+        if (Number.isNaN(d.getTime())) return "—";
+
+        const day = String(d.getDate()).padStart(2, "0");
+        const months = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu",
+            "Sep",
+            "Okt",
+            "Nov",
+            "Des",
+        ];
+        const mon = months[d.getMonth()];
+        const year = d.getFullYear();
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+        return `${day} ${mon} ${year} ${hh}:${mm}`;
+    }
+
+    function updateUpdatedAt(card, iso) {
+        const el = card.querySelector("[data-fac-updated-at]");
+        if (!el) return;
+
+        el.textContent = formatDate(iso);
+
+        el.classList.remove("is-updating");
+        void el.offsetWidth;
+        el.classList.add("is-updating");
+    }
+
+    async function patchToggle(form) {
+        const btn = form.querySelector("[data-toggle-btn]");
+        const url = form.getAttribute("action");
+        const token = form.querySelector('input[name="_token"]')?.value;
+
+        const card = form.closest(".adm-fac-card") || document;
+
+        btn?.classList.add("is-loading");
+
+        try {
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-TOKEN": token || "",
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: new URLSearchParams({
+                    _method: "PATCH",
+                }).toString(),
+            });
+
+            if (!res.ok) {
+                form.submit();
+                return;
+            }
+
+            const data = await res.json();
+            const isActive = !!data.is_active;
+
+            form.dataset.active = isActive ? "1" : "0";
+
+            const nextTitle = isActive ? "Nonaktifkan" : "Aktifkan";
+            btn?.setAttribute("title", nextTitle);
+            btn?.setAttribute("aria-label", nextTitle);
+
+            setToggleIcon(form);
+            updateBadge(card, isActive);
+            updateUpdatedAt(card, data.updated_at || null);
+        } catch (e) {
+            form.submit();
+        } finally {
+            btn?.classList.remove("is-loading");
+        }
+    }
+
+    document.querySelectorAll(".adm-fac-toggle-active-form").forEach((form) => {
+        setToggleIcon(form);
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            patchToggle(form);
+        });
+    });
+});

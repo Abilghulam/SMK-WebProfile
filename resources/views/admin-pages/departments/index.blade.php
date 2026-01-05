@@ -1,10 +1,14 @@
 @extends('layouts.app-admin')
 
+@section('title', 'Panel Program Keahlian')
+@section('kicker', 'Konten')
+@section('page_title', 'Program Keahlian')
+
 @section('content')
     <div class="adm-page">
         <div class="adm-page-head">
             <div>
-                <h1 class="adm-h1">Program Keahlian</h1>
+                <h1 class="adm-h1">Daftar Program Keahlian</h1>
                 <p class="adm-subtitle">Kelola jurusan/program keahlian yang tampil di halaman pengguna.</p>
             </div>
 

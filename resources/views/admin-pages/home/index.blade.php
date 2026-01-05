@@ -1,5 +1,6 @@
 @extends('layouts.app-admin')
 
+@section('title', 'Panel Home Management')
 @section('kicker', 'Konten')
 @section('page_title', 'Home Management')
 
