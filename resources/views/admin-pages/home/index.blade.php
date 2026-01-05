@@ -17,10 +17,16 @@
         <div class="adm-grid adm-grid--stats" style="grid-template-columns:repeat(3,minmax(0,1fr));">
             <article class="adm-stat">
                 <div class="adm-stat-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 20h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="M6 20V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12" stroke="currentColor" stroke-width="1.8" />
-                        <path d="M9 10h6M9 13h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-school-icon lucide-school">
+                        <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+                        <path d="M18 5v16" />
+                        <path d="m4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6" />
+                        <path
+                            d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11" />
+                        <path d="M6 5v16" />
+                        <circle cx="12" cy="9" r="2" />
                     </svg>
                 </div>
                 <div class="adm-stat-body">
@@ -36,11 +42,15 @@
 
             <article class="adm-stat">
                 <div class="adm-stat-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 19V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="M20 19V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="M8 17v-6M12 17V7M16 17v-9" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-chart-no-axes-combined-icon lucide-chart-no-axes-combined">
+                        <path d="M12 16v5" />
+                        <path d="M16 14v7" />
+                        <path d="M20 10v11" />
+                        <path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15" />
+                        <path d="M4 18v3" />
+                        <path d="M8 14v7" />
                     </svg>
                 </div>
                 <div class="adm-stat-body">

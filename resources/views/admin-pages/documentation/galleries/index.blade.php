@@ -14,7 +14,16 @@
 
             <div class="adm-actions">
                 <a class="adm-btn adm-btn--primary" href="{{ route('admin.documentation.galleries.create') }}">
-                    <span class="adm-btn-ic" aria-hidden="true">＋</span>
+                    <span class="adm-btn-ic" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                            height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-image-plus-icon lucide-image-plus">
+                            <path d="M16 5h6" />
+                            <path d="M19 2v6" />
+                            <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+                            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                            <circle cx="9" cy="9" r="2" />
+                        </svg></span>
                     Tambah Album
                 </a>
             </div>
@@ -60,19 +69,24 @@
                 <div class="adm-filter-actions">
                     <button class="adm-icon-btn adm-icon-btn--apply" type="submit" title="Terapkan filter"
                         aria-label="Terapkan filter">
-                        <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2" />
-                            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <svg class="adm-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-text-search-icon lucide-text-search">
+                            <path d="M21 5H3" />
+                            <path d="M10 12H3" />
+                            <path d="M10 19H3" />
+                            <circle cx="17" cy="15" r="3" />
+                            <path d="m21 19-1.9-1.9" />
                         </svg>
                     </button>
 
                     <a class="adm-icon-btn adm-icon-btn--reset" href="{{ route('admin.documentation.galleries.index') }}"
                         title="Reset filter" aria-label="Reset filter">
-                        <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M21 12a9 9 0 1 1-2.64-6.36" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg class="adm-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
                         </svg>
                     </a>
                 </div>
@@ -131,22 +145,25 @@
                             <a class="adm-icon-btn adm-icon-btn--gear"
                                 href="{{ route('admin.documentation.items.index', $gal) }}" title="Kelola item"
                                 aria-label="Kelola item">
-                                <svg class="adm-ic adm-ic--gear" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     stroke-linecap="round" stroke-linejoin="round"
-                                    class="lucide lucide-settings-icon lucide-settings">
-                                    <path
-                                        d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-                                    <circle cx="12" cy="12" r="3" />
+                                    class="lucide lucide-images-icon lucide-images">
+                                    <path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" />
+                                    <path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" />
+                                    <circle cx="13" cy="7" r="1" fill="currentColor" />
+                                    <rect x="8" y="2" width="14" height="14" rx="2" />
                                 </svg>
                             </a>
 
                             <a class="adm-icon-btn" href="{{ route('admin.documentation.galleries.edit', $gal) }}"
                                 title="Edit album" aria-label="Edit album">
-                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z" stroke="currentColor"
-                                        stroke-width="2" stroke-linejoin="round" />
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                 </svg>
                             </a>
 
@@ -170,15 +187,15 @@
                                 @method('DELETE')
                                 <button class="adm-icon-btn adm-icon-btn--delete" type="submit" title="Hapus"
                                     aria-label="Hapus">
-                                    <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M3 6h18" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" />
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-trash2-icon lucide-trash-2">
+                                        <path d="M10 11v6" />
+                                        <path d="M14 11v6" />
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                     </svg>
                                 </button>
                             </form>

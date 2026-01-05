@@ -402,24 +402,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const ICONS = {
         // Published -> tombol menampilkan aksi "Jadikan Draft" (paper + pencil)
         draftAction: `
-      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M13.4 12.6l4-4a1.7 1.7 0 0 1 2.4 2.4l-4 4-3.2.8.8-3.2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M12.7 13.3l2 2"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+</svg>
+
     `,
 
         // Draft -> tombol menampilkan aksi "Publish" (paper + arrow up)
         publishAction: `
-      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M12 16V9"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-      <path d="M9.5 11.5 12 9l2.5 2.5"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M9 18h6"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M12 12v6"/><path d="m15 15-3-3-3 3"/></svg>
     `,
     };
 
@@ -563,24 +554,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const ICONS = {
         // jika sekarang PUBLISHED => tombol menampilkan aksi "Jadikan Draft" (paper + pencil)
         draftAction: `
-      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M13.4 12.6l4-4a1.7 1.7 0 0 1 2.4 2.4l-4 4-3.2.8.8-3.2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M12.7 13.3l2 2"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+<svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+</svg>
     `,
 
         // jika sekarang DRAFT => tombol menampilkan aksi "Publish" (paper + arrow up)
         publishAction: `
-      <path d="M8 3h8l3 3v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-      <path d="M12 16V9"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-      <path d="M9.5 11.5 12 9l2.5 2.5"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-      <path d="M9 18h6"
-            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M12 12v6"/><path d="m15 15-3-3-3 3"/></svg>
     `,
     };
 
@@ -910,17 +891,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const ICONS = {
         // Active -> action is "Nonaktifkan" (eye-off)
         deactivate: `
-                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
-                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                    <path d="M10 10a3 3 0 0 1 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
                 `,
         // Inactive -> action is "Aktifkan" (eye)
         activate: `
-                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
-                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-                        stroke="currentColor" stroke-width="1.8" />
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
                 `,
     };
 
@@ -1046,17 +1021,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const ICONS = {
         // Active -> tombol menampilkan aksi "Nonaktifkan" (eye-off)
         deactivateAction: `
-                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
-                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M9.5 9.5a3.5 3.5 0 0 1 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M3 3l18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
                 `,
         // Inactive -> tombol menampilkan aksi "Aktifkan" (eye)
         activateAction: `
-                    <path d="M3 12s3.5-7 9-7 9 7 9 7-3.5 7-9 7-9-7-9-7Z"
-                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                    <path d="M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z"
-                        stroke="currentColor" stroke-width="1.8" />
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
                 `,
     };
 

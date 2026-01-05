@@ -15,13 +15,23 @@
             </div>
 
             <div class="adm-actions">
-                <a class="adm-btn adm-btn--primary" href="{{ route('admin.documentation.galleries.edit', $gallery) }}">Edit
-                    Album</a>
-                <a class="adm-btn adm-btn--ghost" href="{{ route('admin.documentation.galleries.index') }}">Kembali</a>
+                <a class="adm-btn adm-btn--primary" href="{{ route('admin.documentation.galleries.edit', $gallery) }}"> <span
+                        class="adm-btn-ic"><svg class="w-[20px] h-[20px] text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
+                        </svg>
+                    </span> Edit Album</a>
+
+                <a class="adm-btn adm-btn--ghost" href="{{ route('admin.documentation.galleries.index') }}"><span
+                        class="adm-btn-ic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left">
+                            <path d="m15 18-6-6 6-6" />
+                        </svg></span> Kembali</a>
             </div>
         </div>
-
-
 
         <section class="adm-card adm-card--pad">
             <form class="adm-doc-item-form" method="POST" action="{{ route('admin.documentation.items.store', $gallery) }}"
@@ -59,7 +69,18 @@
                     </div>
 
                     <div class="adm-actions">
-                        <button class="adm-btn adm-btn--primary" type="submit">Tambah Item</button>
+                        <button class="adm-btn adm-btn--primary" type="submit"> <span class="adm-btn-ic"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-image-plus-icon lucide-image-plus">
+                                    <path d="M16 5h6" />
+                                    <path d="M19 2v6" />
+                                    <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+                                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+                                    <circle cx="9" cy="9" r="2" />
+                                </svg></span>
+                            Tambah Item
+                        </button>
                     </div>
                 </div>
             </form>
@@ -93,10 +114,12 @@
                                 data-action="{{ route('admin.documentation.items.update', $it) }}"
                                 data-caption="{{ $it->caption ?? '' }}" data-type="{{ $it->type ?? 'image' }}"
                                 data-src="{{ $it->type === 'image' ? $it->url : '' }}">
-                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M12 20h9" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z" stroke="currentColor"
-                                        stroke-width="2" stroke-linejoin="round" />
+                                <svg class="adm-btn-ic" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                 </svg>
                             </button>
 
@@ -104,16 +127,17 @@
                                 onsubmit="return confirm('Hapus item ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button class="adm-icon-btn adm-icon-btn--danger" type="submit" title="Hapus"
+                                <button class="adm-icon-btn adm-icon-btn--delete" type="submit" title="Hapus"
                                     aria-label="Hapus">
-                                    <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                        <path d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" />
-                                        <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" />
+                                    <svg class="adm-btn-ic" xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-trash2-icon lucide-trash-2">
+                                        <path d="M10 11v6" />
+                                        <path d="M14 11v6" />
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                     </svg>
                                 </button>
                             </form>
@@ -206,7 +230,16 @@
 
                         <div class="adm-modal-actions">
                             <button type="button" class="adm-btn adm-btn--ghost" data-modal-close>Batal</button>
-                            <button type="submit" class="adm-btn adm-btn--primary" data-save-btn>Simpan</button>
+                            <button type="submit" class="adm-btn adm-btn--primary" data-save-btn><span
+                                    class="adm-btn-ic"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                        height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-save-icon lucide-save">
+                                        <path
+                                            d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+                                        <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+                                        <path d="M7 3v4a1 1 0 0 0 1 1h7" />
+                                    </svg></span> Simpan</button>
                         </div>
                     </form>
                 </div>

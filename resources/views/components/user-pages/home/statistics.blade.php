@@ -8,7 +8,7 @@
                 <p>Ringkasan data utama yang menggambarkan aktivitas dan kapasitas sekolah.</p>
             </div>
 
-            @if(!empty($statistic?->academic_year))
+            @if (!empty($statistic?->academic_year))
                 <div class="stat-year-badge">
                     Tahun Ajaran <strong>{{ $statistic->academic_year }}</strong>
                 </div>
@@ -21,12 +21,12 @@
             <div class="stat-box">
                 <div class="stat-top">
                     <div class="stat-icon" aria-hidden="true">
-                        {{-- user/group icon --}}
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M16 11c1.656 0 3-1.567 3-3.5S17.656 4 16 4s-3 1.567-3 3.5S14.344 11 16 11Z" />
-                            <path d="M8 11c1.656 0 3-1.567 3-3.5S9.656 4 8 4 5 5.567 5 7.5 6.344 11 8 11Z" />
-                            <path d="M16 13c-1.505 0-2.83.52-3.71 1.318C13.397 15.057 14 16.01 14 17.1V19h8v-1.5c0-2.485-2.687-4.5-6-4.5Z" />
-                            <path d="M8 13c-3.313 0-6 2.015-6 4.5V19h12v-1.4c0-2.54-2.687-4.6-6-4.6Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round">
+                            <path d="M18 21a8 8 0 0 0-16 0" />
+                            <circle cx="10" cy="8" r="5" />
+                            <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
                         </svg>
                     </div>
                     <p class="stat-label">Siswa</p>
@@ -40,10 +40,11 @@
             <div class="stat-box">
                 <div class="stat-top">
                     <div class="stat-icon" aria-hidden="true">
-                        {{-- badge/teacher icon --}}
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" />
-                            <path d="M4 22v-2c0-3.314 3.582-6 8-6s8 2.686 8 6v2H4Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-user-round-icon lucide-user-round">
+                            <circle cx="12" cy="8" r="5" />
+                            <path d="M20 21a8 8 0 0 0-16 0" />
                         </svg>
                     </div>
                     <p class="stat-label">Guru</p>
@@ -57,12 +58,13 @@
             <div class="stat-box">
                 <div class="stat-top">
                     <div class="stat-icon" aria-hidden="true">
-                        {{-- grid/icon --}}
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 4h7v7H4V4Z" />
-                            <path d="M13 4h7v7h-7V4Z" />
-                            <path d="M4 13h7v7H4v-7Z" />
-                            <path d="M13 13h7v7h-7v-7Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-layers-icon lucide-layers">
+                            <path
+                                d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+                            <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+                            <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
                         </svg>
                     </div>
                     <p class="stat-label">Jurusan</p>

@@ -24,10 +24,12 @@
             <div class="adm-hero-right">
                 <div class="adm-hero-card">
                     <div class="adm-hero-card-ic" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 10.5 12 4l8 6.5V20a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 20v-9.5Z"
-                                stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                            <path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check">
+                            <path
+                                d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                            <path d="m9 12 2 2 4-4" />
                         </svg>
                     </div>
                     <div class="adm-hero-card-body">
@@ -49,10 +51,14 @@
         <div class="adm-grid adm-grid--stats">
             <article class="adm-stat">
                 <div class="adm-stat-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M8 3h7l3 3v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor"
-                            stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M9 10h6M9 14h6M9 18h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-newspaper-icon lucide-newspaper">
+                        <path d="M15 18h-5" />
+                        <path d="M18 14h-8" />
+                        <path
+                            d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2" />
+                        <rect width="8" height="4" x="10" y="6" rx="1" />
                     </svg>
                 </div>
                 <div class="adm-stat-body">
@@ -64,10 +70,14 @@
 
             <article class="adm-stat">
                 <div class="adm-stat-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z" stroke="currentColor"
-                            stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M10 12h7M10 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-file-up-icon lucide-file-up">
+                        <path
+                            d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                        <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                        <path d="M12 12v6" />
+                        <path d="m15 15-3-3-3 3" />
                     </svg>
                 </div>
                 <div class="adm-stat-body">
@@ -79,12 +89,10 @@
 
             <article class="adm-stat">
                 <div class="adm-stat-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"
-                            stroke="currentColor" stroke-width="1.8" />
-                        <path d="M8.5 10.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="1.8" />
-                        <path d="m21 16-5-5-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                     </svg>
                 </div>
                 <div class="adm-stat-body">
@@ -121,11 +129,14 @@
                 <div class="adm-actions--fast">
                     <a class="adm-action" href="{{ url('/admin/posts') }}">
                         <span class="adm-action-ic" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M8 3h7l3 3v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"
-                                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                                <path d="M9 10h6M9 14h6" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper">
+                                <path d="M15 18h-5" />
+                                <path d="M18 14h-8" />
+                                <path
+                                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2" />
+                                <rect width="8" height="4" x="10" y="6" rx="1" />
                             </svg>
                         </span>
                         Kelola Blog
@@ -134,11 +145,14 @@
 
                     <a class="adm-action" href="{{ url('/admin/legal-documents') }}">
                         <span class="adm-action-ic" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"
-                                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                                <path d="M10 12h7M10 16h7" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up">
+                                <path
+                                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                                <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                                <path d="M12 12v6" />
+                                <path d="m15 15-3-3-3 3" />
                             </svg>
                         </span>
                         Kelola Legalitas
@@ -147,11 +161,12 @@
 
                     <a class="adm-action" href="{{ url('/admin/galleries') }}">
                         <span class="adm-action-ic" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"
-                                    stroke="currentColor" stroke-width="1.8" />
-                                <path d="m21 16-5-5-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                             </svg>
                         </span>
                         Kelola Dokumentasi

@@ -14,7 +14,16 @@
 
             <div class="adm-actions">
                 <a class="adm-btn adm-btn--primary" href="{{ route('admin.posts.create') }}">
-                    <span class="adm-btn-ic" aria-hidden="true">＋</span>
+                    <span class="adm-btn-ic" aria-hidden="true"> <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                            height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-file-plus-corner-icon lucide-file-plus-corner">
+                            <path
+                                d="M11.35 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v5.35" />
+                            <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                            <path d="M14 19h6" />
+                            <path d="M17 16v6" />
+                        </svg></span>
                     Tambah Post
                 </a>
             </div>
@@ -52,21 +61,24 @@
                 <div class="adm-filter-actions">
                     <button class="adm-icon-btn adm-icon-btn--apply" type="submit" title="Terapkan filter"
                         aria-label="Terapkan filter">
-                        <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M11 19a8 8 0 1 1 0-16a8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg class="adm-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-text-search-icon lucide-text-search">
+                            <path d="M21 5H3" />
+                            <path d="M10 12H3" />
+                            <path d="M10 19H3" />
+                            <circle cx="17" cy="15" r="3" />
+                            <path d="m21 19-1.9-1.9" />
                         </svg>
                     </button>
 
                     <a class="adm-icon-btn adm-icon-btn--reset" href="{{ route('admin.posts.index') }}"
                         title="Reset filter" aria-label="Reset filter">
-                        <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M21 12a9 9 0 1 1-2.64-6.36" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                        <svg class="adm-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
                         </svg>
                     </a>
                 </div>
@@ -145,13 +157,12 @@
                                         <a class="adm-icon-btn adm-icon-btn--edit"
                                             href="{{ route('admin.posts.edit', $post) }}" title="Edit"
                                             aria-label="Edit">
-                                            {{-- icon pencil --}}
-                                            <svg class="adm-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                                <path d="M12 20h9" stroke="currentColor" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M16.5 3.5a2.1 2.1 0 013 3L8 18l-4 1 1-4 11.5-11.5z"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" />
+                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                             </svg>
                                         </a>
 
@@ -161,17 +172,15 @@
                                             @method('DELETE')
                                             <button class="adm-icon-btn adm-icon-btn--delete" type="submit"
                                                 title="Hapus" aria-label="Hapus">
-                                                {{-- icon trash --}}
-                                                <svg class="adm-ic" viewBox="0 0 24 24" fill="none"
-                                                    aria-hidden="true">
-                                                    <path d="M3 6h18" stroke="currentColor" stroke-width="2"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M8 6V4h8v2" stroke="currentColor" stroke-width="2"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M6 6l1 16h10l1-16" stroke="currentColor" stroke-width="2"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M10 11v6M14 11v6" stroke="currentColor" stroke-width="2"
-                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-trash2-icon lucide-trash-2">
+                                                    <path d="M10 11v6" />
+                                                    <path d="M14 11v6" />
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                                    <path d="M3 6h18" />
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
                                                 </svg>
                                             </button>
                                         </form>

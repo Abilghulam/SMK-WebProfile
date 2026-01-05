@@ -68,11 +68,14 @@
             <a class="admin-nav-link {{ request()->is('admin/posts*') ? 'active' : '' }}"
                 href="{{ url('/admin/posts') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M8 3h7l3 3v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" stroke="currentColor"
-                            stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M9 10h6M9 14h6M9 18h5" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper">
+                        <path d="M15 18h-5" />
+                        <path d="M18 14h-8" />
+                        <path
+                            d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2" />
+                        <rect width="8" height="4" x="10" y="6" rx="1" />
                     </svg>
                 </span>
                 Blog (Posts)
@@ -81,11 +84,14 @@
             <a class="admin-nav-link {{ request()->is('admin/legal-documents*') ? 'active' : '' }}"
                 href="{{ url('/admin/legal-documents') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M7 3h7l3 3v15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z" stroke="currentColor"
-                            stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M10 12h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="M10 16h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up">
+                        <path
+                            d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                        <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                        <path d="M12 12v6" />
+                        <path d="m15 15-3-3-3 3" />
                     </svg>
                 </span>
                 Legalitas
@@ -94,13 +100,11 @@
             <a class="admin-nav-link {{ request()->is('admin/documentation*') ? 'active' : '' }}"
                 href="{{ url('/admin/documentation') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7Z"
-                            stroke="currentColor" stroke-width="1.8" />
-                        <path d="M8.5 10.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor"
-                            stroke-width="1.8" />
-                        <path d="m21 16-5-5-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m3 16 5-7 6 6.5m6.5 2.5L16 13l-4.286 6M14 10h.01M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z" />
                     </svg>
                 </span>
                 Dokumentasi
@@ -109,11 +113,13 @@
             <a class="admin-nav-link {{ request()->is('admin/departments*') ? 'active' : '' }}"
                 href="{{ url('/admin/departments') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M12 3 3 8l9 5 9-5-9-5Z" stroke="currentColor" stroke-width="1.8"
-                            stroke-linejoin="round" />
-                        <path d="M3 12l9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M3 16l9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-layers-icon lucide-layers">
+                        <path
+                            d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" />
+                        <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" />
+                        <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" />
                     </svg>
                 </span>
                 Program Keahlian
@@ -122,12 +128,14 @@
             <a class="admin-nav-link {{ request()->is('admin/facilities*') ? 'active' : '' }}"
                 href="{{ url('/admin/facilities') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M4 21V7l8-4 8 4v14" stroke="currentColor" stroke-width="1.8"
-                            stroke-linejoin="round" />
-                        <path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M8 10h.01M12 10h.01M16 10h.01M8 13h.01M12 13h.01M16 13h.01" stroke="currentColor"
-                            stroke-width="2.2" stroke-linecap="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2">
+                        <path d="M10 12h4" />
+                        <path d="M10 8h4" />
+                        <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+                        <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" />
+                        <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
                     </svg>
                 </span>
                 Fasilitas
@@ -156,10 +164,12 @@
 
         <a class="admin-nav-link" href="{{ url('/') }}" target="_blank" rel="noopener">
             <span class="admin-nav-ic" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M14 4h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                    <path d="M10 14 20 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                    <path d="M20 14v6H4V4h6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="lucide lucide-external-link-icon lucide-external-link">
+                    <path d="M15 3h6v6" />
+                    <path d="M10 14 21 3" />
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 </svg>
             </span>
             Buka Website
@@ -169,12 +179,12 @@
             @csrf
             <button type="submit" class="admin-nav-link admin-nav-link--danger">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M10 7V5a2 2 0 0 1 2-2h7v18h-7a2 2 0 0 1-2-2v-2" stroke="currentColor"
-                            stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M13 12H3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                        <path d="m6 9-3 3 3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
+                        <path d="m16 17 5-5-5-5" />
+                        <path d="M21 12H9" />
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                     </svg>
                 </span>
                 Keluar

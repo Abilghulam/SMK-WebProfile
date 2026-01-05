@@ -1635,8 +1635,8 @@
 .adm-btn-ic {
     display: inline-grid;
     place-items: center;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.18);
 }
