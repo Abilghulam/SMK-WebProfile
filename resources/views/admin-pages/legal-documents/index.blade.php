@@ -213,7 +213,7 @@
             @endforelse
         </section>
 
-        <div class="adm-paginate">
+        <div class="adm-pagination">
             {{ $docs->links() }}
         </div>
     </div>

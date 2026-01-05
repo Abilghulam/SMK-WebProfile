@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminGalleriesController;
 use App\Http\Controllers\Admin\AdminGalleryItemsController;
 use \App\Http\Controllers\Admin\AdminDepartmentsController;
 use App\Http\Controllers\Admin\AdminFacilitiesController;
+use App\Http\Controllers\Admin\AdminSettingsController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
@@ -161,12 +162,15 @@ Route::prefix('admin')
 
         Route::patch('facilities/{facility}/toggle-active', [AdminFacilitiesController::class, 'toggleActive'])
             ->name('facilities.toggle-active');
-});
 
-// Role Super Admin Only
-Route::get('/settings')
-    ->middleware('super_admin')
-    ->name('settings');
+        // SETTINGS (Super Admin)
+        Route::middleware('super_admin')->prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [AdminSettingsController::class, 'index'])->name('index'); // Beranda
+            Route::get('/school', [AdminSettingsController::class, 'school'])->name('school'); // Informasi Sekolah
+            Route::patch('/school', [AdminSettingsController::class, 'updateSchool'])->name('school.update');
+        });
+
+});
 
 // Forgot password (request link)
 Route::get('/admin/forgot-password', [AdminPasswordResetController::class, 'requestForm'])

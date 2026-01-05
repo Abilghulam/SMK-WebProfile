@@ -3579,3 +3579,124 @@ body.adm-scroll-lock {
         aspect-ratio: 16/10;
     }
 }
+
+/* =========================
+   PAGINATION (global)
+   .adm-pagination wrapper
+   ========================= */
+
+.adm-pagination {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.adm-pagination nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.adm-pagination nav > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 10px 12px;
+    border-radius: 999px;
+
+    background: rgba(248, 250, 252, 0.85);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    backdrop-filter: blur(6px);
+}
+
+/* hide teks "Showing x to y" jika pagination view mengeluarkannya */
+.adm-pagination nav > div > div:first-child {
+    display: none;
+}
+
+/* container link halaman */
+.adm-pagination nav > div > div:last-child {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* base item */
+.adm-pagination a,
+.adm-pagination span[aria-current="page"] > span,
+.adm-pagination span[aria-disabled="true"] > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 34px;
+    padding: 0 12px;
+
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    color: rgba(15, 23, 42, 0.78);
+
+    transition: transform 0.16s ease, background-color 0.16s ease,
+        border-color 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+}
+
+/* hover */
+@media (hover: hover) {
+    .adm-pagination a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(2, 56, 117, 0.18);
+        color: rgba(2, 56, 117, 0.92);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+        background: rgba(248, 250, 252, 0.98);
+    }
+}
+
+/* active page */
+.adm-pagination span[aria-current="page"] > span {
+    border-color: rgba(2, 56, 117, 0.18);
+    background: rgba(2, 56, 117, 0.08);
+    color: rgba(2, 56, 117, 0.95);
+}
+
+/* disabled */
+.adm-pagination span[aria-disabled="true"] > span {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+/* icons (prev/next) */
+.adm-pagination svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* compact on small screens */
+@media (max-width: 640px) {
+    .adm-pagination nav > div {
+        border-radius: 18px;
+        padding: 10px;
+        gap: 6px;
+    }
+    .adm-pagination a,
+    .adm-pagination span[aria-current="page"] > span,
+    .adm-pagination span[aria-disabled="true"] > span {
+        min-width: 34px;
+        height: 32px;
+        padding: 0 10px;
+        font-size: 12.5px;
+    }
+}

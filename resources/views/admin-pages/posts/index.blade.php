@@ -190,7 +190,7 @@
                 </table>
             </div>
 
-            <div class="adm-pager">
+            <div class="adm-pagination">
                 {{ $posts->links() }}
             </div>
         </div>

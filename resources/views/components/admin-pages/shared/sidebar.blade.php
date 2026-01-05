@@ -140,12 +140,12 @@
             <a class="admin-nav-link {{ request()->is('admin/settings*') ? 'active' : '' }}"
                 href="{{ url('/admin/settings') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor"
-                            stroke-width="1.8" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings">
                         <path
-                            d="M19.4 15a7.6 7.6 0 0 0 .1-1l2-1.2-2-3.4-2.2.6a7.8 7.8 0 0 0-1.7-1l-.3-2.3H9.7L9.4 7a7.8 7.8 0 0 0-1.7 1L5.5 7.4 3.5 10.8l2 1.2a7.6 7.6 0 0 0 0 2l-2 1.2 2 3.4 2.2-.6a7.8 7.8 0 0 0 1.7 1l.3 2.3h5.6l.3-2.3a7.8 7.8 0 0 0 1.7-1l2.2.6 2-3.4-2-1.2Z"
-                            stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                            d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+                        <circle cx="12" cy="12" r="3" />
                     </svg>
                 </span>
                 Settings
