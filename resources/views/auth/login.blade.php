@@ -44,7 +44,7 @@
 
                     <div class="a-auth-brand-text">
                         <div class="a-auth-brand-name">{{ $site }}</div>
-                        <div class="a-auth-brand-sub">Panel Admin</div>
+                        <div class="a-auth-brand-sub">Dashboard Admin</div>
                     </div>
                 </div>
 

@@ -14,7 +14,15 @@
 
         <div class="adm-setting-stack" role="list">
             <button type="button" class="adm-setting-item" data-open-modal="identitas" role="listitem">
-                <span class="adm-setting-item-ic" aria-hidden="true"><i data-lucide="badge-check"></i></span>
+                <span class="adm-setting-item-ic" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user-round-icon lucide-user-round">
+                        <circle cx="12" cy="8" r="5" />
+                        <path d="M20 21a8 8 0 0 0-16 0" />
+                    </svg>
+                </span>
+
                 <span class="adm-setting-item-main">
                     <span class="adm-setting-item-title">Identitas</span>
                     <span class="adm-setting-item-sub">Nama situs, logo, favicon</span>
@@ -23,7 +31,16 @@
             </button>
 
             <button type="button" class="adm-setting-item" data-open-modal="kontak" role="listitem">
-                <span class="adm-setting-item-ic" aria-hidden="true"><i data-lucide="map-pin"></i></span>
+                <span class="adm-setting-item-ic" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin-icon lucide-map-pin">
+                        <path
+                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                </span>
+
                 <span class="adm-setting-item-main">
                     <span class="adm-setting-item-title">Kontak & Lokasi</span>
                     <span class="adm-setting-item-sub">Telepon, email, alamat, maps embed</span>
@@ -32,7 +49,16 @@
             </button>
 
             <button type="button" class="adm-setting-item" data-open-modal="sosial" role="listitem">
-                <span class="adm-setting-item-ic" aria-hidden="true"><i data-lucide="share-2"></i></span>
+                <span class="adm-setting-item-ic" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-badge-check-icon lucide-badge-check">
+                        <path
+                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg>
+                </span>
+
                 <span class="adm-setting-item-main">
                     <span class="adm-setting-item-title">Sosial Media</span>
                     <span class="adm-setting-item-sub">Instagram, Facebook, TikTok, WhatsApp</span>
@@ -41,7 +67,15 @@
             </button>
 
             <button type="button" class="adm-setting-item" data-open-modal="footer" role="listitem">
-                <span class="adm-setting-item-ic" aria-hidden="true"><i data-lucide="layout-template"></i></span>
+                <span class="adm-setting-item-ic" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-layout-panel-top-icon lucide-layout-panel-top">
+                        <rect width="18" height="7" x="3" y="3" rx="1" />
+                        <rect width="7" height="7" x="3" y="14" rx="1" />
+                        <rect width="7" height="7" x="14" y="14" rx="1" />
+                    </svg>
+                </span>
                 <span class="adm-setting-item-main">
                     <span class="adm-setting-item-title">Footer</span>
                     <span class="adm-setting-item-sub">Footer about & copyright</span>
@@ -59,7 +93,12 @@
             <div class="adm-setting-modal-head">
                 <div class="adm-setting-modal-title" id="admSettingModalTitle">Edit</div>
                 <button class="adm-setting-modal-x" type="button" aria-label="Tutup" data-close-modal>
-                    <i data-lucide="x"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
                 </button>
             </div>
 
@@ -82,7 +121,8 @@
                     <div class="adm-setting-field-grid">
                         <div class="adm-setting-field">
                             <label class="adm-setting-label" for="logo">Logo</label>
-                            <input class="adm-setting-input" id="logo" name="logo" type="file" accept="image/*">
+                            <input class="adm-setting-input" id="logo" name="logo" type="file"
+                                accept="image/*">
                             @if (!empty($settings->logo))
                                 <div class="adm-setting-preview">
                                     <img src="{{ asset($settings->logo) }}" alt="Logo" loading="lazy">
@@ -105,9 +145,7 @@
                     </div>
 
                     <div class="adm-setting-modal-actions">
-                        <button class="adm-setting-btn adm-setting-btn--primary" type="submit">
-                            Simpan
-                        </button>
+                        <button class="adm-setting-btn adm-setting-btn--primary" type="submit">Simpan</button>
                         <button class="adm-setting-btn" type="button" data-close-modal>Batal</button>
                     </div>
                 </form>
