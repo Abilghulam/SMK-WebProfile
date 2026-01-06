@@ -18,20 +18,6 @@
                 <div class="admin-brand-sub">Dashboard Admin</div>
             </div>
         </a>
-
-        <div class="admin-branch">
-            <span class="admin-branch-pill">
-                <span class="admin-branch-ic" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="1.8"
-                            stroke-linejoin="round" />
-                    </svg>
-                </span>
-                <span class="admin-branch-text">
-                    {{ $isSuper ? 'Super Admin' : ($isAdmin ? 'Admin Konten' : 'Operator') }}
-                </span>
-            </span>
-        </div>
     </div>
 
     <nav class="admin-nav" aria-label="Navigasi Admin">
@@ -47,7 +33,7 @@
         </a>
 
         @if ($isAdmin)
-            <div class="admin-nav-section">Konten</div>
+            <div class="admin-nav-section">Manage</div>
 
             <a class="admin-nav-link {{ request()->routeIs('admin.home.*') ? 'active' : '' }}"
                 href="{{ route('admin.home.index') }}">
@@ -143,7 +129,7 @@
         @endif
 
         @if ($isSuper)
-            <div class="admin-nav-section">Pengaturan</div>
+            <div class="admin-nav-section">Sistem</div>
 
             <a class="admin-nav-link {{ request()->is('admin/settings*') ? 'active' : '' }}"
                 href="{{ url('/admin/settings') }}">
@@ -160,7 +146,7 @@
             </a>
         @endif
 
-        <div class="admin-nav-section">Akun</div>
+        <div class="admin-nav-section">Home</div>
 
         <a class="admin-nav-link" href="{{ url('/') }}" target="_blank" rel="noopener">
             <span class="admin-nav-ic" aria-hidden="true">
@@ -174,32 +160,6 @@
             </span>
             Buka Website
         </a>
-
-        <form method="POST" action="{{ route('admin.logout') }}" class="admin-logout">
-            @csrf
-            <button type="submit" class="admin-nav-link admin-nav-link--danger">
-                <span class="admin-nav-ic" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out">
-                        <path d="m16 17 5-5-5-5" />
-                        <path d="M21 12H9" />
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                    </svg>
-                </span>
-                Keluar
-            </button>
-        </form>
-
-        <div class="admin-nav-foot">
-            <div class="admin-footline">
-                <span class="admin-foot-dot" aria-hidden="true"></span>
-                <span>Mode Admin</span>
-            </div>
-            <div class="admin-footmuted">
-                Pastikan data yang dipublikasi sudah diverifikasi.
-            </div>
-        </div>
     </nav>
 </aside>
 

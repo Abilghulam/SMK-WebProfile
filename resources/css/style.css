@@ -103,7 +103,7 @@ ul {
     padding: 10px 12px;
     border-radius: 12px;
 
-    font-weight: 650;
+    font-weight: 600;
     font-size: 14px;
     color: #334155;
     text-decoration: none;
@@ -124,7 +124,7 @@ ul {
 .chev {
     font-size: 12px;
     opacity: 0.6;
-    color: rgba(11, 42, 85, 0.7);
+    color: rgba(11, 42, 85, 0.9);
 }
 
 .dropdown {
@@ -173,8 +173,8 @@ ul {
     width: 42px;
     height: 42px;
     border-radius: 12px;
-    border: 1px solid rgba(2, 6, 23, 0.1);
-    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(2, 6, 23, 0.01);
+    background: rgba(15, 23, 42, 0.03);
     cursor: pointer;
 }
 
@@ -184,21 +184,6 @@ ul {
     height: 2px;
     background: var(--brand-blue);
     position: relative;
-}
-.toggle-bars::before,
-.toggle-bars::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 18px;
-    height: 2px;
-    background: var(--brand-blue);
-}
-.toggle-bars::before {
-    top: -6px;
-}
-.toggle-bars::after {
-    top: 6px;
 }
 
 /* ===============================

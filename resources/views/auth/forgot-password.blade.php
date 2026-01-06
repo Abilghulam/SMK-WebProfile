@@ -11,6 +11,8 @@
     @if (!empty($settings?->favicon))
         <link rel="icon" href="{{ asset($settings->favicon) }}">
     @endif
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="a-auth-body">
@@ -46,11 +48,12 @@
                 </div>
 
                 <div class="a-auth-pill" aria-label="Mode OTP">
-                    <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" />
-                        <path d="M7 11h10v9H7v-9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                        <path d="M12 15v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <svg class="a-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-key-round-icon lucide-key-round">
+                        <path
+                            d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" />
+                        <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
                     </svg>
                     PASSWORD
                 </div>
@@ -59,11 +62,15 @@
             <section class="a-card">
                 <div class="a-card-head">
                     <div class="a-card-ic" aria-hidden="true">
-                        <svg class="a-ic" viewBox="0 0 24 24" fill="none">
-                            <path d="M7 11h10a2 2 0 012 2v5a2 2 0 01-2 2H7a2 2 0 01-2-2v-5a2 2 0 012-2z"
-                                stroke="currentColor" stroke-width="1.8" />
-                            <path d="M8 11V8.5A4 4 0 0112 4a4 4 0 014 4.5V11" stroke="currentColor" stroke-width="1.8"
-                                stroke-linecap="round" />
+                        <svg class="a-ic" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-rotate-ccw-key-icon lucide-rotate-ccw-key">
+                            <path d="m14.5 9.5 1 1" />
+                            <path d="m15.5 8.5-4 4" />
+                            <path d="M3 12a9 9 0 1 0 9-9 9.74 9.74 0 0 0-6.74 2.74L3 8" />
+                            <path d="M3 3v5h5" />
+                            <circle cx="10" cy="14" r="2" />
                         </svg>
                     </div>
                     <div class="a-card-title">
@@ -110,8 +117,8 @@
                     <div class="a-actions-row">
                         <a class="a-btn a-btn--ghost" href="{{ route('admin.login') }}">
                             <svg class="a-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                                <path d="M14 7l-5 5 5 5" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             Kembali</a>
                     </div>

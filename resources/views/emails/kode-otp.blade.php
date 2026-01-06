@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Kode Verifikasi OTP</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="margin:0; padding:0; background:#f4f7fb; color:#0f172a;">
+<body style="margin:0; padding:0; background:#f4f7fb; color:#0f172a;     font-family: Poppins, sans-serif;">
     @php
         // Inline logo via CID (AMAN di Gmail & localhost)
         $logoPath = public_path('img/logo.png');

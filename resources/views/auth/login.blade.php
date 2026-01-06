@@ -11,6 +11,8 @@
     @if (!empty($settings?->favicon))
         <link rel="icon" href="{{ asset($settings->favicon) }}">
     @endif
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="a-auth-body">
@@ -72,7 +74,7 @@
                     </div>
 
                     <div class="a-card-title">
-                        <h1>Login</h1>
+                        <h1>Selamat Datang!</h1>
                         <p>Gunakan email & password untuk melakukan autentikasi</p>
                     </div>
                 </div>

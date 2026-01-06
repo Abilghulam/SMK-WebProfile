@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     {{-- Admin CSS --}}
     @vite(['resources/css/admin.css', 'resources/js/admin.js'])
@@ -45,9 +47,8 @@
 
             <footer class="admin-footer">
                 <div class="admin-footer-inner">
-                    <span>{{ $settings->site_name ?? 'SMK Negeri' }} — Admin Panel</span>
-                    <span class="admin-footer-sep">|</span>
-                    <span>&copy; {{ now()->year }}</span>
+                    <span>{{ $settings->site_name ?? 'SMK Negeri' }} — Dashboard Admin</span>
+                    <span>&copy; {{ now()->year }} All rights reserved.</span>
                 </div>
             </footer>
         </div>

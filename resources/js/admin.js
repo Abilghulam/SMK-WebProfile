@@ -100,6 +100,7 @@ function initOtpUI() {
     initOtpExpiryCountdown(otpForm);
 }
 
+// OTP Expired Countdown
 function initOtpExpiryCountdown(otpForm) {
     const expIso = otpForm.getAttribute("data-expires-at") || "";
     const expText = document.querySelector("[data-otp-exp-text]");
@@ -167,6 +168,47 @@ function initResendOtpUI() {
 
     tick();
 }
+
+// Toggle Topbar
+document.addEventListener("DOMContentLoaded", () => {
+    const dd = document.querySelector("[data-user-dd]");
+    if (!dd) return;
+
+    const btn = dd.querySelector("[data-user-dd-btn]");
+    const menu = dd.querySelector("[data-user-dd-menu]");
+
+    const open = () => {
+        dd.classList.add("is-open");
+        btn?.setAttribute("aria-expanded", "true");
+        menu?.setAttribute("aria-hidden", "false");
+    };
+
+    const close = () => {
+        dd.classList.remove("is-open");
+        btn?.setAttribute("aria-expanded", "false");
+        menu?.setAttribute("aria-hidden", "true");
+    };
+
+    const toggle = () => {
+        dd.classList.contains("is-open") ? close() : open();
+    };
+
+    btn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggle();
+    });
+
+    // klik luar -> tutup
+    document.addEventListener("click", (e) => {
+        if (!dd.contains(e.target)) close();
+    });
+
+    // esc -> tutup
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") close();
+    });
+});
 
 // Type Definition
 document.addEventListener("DOMContentLoaded", () => {
