@@ -42,10 +42,9 @@
                 {{-- MAIN --}}
                 <article class="blog-article">
 
-                    {{-- Cover (optional, kalau thumbnail ada) --}}
-                    @if (!empty($post->thumbnail))
+                    @if (!empty($post->thumbnail_url))
                         <div class="blog-cover">
-                            <img src="{{ asset($post->thumbnail) }}" alt="{{ $post->title }}" loading="lazy">
+                            <img src="{{ asset($post->thumbnail_url) }}" alt="{{ $post->title }}" loading="lazy">
                         </div>
                     @endif
 
@@ -160,24 +159,41 @@
                         <h3>Aksi Cepat</h3>
 
                         <a class="side-action" href="{{ route('blog.index') }}">
-                            Kembali ke Blog
-                            <span aria-hidden="true">→</span>
+                            <span style="margin-left: 8px">Kembali ke Blog</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
                         </a>
 
                         @if ($post->type === 'news')
                             <a class="side-action" href="{{ route('blog.news') }}">
-                                Semua Berita
-                                <span aria-hidden="true">→</span>
+                                <span style="margin-left: 8px">Semua Berita</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
                             </a>
                         @elseif($post->type === 'agenda')
                             <a class="side-action" href="{{ route('blog.agenda') }}">
-                                Semua Agenda
-                                <span aria-hidden="true">→</span>
+                                <span style="margin-left: 8px">Semua Agenda</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
                             </a>
                         @elseif($post->type === 'achievement')
                             <a class="side-action" href="{{ route('blog.achievements') }}">
-                                Semua Prestasi
-                                <span aria-hidden="true">→</span>
+                                <span style="margin-left: 8px">Semua Prestasi</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
                             </a>
                         @endif
                     </div>

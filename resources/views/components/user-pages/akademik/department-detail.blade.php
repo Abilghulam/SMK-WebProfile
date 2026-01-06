@@ -86,8 +86,12 @@
                     </div>
 
                     <div class="detail-actions">
-                        <a href="{{ route('departments.index') }}" class="btn-back">
-                            Kembali Ke Daftar Program
+                        <a class="legal-action legal-action--back" href="{{ route('departments.index') }}">
+                            <svg class="legal-action-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span>Kembali</span>
                         </a>
                     </div>
 
@@ -188,12 +192,24 @@
 
                         <a class="side-action" href="{{ route('departments.index') }}">
                             Lihat Daftar Program Lainnya
-                            <span aria-hidden="true">→</span>
+                            <span style="margin-top: 7px;" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </span>
                         </a>
 
                         <a class="side-action" href="{{ route('facilities.index') }}">
                             Lihat Fasilitas Sekolah
-                            <span aria-hidden="true">→</span>
+                            <span style="margin-top: 7px;" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg>
+                            </span>
                         </a>
                     </div>
 

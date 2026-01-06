@@ -104,7 +104,7 @@
                 @endforelse
             </div>
 
-            <div class="doc-pagination">
+            <div class="usr-pagination">
                 {{ $galleries->links() }}
             </div>
 

@@ -5,22 +5,13 @@
 
             {{-- Foto + Shape background --}}
             <div class="principal-image-container">
-            <div class="principal-image-bg"></div>
-            @if ($principal?->photo)
-                <img
-                    src="{{ asset($principal->photo) }}"
-                    alt="{{ $principal->name }}"
-                    class="principal-image"
-                />
-            @else
-                <img
-                    src="{{ asset('assets/images/principal.jpg') }}"
-                    alt="Kepala Sekolah"
-                    class="principal-image"
-                />
-            @endif
-
-        </div>
+                <div class="principal-image-bg"></div>
+                @if ($principal?->photo_url)
+                    <img src="{{ $principal->photo_url }}" alt="{{ $principal->name }}" class="principal-image" />
+                @else
+                    <img src="{{ asset('assets/images/principal.jpg') }}" alt="Kepala Sekolah" class="principal-image" />
+                @endif
+            </div>
 
             {{-- Konten --}}
             <div class="welcome-content">

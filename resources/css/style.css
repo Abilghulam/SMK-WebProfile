@@ -147,6 +147,19 @@ ul {
     display: block;
 }
 
+.nav-dropdown.is-open .chev svg {
+    transform: rotate(180deg);
+}
+
+.chev svg {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+
+.nav-trigger[aria-expanded="true"] .chev svg {
+    transform: rotate(180deg);
+}
+
 .dropdown-link {
     display: block;
     padding: 10px 10px;
@@ -1791,7 +1804,7 @@ ul {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 16px;
+    padding: 10px 12px;
     border-radius: 14px;
     text-decoration: none;
     font-weight: 700;
@@ -1962,11 +1975,11 @@ ul {
     align-items: center;
     justify-content: space-between;
 
-    padding: 12px 12px;
+    padding: 8px 12px;
     border-radius: 14px;
 
     text-decoration: none;
-    font-weight: 750;
+    font-weight: 700;
     font-size: 14px;
 
     color: rgba(11, 42, 85, 0.95);
@@ -2457,7 +2470,7 @@ ul {
     align-items: center;
     gap: 10px;
 
-    padding: 10px 14px;
+    padding: 4px 12px;
     border-radius: 999px;
 
     font-size: 13px;
@@ -2551,32 +2564,6 @@ ul {
     line-height: 1.7;
 }
 
-.blog-back {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 10px 14px;
-    border-radius: 999px;
-
-    text-decoration: none;
-    font-weight: 850;
-    font-size: 13px;
-
-    color: rgba(11, 42, 85, 0.95);
-    background: rgba(11, 42, 85, 0.06);
-    border: 1px solid rgba(11, 42, 85, 0.12);
-
-    transition: transform 0.18s ease, background 0.18s ease,
-        border-color 0.18s ease;
-}
-
-.blog-back:hover {
-    transform: translateY(-2px);
-    background: rgba(226, 179, 58, 0.1);
-    border-color: rgba(226, 179, 58, 0.22);
-}
-
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2652,7 +2639,7 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 10px 14px;
-    border-radius: 999px;
+    border-radius: 14px;
     text-decoration: none;
     font-weight: 850;
     font-size: 13px;
@@ -2788,7 +2775,7 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 10px 14px;
-    border-radius: 999px;
+    border-radius: 14px;
     text-decoration: none;
     font-weight: 850;
     font-size: 13px;
@@ -2938,6 +2925,8 @@ ul {
 /* ===============================
    BLOG SHOW (DETAIL POST)
 ================================ */
+.post-card {
+}
 
 .blog-show {
     padding: 70px 0;
@@ -3078,9 +3067,9 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 10px 14px;
-    border-radius: 999px;
+    border-radius: 14px;
     text-decoration: none;
-    font-weight: 900;
+    font-weight: 800;
     font-size: 13px;
     transition: transform 0.18s ease, background 0.18s ease,
         border-color 0.18s ease;
@@ -4195,7 +4184,7 @@ body.lb-lock {
     font-size: 13px;
     line-height: 1.6;
     color: rgba(15, 23, 42, 0.92);
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .svc-kv--row {
@@ -4450,7 +4439,7 @@ body.lb-lock {
 .svc-side-value {
     margin-top: 6px;
     color: rgba(15, 23, 42, 0.92);
-    font-weight: 800;
+    font-weight: 650;
     font-size: 13px;
     line-height: 1.55;
 }
@@ -5035,5 +5024,125 @@ body.lb-lock {
     .legal-action {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* =========================
+   PAGINATION
+   ========================= */
+
+.usr-pagination {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.usr-pagination nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.usr-pagination nav > div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    padding: 10px 12px;
+    border-radius: 999px;
+
+    background: rgba(248, 250, 252, 0.85);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    backdrop-filter: blur(6px);
+}
+
+/* hide teks "Showing x to y" jika pagination view mengeluarkannya */
+.usr-pagination nav > div > div:first-child {
+    display: none;
+}
+
+/* container link halaman */
+.usr-pagination nav > div > div:last-child {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* base item */
+.usr-pagination a,
+.usr-pagination span[aria-current="page"] > span,
+.usr-pagination span[aria-disabled="true"] > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 36px;
+    height: 34px;
+    padding: 0 12px;
+
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    color: rgba(15, 23, 42, 0.78);
+
+    transition: transform 0.16s ease, background-color 0.16s ease,
+        border-color 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+}
+
+/* hover */
+@media (hover: hover) {
+    .usr-pagination a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(2, 56, 117, 0.18);
+        color: rgba(2, 56, 117, 0.92);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+        background: rgba(248, 250, 252, 0.98);
+    }
+}
+
+/* active page */
+.usr-pagination span[aria-current="page"] > span {
+    border-color: rgba(2, 56, 117, 0.18);
+    background: rgba(2, 56, 117, 0.08);
+    color: rgba(2, 56, 117, 0.95);
+}
+
+/* disabled */
+.usr-pagination span[aria-disabled="true"] > span {
+    opacity: 0.55;
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+/* icons (prev/next) */
+.usr-pagination svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* compact on small screens */
+@media (max-width: 640px) {
+    .usr-pagination nav > div {
+        border-radius: 18px;
+        padding: 10px;
+        gap: 6px;
+    }
+    .usr-pagination a,
+    .usr-pagination span[aria-current="page"] > span,
+    .usr-pagination span[aria-disabled="true"] > span {
+        min-width: 34px;
+        height: 32px;
+        padding: 0 10px;
+        font-size: 12.5px;
     }
 }

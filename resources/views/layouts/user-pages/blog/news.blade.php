@@ -22,7 +22,13 @@
                 </div>
 
                 <div class="blog-topbar-right">
-                    <a class="blog-back" href="{{ route('blog.index') }}">Kembali ke Blog</a>
+                    <a class="blog-back" href="{{ route('blog.index') }}">
+                        <svg class="legal-action-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span style="margin-left: 8px">Kembali ke Blog</span>
+                    </a>
                 </div>
             </div>
 

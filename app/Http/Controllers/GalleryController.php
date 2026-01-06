@@ -36,7 +36,7 @@ class GalleryController extends Controller
             ->when($category, fn ($q) => $q->where('category', $category))
             ->orderByDesc('event_date')
             ->orderByDesc('created_at')
-            ->paginate(12)
+            ->paginate(9)
             ->withQueryString();
 
         // Untuk filter UI (list kategori yang muncul)

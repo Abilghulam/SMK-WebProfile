@@ -28,12 +28,12 @@
                 <div class="svc-topbar-badges">
                     <span class="svc-chip">
                         <span class="svc-chip-ico" aria-hidden="true">
-                            {{-- shield/check --}}
-                            <svg viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor"
-                                    stroke-width="1.8" />
-                                <path d="M8.5 12l2.2 2.2L15.8 9" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" stroke-linejoin="round" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check">
+                                <path
+                                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                                <path d="m9 12 2 2 4-4" />
                             </svg>
                         </span>
                         Informasi Resmi
@@ -42,12 +42,11 @@
                     @if (!empty(data_get($settings, 'phone')) || !empty(data_get($settings, 'email')))
                         <span class="svc-chip">
                             <span class="svc-chip-ico" aria-hidden="true">
-                                {{-- phone --}}
-                                <svg viewBox="0 0 24 24" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone">
                                     <path
-                                        d="M6.5 3.8h3l1.2 4-1.6 1.3c1.2 2.5 3.2 4.6 5.8 5.8l1.3-1.6 4 1.2v3c0 1-0.7 1.8-1.7 1.9-8 .6-14.5-5.9-13.9-13.9.1-1 .9-1.7 1.9-1.7z"
-                                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                                        stroke-linejoin="round" />
+                                        d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
                                 </svg>
                             </span>
                             Layanan Resmi
@@ -65,14 +64,14 @@
                     <div class="svc-card svc-card--panel">
                         <div class="svc-panel-head">
                             <div class="svc-panel-badge" aria-hidden="true">
-                                {{-- id card --}}
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 7.5c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v9c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2v-9z"
-                                        stroke="currentColor" stroke-width="1.8" />
-                                    <path d="M7 10h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                                    <path d="M7 13h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                                    <path d="M16.5 13.5c1 0 1.8-.8 1.8-1.8S17.5 10 16.5 10s-1.8.8-1.8 1.7.8 1.8 1.8 1.8z"
-                                        stroke="currentColor" stroke-width="1.6" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-contact-icon lucide-contact">
+                                    <path d="M16 2v2" />
+                                    <path d="M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
+                                    <path d="M8 2v2" />
+                                    <circle cx="12" cy="11" r="3" />
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
                                 </svg>
                             </div>
 
@@ -104,14 +103,17 @@
                                 <div class="svc-info-item">
                                     <div class="svc-info-line">
                                         <span class="svc-icon" aria-hidden="true">
-                                            {{-- building --}}
-                                            <svg viewBox="0 0 24 24" fill="none">
-                                                <path d="M4 20h16" stroke="currentColor" stroke-width="1.8"
-                                                    stroke-linecap="round" />
-                                                <path d="M6 20V6a2 2 0 012-2h8a2 2 0 012 2v14" stroke="currentColor"
-                                                    stroke-width="1.8" />
-                                                <path d="M9 8h2M9 11h2M9 14h2M13 8h2M13 11h2M13 14h2" stroke="currentColor"
-                                                    stroke-width="1.8" stroke-linecap="round" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-school-icon lucide-school">
+                                                <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+                                                <path d="M18 5v16" />
+                                                <path d="m4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6" />
+                                                <path
+                                                    d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11" />
+                                                <path d="M6 5v16" />
+                                                <circle cx="12" cy="9" r="2" />
                                             </svg>
                                         </span>
                                         Identitas
@@ -185,14 +187,13 @@
                     <div class="svc-card svc-card--panel">
                         <div class="svc-panel-head">
                             <div class="svc-panel-badge" aria-hidden="true">
-                                {{-- file --}}
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"
-                                        stroke="currentColor" stroke-width="1.8" />
-                                    <path d="M14 3v5h5" stroke="currentColor" stroke-width="1.8"
-                                        stroke-linejoin="round" />
-                                    <path d="M8 12h8M8 15h8" stroke="currentColor" stroke-width="1.8"
-                                        stroke-linecap="round" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-file-icon lucide-file">
+                                    <path
+                                        d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                                    <path d="M14 2v5a1 1 0 0 0 1 1h5" />
                                 </svg>
                             </div>
 
@@ -213,11 +214,16 @@
                         <div class="svc-legal-list">
                             <div class="svc-legal-item">
                                 <div class="svc-legal-ico" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M8 7h8M8 11h8M8 15h6" stroke="currentColor" stroke-width="1.8"
-                                            stroke-linecap="round" />
-                                        <path d="M6 3h8l4 4v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2z"
-                                            stroke="currentColor" stroke-width="1.8" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-file-text-icon lucide-file-text">
+                                        <path
+                                            d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />
+                                        <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+                                        <path d="M10 9H8" />
+                                        <path d="M16 13H8" />
+                                        <path d="M16 17H8" />
                                     </svg>
                                 </div>
                                 <div class="svc-legal-text">
@@ -229,10 +235,14 @@
 
                             <div class="svc-legal-item">
                                 <div class="svc-legal-ico" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M7 7h10M7 11h10M7 15h7" stroke="currentColor" stroke-width="1.8"
-                                            stroke-linecap="round" />
-                                        <path d="M5 4h14v16H5V4z" stroke="currentColor" stroke-width="1.8" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-form-icon lucide-form">
+                                        <path d="M4 14h6" />
+                                        <path d="M4 2h10" />
+                                        <rect x="4" y="18" width="16" height="4" rx="1" />
+                                        <rect x="4" y="6" width="16" height="4" rx="1" />
                                     </svg>
                                 </div>
                                 <div class="svc-legal-text">
@@ -244,11 +254,14 @@
 
                             <div class="svc-legal-item">
                                 <div class="svc-legal-ico" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M12 22a10 10 0 110-20 10 10 0 010 20z" stroke="currentColor"
-                                            stroke-width="1.8" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-book-alert-icon lucide-book-alert">
+                                        <path d="M12 13h.01" />
+                                        <path d="M12 6v3" />
+                                        <path
+                                            d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
                                     </svg>
                                 </div>
                                 <div class="svc-legal-text">
@@ -262,11 +275,12 @@
                         <div class="svc-actions svc-actions--legal">
                             <a class="svc-btn" href="{{ route('legal.index') }}">
                                 <span class="svc-btn-ico" aria-hidden="true">
-                                    {{-- folder --}}
-                                    <svg viewBox="0 0 24 24" fill="none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-folder-open-icon lucide-folder-open">
                                         <path
-                                            d="M3.5 7.5h6l2 2H20a2 2 0 012 2v7a2 2 0 01-2 2H5.5a2 2 0 01-2-2v-11a2 2 0 012-2z"
-                                            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                                            d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
                                     </svg>
                                 </span>
                                 Buka Legalitas & Dokumen
@@ -304,10 +318,12 @@
 
                         <a class="svc-side-action" href="{{ route('legal.index') }}">
                             <span class="svc-side-action-ico" aria-hidden="true">
-                                {{-- folder --}}
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M3.5 7.5h6l2 2H20a2 2 0 012 2v7a2 2 0 01-2 2H5.5a2 2 0 01-2-2v-11a2 2 0 012-2z"
-                                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-folder-open-icon lucide-folder-open">
+                                    <path
+                                        d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
                                 </svg>
                             </span>
                             Legalitas & Dokumen
@@ -347,10 +363,15 @@
                         @if (!empty($wa))
                             <a class="svc-side-action" href="{{ $wa }}" target="_blank" rel="noopener">
                                 <span class="svc-side-action-ico" aria-hidden="true">
-                                    {{-- chat --}}
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M20 15a4 4 0 01-4 4H8l-4 3V7a4 4 0 014-4h8a4 4 0 014 4v8z"
-                                            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-message-square-more-icon lucide-message-square-more">
+                                        <path
+                                            d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+                                        <path d="M12 11h.01" />
+                                        <path d="M16 11h.01" />
+                                        <path d="M8 11h.01" />
                                     </svg>
                                 </span>
                                 Hubungi Admin
@@ -360,11 +381,12 @@
                         @if (!empty($email))
                             <a class="svc-side-action" href="mailto:{{ $email }}">
                                 <span class="svc-side-action-ico" aria-hidden="true">
-                                    {{-- mail --}}
-                                    <svg viewBox="0 0 24 24" fill="none">
-                                        <path d="M4 6h16v12H4V6z" stroke="currentColor" stroke-width="1.8" />
-                                        <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8"
-                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-mail-icon lucide-mail">
+                                        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                                        <rect x="2" y="4" width="20" height="16" rx="2" />
                                     </svg>
                                 </span>
                                 Kirim Email

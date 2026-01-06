@@ -44,7 +44,7 @@ class BlogController extends Controller
 
         $latest = Post::published()
             ->orderByDesc('published_at')
-            ->paginate(9);
+            ->paginate(6);
 
         return view('layouts.user-pages.blog.index', compact(
             'featured',
@@ -60,7 +60,7 @@ class BlogController extends Controller
         $posts = Post::published()
             ->type('news')
             ->orderByDesc('published_at')
-            ->paginate(9);
+            ->paginate(6);
 
         return view('layouts.user-pages.blog.news', compact('posts'));
     }
@@ -72,14 +72,14 @@ class BlogController extends Controller
             ->whereNotNull('event_start_at')
             ->where('event_start_at', '>=', now())
             ->orderBy('event_start_at')
-            ->paginate(10, ['*'], 'upcoming_page');
+            ->paginate(6, ['*'], 'upcoming_page');
 
         $past = Post::published()
             ->type('agenda')
             ->whereNotNull('event_start_at')
             ->where('event_start_at', '<', now())
             ->orderByDesc('event_start_at')
-            ->paginate(10, ['*'], 'past_page');
+            ->paginate(6, ['*'], 'past_page');
 
         return view('layouts.user-pages.blog.agenda', compact('upcoming', 'past'));
     }
@@ -90,7 +90,7 @@ class BlogController extends Controller
             ->type('achievement')
             ->orderByDesc('awarded_at')
             ->orderByDesc('published_at')
-            ->paginate(12);
+            ->paginate(6);
 
         return view('layouts.user-pages.blog.achievements', compact('posts'));
     }

@@ -34,8 +34,19 @@
                     <div class="adm-stat-value">{{ $profile?->school_name ? 'Identitas' : '—' }}</div>
                     <div class="adm-stat-meta">Identitas, visi-misi, NPSN, akreditasi</div>
 
-                    <div style="margin-top:10px;">
-                        <a class="adm-btn adm-btn--primary" href="{{ route('admin.home.profile.edit') }}">Edit</a>
+                    <div style="margin-top:14px;">
+                        <a class="home adm-btn adm-btn--primary" href="{{ route('admin.home.profile.edit') }}">
+                            <span class="adm-btn-ic" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen">
+                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path
+                                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                </svg>
+                            </span>
+                            Edit
+                        </a>
                     </div>
                 </div>
             </article>
@@ -58,8 +69,19 @@
                     <div class="adm-stat-value">{{ $stats?->academic_year ?? '—' }}</div>
                     <div class="adm-stat-meta">Siswa, guru, jurusan, tahun ajaran</div>
 
-                    <div style="margin-top:10px;">
-                        <a class="adm-btn adm-btn--primary" href="{{ route('admin.home.statistics.edit') }}">Edit</a>
+                    <div style="margin-top:14px;">
+                        <a class="home adm-btn adm-btn--primary" href="{{ route('admin.home.statistics.edit') }}">
+                            <span class="adm-btn-ic" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen">
+                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path
+                                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                </svg>
+                            </span>
+                            Edit
+                        </a>
                     </div>
                 </div>
             </article>
@@ -76,8 +98,19 @@
                     <div class="adm-stat-value">{{ $principal?->position ?? '—' }}</div>
                     <div class="adm-stat-meta">Nama, jabatan, foto, sambutan</div>
 
-                    <div style="margin-top:10px;">
-                        <a class="adm-btn adm-btn--primary" href="{{ route('admin.home.principal.edit') }}">Edit</a>
+                    <div style="margin-top:14px;">
+                        <a class="home adm-btn adm-btn--primary" href="{{ route('admin.home.principal.edit') }}">
+                            <span class="adm-btn-ic" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen">
+                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                    <path
+                                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                                </svg>
+                            </span>
+                            Edit
+                        </a>
                     </div>
                 </div>
             </article>

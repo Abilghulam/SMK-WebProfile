@@ -18,7 +18,7 @@
             <div class="container">
 
                 <a href="{{ route('blog.show', $featured->slug) }}"
-                    class="featured-card {{ empty($featured->thumbnail) ? 'no-thumb' : '' }}">
+                    class="featured-card {{ empty($featured->thumbnail_url) ? 'no-thumb' : '' }}">
 
                     <div class="featured-content">
 
@@ -43,15 +43,22 @@
 
                             <span class="featured-cta">
                                 Baca Pengumuman
-                                <span aria-hidden="true">→</span>
+                                <span style="margin-top: 7px;" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
+                                </span>
                             </span>
                         </div>
 
                     </div>
 
-                    @if (!empty($featured->thumbnail))
+                    @if (!empty($featured->thumbnail_url))
                         <div class="featured-thumb">
-                            <img src="{{ asset($featured->thumbnail) }}" alt="{{ $featured->title }}" loading="lazy">
+                            <img src="{{ asset($featured->thumbnail_url) }}" alt="{{ $featured->title }}" loading="lazy">
                         </div>
                     @endif
 
@@ -131,7 +138,7 @@
                 @endforelse
             </div>
 
-            <div class="blog-pagination">
+            <div class="usr-pagination">
                 {{ $latest->links() }}
             </div>
 

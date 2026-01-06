@@ -21,6 +21,7 @@
     </div>
 
     <nav class="admin-nav" aria-label="Navigasi Admin">
+        <div class="admin-nav-section">Main</div>
         <a class="admin-nav-link {{ request()->is('admin') ? 'active' : '' }}" href="{{ url('/admin') }}">
             <span class="admin-nav-ic" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">

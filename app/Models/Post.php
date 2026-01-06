@@ -86,4 +86,10 @@ class Post extends Model
         return $query->where('type', $type);
     }
 
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        if (!$this->thumbnail) return null;
+        return asset('storage/' . $this->thumbnail);
+    }
+
 }

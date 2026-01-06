@@ -1,5 +1,5 @@
 @php
-    $img = $post->thumbnail ? asset($post->thumbnail) : asset('assets/images/blog/placeholder.jpg');
+    $img = $post->thumbnail_url ? asset($post->thumbnail_url) : asset('assets/images/blog/placeholder.jpg');
 @endphp
 
 <a class="post-card" href="{{ route('blog.show', $post->slug) }}">
