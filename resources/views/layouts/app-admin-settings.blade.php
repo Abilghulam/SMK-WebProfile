@@ -7,7 +7,7 @@
     <title>@yield('title', 'Panel Setting')</title>
 
     {{-- Admin Setting CSS --}}
-    @vite(['resources/css/admin-settings.css', 'resources/js/admin.js'])
+    @vite(['resources/css/admin-settings.css', 'resources/js/admin.js', 'resources/js/admin-settings.js'])
 
     {{-- Favicon --}}
     <link rel="icon" href="{{ data_get($settings, 'favicon_url', asset('assets/images/favicon.ico')) }}">
@@ -79,15 +79,25 @@
         {{-- Main --}}
         <main class="adm-setting-main">
             @if (session('success'))
-                <div class="adm-setting-toast" role="status">
-                    <span class="adm-setting-toast-ic" aria-hidden="true"><i data-lucide="check-circle-2"></i></span>
+                <div class="adm-setting-toast" role="status" data-toast data-timeout="4500">
+                    <span class="adm-setting-toast-ic" aria-hidden="true">
+                        <i data-lucide="check-circle-2"></i>
+                    </span>
+
                     <div class="adm-setting-toast-text">{{ session('success') }}</div>
+
+                    <button type="button" class="adm-setting-toast-close" aria-label="Tutup" data-toast-close>
+                        <i data-lucide="x"></i>
+                    </button>
                 </div>
             @endif
 
             @if ($errors->any())
-                <div class="adm-setting-toast adm-setting-toast--danger" role="alert">
-                    <span class="adm-setting-toast-ic" aria-hidden="true"><i data-lucide="alert-triangle"></i></span>
+                <div class="adm-setting-toast adm-setting-toast--danger" role="alert" data-toast data-timeout="8000">
+                    <span class="adm-setting-toast-ic" aria-hidden="true">
+                        <i data-lucide="alert-triangle"></i>
+                    </span>
+
                     <div class="adm-setting-toast-text">
                         <div class="adm-setting-toast-title">Ada input yang belum valid:</div>
                         <ul class="adm-setting-toast-list">
@@ -96,6 +106,10 @@
                             @endforeach
                         </ul>
                     </div>
+
+                    <button type="button" class="adm-setting-toast-close" aria-label="Tutup" data-toast-close>
+                        <i data-lucide="x"></i>
+                    </button>
                 </div>
             @endif
 
