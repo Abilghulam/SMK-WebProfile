@@ -24,6 +24,10 @@ use App\Http\Controllers\Admin\AdminSettingsController;
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
+
 Route::prefix('akademik')->group(function () {
 
     // Program Keahlian
