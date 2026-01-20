@@ -36,7 +36,7 @@
         @if ($isAdmin)
             <div class="admin-nav-section">Manage</div>
 
-            <a class="admin-nav-link {{ request()->is('admin.home*') ? 'active' : '' }}"
+            <a class="admin-nav-link {{ request()->routeIs('admin.home.*') ? 'active' : '' }}"
                 href="{{ route('admin.home.index') }}">
                 <span class="admin-nav-ic" aria-hidden="true">
                     {{-- home/settings (modern & institusional) --}}
