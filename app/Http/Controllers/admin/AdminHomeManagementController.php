@@ -24,9 +24,12 @@ class AdminHomeManagementController extends Controller
         return SchoolStatistic::query()->whereKey(self::SINGLETON_ID)->first();
     }
 
-    private function principal(): ?Principal
+    private function principal(): Principal
     {
-        return Principal::query()->whereKey(self::SINGLETON_ID)->first();
+        return Principal::query()->firstOrCreate(
+            ['id' => self::SINGLETON_ID],
+            ['position' => 'Kepala Sekolah'] // opsional, biar ada default
+        );
     }
 
     public function index()
