@@ -9,7 +9,6 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LegalDocumentController;
 
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AdminPasswordResetController;
 
 use App\Http\Controllers\admin\AdminHomeManagementController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\Admin\AdminGalleryItemsController;
 use \App\Http\Controllers\Admin\AdminDepartmentsController;
 use App\Http\Controllers\Admin\AdminFacilitiesController;
 use App\Http\Controllers\Admin\AdminSettingsController;
+use App\Http\Controllers\Admin\DashboardController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
