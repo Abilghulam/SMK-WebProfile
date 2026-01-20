@@ -12,14 +12,14 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminPasswordResetController;
 
 use App\Http\Controllers\admin\AdminHomeManagementController;
-use App\Http\Controllers\Admin\AdminPostsController;
-use App\Http\Controllers\Admin\AdminLegalDocumentsController;
-use App\Http\Controllers\Admin\AdminGalleriesController;
-use App\Http\Controllers\Admin\AdminGalleryItemsController;
-use \App\Http\Controllers\Admin\AdminDepartmentsController;
-use App\Http\Controllers\Admin\AdminFacilitiesController;
-use App\Http\Controllers\Admin\AdminSettingsController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\AdminPostsController;
+use App\Http\Controllers\admin\AdminLegalDocumentsController;
+use App\Http\Controllers\admin\AdminGalleriesController;
+use App\Http\Controllers\admin\AdminGalleryItemsController;
+use \App\Http\Controllers\admin\AdminDepartmentsController;
+use App\Http\Controllers\admin\AdminFacilitiesController;
+use App\Http\Controllers\admin\AdminSettingsController;
+use App\Http\Controllers\admin\DashboardController;
 
 // User Routes
 Route::get('/', [HomeController::class, 'index']);
