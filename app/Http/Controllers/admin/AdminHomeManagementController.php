@@ -14,19 +14,19 @@ class AdminHomeManagementController extends Controller
 {
     private const SINGLETON_ID = 1;
 
-    private function profile(): SchoolProfile
+    private function profile(): ?SchoolProfile
     {
-        return SchoolProfile::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
+        return SchoolProfile::query()->whereKey(self::SINGLETON_ID)->first();
     }
 
-    private function stats(): SchoolStatistic
+    private function stats(): ?SchoolStatistic
     {
-        return SchoolStatistic::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
+        return SchoolStatistic::query()->whereKey(self::SINGLETON_ID)->first();
     }
 
-    private function principal(): Principal
+    private function principal(): ?Principal
     {
-        return Principal::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
+        return Principal::query()->whereKey(self::SINGLETON_ID)->first();
     }
 
     public function index()
@@ -38,9 +38,6 @@ class AdminHomeManagementController extends Controller
         return view('admin-pages.home.index', compact('profile', 'stats', 'principal'));
     }
 
-    /* =========================
-     *  SCHOOL PROFILE
-     * ========================= */
     public function editProfile()
     {
         $profile = $this->profile();
@@ -49,9 +46,6 @@ class AdminHomeManagementController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $profile = $this->profile();
-
-        // Validasi: school_name sekarang nullable (setelah migration)
         $rules = [
             'school_name'        => ['nullable','string','max:255'],
             'slogan'             => ['nullable','string','max:255'],
@@ -66,21 +60,21 @@ class AdminHomeManagementController extends Controller
             'logo'               => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ];
 
-        // Kalau kolom "address" memang ada di DB, baru divalidasi & diupdate
         if (Schema::hasColumn('school_profiles', 'address')) {
             $rules['address'] = ['nullable','string','max:500'];
         }
 
         $data = $request->validate($rules);
 
-        // upload logo (opsional) kalau kolom logo memang ada
+        // ambil row id=1, kalau belum ada baru create (tapi create ini aman karena kolom sudah nullable)
+        $profile = SchoolProfile::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
+
         if ($request->hasFile('logo') && Schema::hasColumn('school_profiles', 'logo')) {
             if (!empty($profile->logo)) {
                 Storage::disk('public')->delete($profile->logo);
             }
             $data['logo'] = $request->file('logo')->store('school/logo', 'public');
         } else {
-            // kalau kolom logo tidak ada, jangan ikut update key logo
             unset($data['logo']);
         }
 
@@ -89,9 +83,6 @@ class AdminHomeManagementController extends Controller
         return back()->with('success', 'Profil sekolah berhasil diperbarui.');
     }
 
-    /* =========================
-     *  SCHOOL STATISTICS
-     * ========================= */
     public function editStatistics()
     {
         $stats = $this->stats();
@@ -100,8 +91,6 @@ class AdminHomeManagementController extends Controller
 
     public function updateStatistics(Request $request)
     {
-        $stats = $this->stats();
-
         $data = $request->validate([
             'total_students'     => ['nullable','integer','min:0'],
             'total_teachers'     => ['nullable','integer','min:0'],
@@ -109,14 +98,12 @@ class AdminHomeManagementController extends Controller
             'academic_year'      => ['nullable','string','max:20'],
         ]);
 
+        $stats = SchoolStatistic::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
         $stats->update($data);
 
         return back()->with('success', 'Statistik sekolah berhasil diperbarui.');
     }
 
-    /* =========================
-     *  PRINCIPAL
-     * ========================= */
     public function editPrincipal()
     {
         $principal = $this->principal();
@@ -125,14 +112,14 @@ class AdminHomeManagementController extends Controller
 
     public function updatePrincipal(Request $request)
     {
-        $principal = $this->principal();
-
         $data = $request->validate([
             'name'            => ['nullable','string','max:255'],
             'position'        => ['nullable','string','max:255'],
             'welcome_message' => ['nullable','string'],
             'photo'           => ['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
         ]);
+
+        $principal = Principal::query()->firstOrCreate(['id' => self::SINGLETON_ID], []);
 
         if ($request->hasFile('photo') && Schema::hasColumn('principals', 'photo')) {
             if (!empty($principal->photo)) {
